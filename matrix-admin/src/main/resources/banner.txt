@@ -4,4 +4,4 @@ you opened my project! thanks!${AnsiColor.BRIGHT_MAGENTA}
 |-------------------------------------|
 |❤❤❤❤   I like LiXiaoBao!!   ❤❤❤❤|
 |-------------------------------------|
-${AnsiColor.BRIGHT_BLACK}
+${AnsiColor.BRIGHT_BLACK}${AnsiColor.BLUE}
