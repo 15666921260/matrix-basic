@@ -3,13 +3,16 @@ package com.liu.matrixadmin.config;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * sa-token 权限配置类
  * @author liuweizhong
  * @since 2024-02-11
  */
+@Component    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
 public class SaTokenConfigure implements WebMvcConfigurer {
 
     /**
@@ -22,7 +25,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         registry.addInterceptor(new SaInterceptor(handler -> {
             // 指定一条 match 规则
             SaRouter.match("/**")    // 拦截的 path 列表，可以写多个 */
-                    .notMatch("/liu/user/login")        // 排除掉的 path 列表，可以写多个
+                    .notMatch("/user/login")        // 排除掉的 path 列表，可以写多个
                     .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
         })).addPathPatterns("/**");
     }
