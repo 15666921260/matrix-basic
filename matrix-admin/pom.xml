@@ -18,6 +18,12 @@
             <groupId>com.liu</groupId>
             <artifactId>matrix-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
