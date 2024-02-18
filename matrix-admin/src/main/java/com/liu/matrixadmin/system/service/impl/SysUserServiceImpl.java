@@ -39,6 +39,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             resultVo.setSysUser(sysUser);
             resultVo.setLoginId(sysUser.getId());
             resultVo.setLoginStatus(LoginStatus.SUCCESS);
+            // 此方法可以用于获取登录用户的信息 StpUtil.getTokenInfo()
             resultVo.setTokenInfo(StpUtil.getTokenInfo());
         }else {
             resultVo.setLoginStatus(LoginStatus.ERROR);

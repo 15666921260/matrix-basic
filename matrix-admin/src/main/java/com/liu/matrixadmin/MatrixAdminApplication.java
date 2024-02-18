@@ -19,7 +19,7 @@ public class MatrixAdminApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MatrixAdminApplication.class, args);
-        logger.info("sa-token启动成功！配置如下:{}", SaManager.getConfig());
+//        logger.info("sa-token启动成功！配置如下:{}", SaManager.getConfig());
         logger.info("--------<=========系统启动完成========>---------");
     }
 

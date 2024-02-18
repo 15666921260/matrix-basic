@@ -28,6 +28,12 @@ public class SysUserController {
     @Resource
     private SysUserService sysUserService;
 
+    /**
+     * 登录接口
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回的信息
+     */
     @PostMapping("/login")
     public BaseResponse<LoginResultVo> login(String username, String password){
         LoginResultVo login = sysUserService.login(username, password);
@@ -39,10 +45,11 @@ public class SysUserController {
     public BaseResponse<List<SysUser>> test(){
         return ResultUtils.success(sysUserService.queryAllUser());
     }
-
     @GetMapping("/isLogin")
     public BaseResponse<String> isLogin(){
         return ResultUtils.success("是否登录："+StpUtil.isLogin());
     }
+
+
 
 }
