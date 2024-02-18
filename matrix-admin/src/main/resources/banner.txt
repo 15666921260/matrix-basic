@@ -1,7 +1,5 @@
-${AnsiColor.BLUE}
-----------========>>> by dgb
+${AnsiColor.BLUE}----------========>>> by dgb
 you opened my project! thanks!${AnsiColor.BRIGHT_MAGENTA}
 |-------------------------------------|
 |❤❤❤❤   I like LiXiaoBao!!   ❤❤❤❤|
-|-------------------------------------|
-${AnsiColor.BRIGHT_BLACK}${AnsiColor.WHITE}
+|-------------------------------------|${AnsiColor.BRIGHT_BLACK}${AnsiColor.WHITE}

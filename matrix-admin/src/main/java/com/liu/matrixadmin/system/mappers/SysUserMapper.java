@@ -13,8 +13,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 根据用户名获取用户
-     * @param username
-     * @return
+     * @param username 用户名
+     * @return 用户实体类
      */
     SysUser queryByUsername(@Param("username") String username);
 
