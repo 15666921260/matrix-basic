@@ -9,10 +9,7 @@ import com.liu.matrixcommon.pojo.system.SysUser;
 import com.liu.matrixcommon.utils.ResultUtils;
 import com.liu.matrixcommon.vo.LoginResultVo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,7 +32,8 @@ public class SysUserController {
      * @return 返回的信息
      */
     @PostMapping("/login")
-    public BaseResponse<LoginResultVo> login(String username, String password){
+    public BaseResponse<LoginResultVo> login(@RequestParam("username") String username,
+                                             @RequestParam("password") String password){
         LoginResultVo login = sysUserService.login(username, password);
         LoginStatus loginStatus = login.getLoginStatus();
         return ResultUtils.build(loginStatus.getCode(), loginStatus.getMessage(), login);
