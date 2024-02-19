@@ -33,6 +33,10 @@
         <druid-version>1.2.11</druid-version>
         <log4j.version>2.20.0</log4j.version>
         <sa-token.version>1.37.0</sa-token.version>
+        <swagger.version>2.2.0</swagger.version>
+        <commons-lang3.verson>3.14.0</commons-lang3.verson>
+        <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
+        <hutool-all.version>5.8.25</hutool-all.version>
     </properties>
 
 
@@ -86,13 +90,13 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.2.0</version>
+            <version>${swagger.version}</version>
         </dependency>
         <!-- 官方建议是springdoc替代springfox-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>2.2.0</version>
+            <version>${swagger.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.yaml</groupId>
@@ -112,6 +116,22 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <!--  好用的工具包  -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.verson}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.vsersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-all.version}</version>
         </dependency>
 
     </dependencies>
