@@ -6,6 +6,8 @@ server:
     context-path: /liu
 
 spring:
+  application:
+    name: matrix-basic
   # 当前项目maven激活环境，例如：dev/test/prod
   profiles:
     active: dev
@@ -24,6 +26,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+# 配置swagger文档的访问路径，访问地址：http://127.0.0.1:9010/liu/swagger-ui.html 注意上方context-path配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
 
 # 自己的配置
 matrix:

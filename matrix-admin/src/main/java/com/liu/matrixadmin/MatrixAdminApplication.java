@@ -13,14 +13,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.liu.matrixadmin.**.mappers")
-public class MatrixAdminApplication {
+public class  MatrixAdminApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(MatrixAdminApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(MatrixAdminApplication.class, args);
-//        logger.info("sa-token启动成功！配置如下:{}", SaManager.getConfig());
-        logger.info("--------<=========系统启动完成========>---------");
+        logger.info("--------<=========系统启动完成========>---------\nswagger路径:http://127.0.0.1:9010/liu/swagger-ui.html");
     }
 
 }

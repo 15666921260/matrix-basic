@@ -8,6 +8,8 @@ import com.liu.matrixcommon.pojo.basic.BaseResponse;
 import com.liu.matrixcommon.pojo.system.SysUser;
 import com.liu.matrixcommon.utils.ResultUtils;
 import com.liu.matrixcommon.vo.LoginResultVo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.Objects;
  * @author liuweizhong
  * @since 2024-02-11
  */
+@Tag(name = "用户管理")
 @RestController
 @RequestMapping("/user")
 public class SysUserController {
@@ -31,6 +34,7 @@ public class SysUserController {
      * @param password 密码
      * @return 返回的信息
      */
+    @Operation(summary = "登录接口")
     @PostMapping("/login")
     public BaseResponse<LoginResultVo> login(@RequestParam("username") String username,
                                              @RequestParam("password") String password){
@@ -39,10 +43,12 @@ public class SysUserController {
         return ResultUtils.build(loginStatus.getCode(), loginStatus.getMessage(), login);
     }
 
+    @Operation(summary = "测试")
     @GetMapping("/test")
     public BaseResponse<List<SysUser>> test(){
         return ResultUtils.success(sysUserService.queryAllUser());
     }
+    @Operation(summary = "是否登录")
     @GetMapping("/isLogin")
     public BaseResponse<String> isLogin(){
         return ResultUtils.success("是否登录："+StpUtil.isLogin());
