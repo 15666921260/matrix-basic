@@ -5,10 +5,12 @@ import com.liu.matrixadmin.system.service.SysUserService;
 import com.liu.matrixcommon.enums.system.LoginStatus;
 import com.liu.matrixcommon.pojo.basic.BaseResponse;
 import com.liu.matrixcommon.pojo.system.SysUser;
+import com.liu.matrixcommon.vo.LoginParam;
 import com.liu.matrixcommon.vo.LoginResultVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,15 +29,13 @@ public class SysUserController {
 
     /**
      * 登录接口
-     * @param username 用户名
-     * @param password 密码
+     * @param loginParam 用户名
      * @return 返回的信息
      */
     @Operation(summary = "登录接口")
     @PostMapping("/login")
-    public BaseResponse<LoginResultVo> login(@RequestParam("username") String username,
-                                             @RequestParam("password") String password){
-        LoginResultVo login = sysUserService.login(username, password);
+    public BaseResponse<LoginResultVo> login(@RequestBody LoginParam loginParam){
+        LoginResultVo login = sysUserService.login(loginParam.getUsername(), loginParam.getPassword());
         LoginStatus loginStatus = login.getLoginStatus();
         return BaseResponse.build(loginStatus.getCode(), loginStatus.getMessage(), login);
     }

@@ -27,7 +27,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
-# 配置swagger文档的访问路径，访问地址：http://127.0.0.1:9010/liu/swagger-ui.html 注意上方context-path配置
+# 配置swagger文档的访问路径，访问地址：http://127.0.0.1:9090/liu/swagger-ui.html 注意上方context-path配置
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
