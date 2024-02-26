@@ -1,6 +1,6 @@
 package com.liu.matrixcommon.pojo.basic;
 
-import com.liu.matrixcommon.enums.HttpStatus;
+import com.liu.matrixcommon.enums.system.HttpStatus;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -41,9 +41,9 @@ public class BaseResponse<T> implements Serializable {
     /**
      * 成功
      *
-     * @param data
-     * @param <T>
-     * @return
+     * @param data 返回的数据
+     * @param <T> 类型
+     * @return 返回
      */
     public static <T> BaseResponse<T> success(T data) {
         return new BaseResponse<>(HttpStatus.SUCCESS, data);
@@ -52,9 +52,9 @@ public class BaseResponse<T> implements Serializable {
     /**
      * 成功
      *
-     * @param data
-     * @param <T>
-     * @return
+     * @param data 返回的数据
+     * @param <T> 类型
+     * @return 返回
      */
     public static <T> BaseResponse<T> success(HttpStatus httpStatus, T data) {
         return new BaseResponse<>(httpStatus, data);
@@ -62,11 +62,11 @@ public class BaseResponse<T> implements Serializable {
 
     /**
      * 自己构建结果集
-     * @param code
-     * @param message
-     * @param data
-     * @return
-     * @param <T>
+     * @param code 返回的code
+     * @param message 返回的message
+     * @param data 返回的数据
+     * @return 返回
+     * @param <T> 类型
      */
     public static <T> BaseResponse<T> build(Integer code, String message, T data) {
         return new BaseResponse<>(code, data, message);
@@ -75,32 +75,32 @@ public class BaseResponse<T> implements Serializable {
     /**
      * 成功
      *
-     * @param code
-     * @param message
-     * @return
+     * @param code 返回的code
+     * @param message 返回的message
+     * @return 返回
      */
-    public static BaseResponse success(int code, String message) {
+    public static BaseResponse<String> success(int code, String message) {
         return new BaseResponse<>(code, null, message);
     }
 
     /**
      * 失败
      *
-     * @param httpStatus
-     * @return
+     * @param httpStatus 返回的http枚举类型
+     * @return 返回
      */
-    public static BaseResponse error(HttpStatus httpStatus) {
+    public static BaseResponse<String> error(HttpStatus httpStatus) {
         return new BaseResponse<>(httpStatus);
     }
 
     /**
      * 失败
      *
-     * @param code
-     * @param message
-     * @return
+     * @param code 返回的code
+     * @param message 返回的message
+     * @return 返回
      */
-    public static BaseResponse error(int code, String message) {
+    public static BaseResponse<String> error(int code, String message) {
         return new BaseResponse<>(code, null, message);
     }
 

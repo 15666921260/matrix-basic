@@ -34,3 +34,9 @@ springdoc:
 
 # 自己的配置
 matrix:
+  # 加密相关
+  encrypt:
+    # 盐值
+    salt: Liu
+    # 加密次数
+    repeat: 2

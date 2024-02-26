@@ -31,7 +31,7 @@
         <mysql-connector.version>8.0.33</mysql-connector.version>
         <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
         <druid-version>1.2.11</druid-version>
-        <log4j.version>2.20.0</log4j.version>
+        <slf4j.version>2.0.12</slf4j.version>
         <sa-token.version>1.37.0</sa-token.version>
         <swagger.version>2.2.0</swagger.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
@@ -112,10 +112,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <!--  好用的工具包  -->
         <dependency>

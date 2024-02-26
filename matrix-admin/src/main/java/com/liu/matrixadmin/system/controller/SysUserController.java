@@ -5,12 +5,15 @@ import com.liu.matrixadmin.system.service.SysUserService;
 import com.liu.matrixcommon.enums.system.LoginStatus;
 import com.liu.matrixcommon.pojo.basic.BaseResponse;
 import com.liu.matrixcommon.pojo.system.SysUser;
+import com.liu.matrixcommon.utils.EncryptUtils;
 import com.liu.matrixcommon.vo.LoginParam;
 import com.liu.matrixcommon.vo.LoginResultVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
  * @author liuweizhong
  * @since 2024-02-11
  */
+@Slf4j
 @Tag(name = "用户管理")
 @RestController
 @RequestMapping("/user")
@@ -43,6 +47,8 @@ public class SysUserController {
     @Operation(summary = "测试")
     @GetMapping("/test")
     public BaseResponse<List<SysUser>> test(){
+        String s = EncryptUtils.encryptBase64("刘伟中");
+        String s1 = EncryptUtils.decryptBase64(s);
         return BaseResponse.success(sysUserService.queryAllUser());
     }
     @Operation(summary = "是否登录")

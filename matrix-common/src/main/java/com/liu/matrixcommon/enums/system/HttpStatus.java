@@ -1,4 +1,4 @@
-package com.liu.matrixcommon.enums;
+package com.liu.matrixcommon.enums.system;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

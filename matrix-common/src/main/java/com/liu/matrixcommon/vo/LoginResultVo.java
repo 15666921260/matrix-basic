@@ -1,7 +1,6 @@
 package com.liu.matrixcommon.vo;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
-import com.liu.matrixcommon.enums.HttpStatus;
 import com.liu.matrixcommon.enums.system.LoginStatus;
 import com.liu.matrixcommon.pojo.system.SysUser;
 import lombok.Data;
