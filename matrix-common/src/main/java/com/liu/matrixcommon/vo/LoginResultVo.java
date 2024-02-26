@@ -23,6 +23,8 @@ public class LoginResultVo {
 
     private SaTokenInfo tokenInfo;
 
+    private String token;
+
     private SysUser sysUser;
 
     /**
