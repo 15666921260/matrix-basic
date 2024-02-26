@@ -42,12 +42,3 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
-
-# 自己的配置
-matrix:
-  # 加密相关
-  encrypt:
-    # 盐值
-    salt: Liu
-    # 加密次数
-    repeat: 2

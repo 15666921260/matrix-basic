@@ -25,8 +25,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
 public class SaTokenConfigure implements WebMvcConfigurer {
 
-    private static final Logger logger = LoggerFactory.getLogger(SaTokenConfigure.class);
-
     /**
      * 注册 [Sa-Token 全局过滤器]
      */
