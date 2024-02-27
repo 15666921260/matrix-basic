@@ -27,8 +27,6 @@ public class EncryptUtils {
         return encryptMd5;
     }
 
-
-
     /**
      * 加密处理
      * @param str 要加密的字符串，需要与盐值整合

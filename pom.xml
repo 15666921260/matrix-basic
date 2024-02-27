@@ -106,17 +106,11 @@
         </dependency>
 
         <!-- 工具包 -->
-        <!-- lombok -->
+        <!-- lombok 含有slf4j包 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <!--  好用的工具包  -->
         <dependency>

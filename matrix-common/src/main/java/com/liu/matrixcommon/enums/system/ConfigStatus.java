@@ -16,8 +16,8 @@ public enum ConfigStatus {
      */
     // base64加密盐值配置 strValue
     ENCRYPT_BASE_SALT("Liu", 0),
-    // base64加密次数配置 intValue
-    ENCRYPT_BASE_REPEAT("", 2)
+    // base64加密次数配置 intValue 大于等于1
+    ENCRYPT_BASE_REPEAT("", 1)
     ;
 
 

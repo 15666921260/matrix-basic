@@ -23,7 +23,7 @@ import java.util.List;
  * @since 2024-02-11
  */
 @Slf4j
-@Tag(name = "用户管理")
+@Tag(name = "SysUserControllerApi", description = "用户管理")
 @RestController
 @RequestMapping("/user")
 public class SysUserController {
@@ -47,8 +47,6 @@ public class SysUserController {
     @Operation(summary = "测试")
     @GetMapping("/test")
     public BaseResponse<List<SysUser>> test(){
-        String s = EncryptUtils.encryptBase64("刘伟中");
-        String s1 = EncryptUtils.decryptBase64(s);
         return BaseResponse.success(sysUserService.queryAllUser());
     }
     @Operation(summary = "是否登录")

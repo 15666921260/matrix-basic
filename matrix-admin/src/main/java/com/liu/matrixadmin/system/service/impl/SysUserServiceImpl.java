@@ -8,9 +8,10 @@ import com.liu.matrixadmin.system.service.SysUserService;
 import com.liu.matrixcommon.enums.system.LoginStatus;
 import com.liu.matrixcommon.pojo.system.SysUser;
 import com.liu.matrixcommon.vo.LoginResultVo;
+import com.liu.matrixcommon.vo.SysUserVo;
 import jakarta.annotation.Resource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +37,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         if (password.equals(sysUser.getPassword())){
             StpUtil.login(sysUser.getId());
-            resultVo.setSysUser(sysUser);
+            SysUserVo sysUserVo = new SysUserVo();
+            BeanUtils.copyProperties(sysUser, sysUserVo);
+            resultVo.setSysUserVo(sysUserVo);
             resultVo.setLoginId(sysUser.getId());
             resultVo.setLoginStatus(LoginStatus.SUCCESS);
             // 此方法可以用于获取登录用户的信息 StpUtil.getTokenInfo()

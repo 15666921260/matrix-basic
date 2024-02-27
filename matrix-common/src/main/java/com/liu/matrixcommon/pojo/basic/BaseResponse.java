@@ -1,6 +1,7 @@
 package com.liu.matrixcommon.pojo.basic;
 
 import com.liu.matrixcommon.enums.system.HttpStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,12 +13,16 @@ import java.io.Serializable;
  * @param <T>
  */
 @Data
+@Schema(name = "BaseResponse", description = "通用返回对象")
 public class BaseResponse<T> implements Serializable {
 
+    @Schema(name = "code", description = "状态码")
     private int code;
 
+    @Schema(name = "data", description = "数据封装")
     private T data;
 
+    @Schema(name = "message", description = "提示信息")
     private String message;
 
     public BaseResponse(int code, T data, String message) {

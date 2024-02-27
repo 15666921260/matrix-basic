@@ -6,33 +6,19 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
+ *
  * @author liuweizhong
- * @since 2024-02-11
+ * @since 2024-02-28
  */
 @Data
-@TableName("sys_user")
-public class SysUser {
+@TableName("sys_role")
+public class SysRole {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("username")
-    private String username;
-
-    @TableField("password")
-    private String password;
-
-    @TableField("phone")
-    private String phone;
-
-    @TableField("nick_name")
-    private String nickName;
-
-    @TableField("real_name")
-    private String realName;
-
-    @TableField("user_type")
-    private String userType;
+    @TableField("auth_name")
+    private String roleName;
 
     @TableField("remarks")
     private String remarks;
@@ -51,5 +37,4 @@ public class SysUser {
 
     @TableLogic(value="0",delval="1")
     private Integer deleted;
-
 }

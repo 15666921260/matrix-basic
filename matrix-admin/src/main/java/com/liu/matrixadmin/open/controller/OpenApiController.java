@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liuweizhong
  * @since 2024-02-11
  */
-@Tag(name = "开放接口")
+@Tag(name = "OpenApiControllerApi", description = "开放接口")
 @RestController
 @RequestMapping("/openApi")
 public class OpenApiController {
