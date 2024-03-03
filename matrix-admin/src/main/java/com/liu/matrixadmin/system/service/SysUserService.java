@@ -16,7 +16,7 @@ public interface SysUserService extends IService<SysUser> {
      * 登录接口
      * @param username 用户名
      * @param password 密码
-     * @return
+     * @return LoginResultVo
      */
     LoginResultVo login(String username, String password);
 

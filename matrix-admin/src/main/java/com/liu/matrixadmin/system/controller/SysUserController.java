@@ -41,6 +41,13 @@ public class SysUserController {
         return BaseResponse.build(loginStatus.getCode(), loginStatus.getMessage(), login);
     }
 
+    @Operation(summary = "退出登录接口")
+    @PostMapping("/logOut")
+    public BaseResponse<Boolean> logOut(){
+        StpUtil.logout();
+        return BaseResponse.success(Boolean.TRUE);
+    }
+
     @Operation(summary = "测试")
     @GetMapping("/test")
     public BaseResponse<List<SysUser>> test(){
