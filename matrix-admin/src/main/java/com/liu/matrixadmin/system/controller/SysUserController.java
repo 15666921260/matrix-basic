@@ -5,15 +5,12 @@ import com.liu.matrixadmin.system.service.SysUserService;
 import com.liu.matrixcommon.enums.system.LoginStatus;
 import com.liu.matrixcommon.pojo.basic.BaseResponse;
 import com.liu.matrixcommon.pojo.system.SysUser;
-import com.liu.matrixcommon.utils.EncryptUtils;
 import com.liu.matrixcommon.vo.LoginParam;
 import com.liu.matrixcommon.vo.LoginResultVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

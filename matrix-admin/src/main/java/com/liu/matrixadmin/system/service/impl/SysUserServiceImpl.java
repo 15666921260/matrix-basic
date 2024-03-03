@@ -37,14 +37,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         if (password.equals(sysUser.getPassword())){
             StpUtil.login(sysUser.getId());
-            SysUserVo sysUserVo = new SysUserVo();
-            BeanUtils.copyProperties(sysUser, sysUserVo);
-            resultVo.setSysUserVo(sysUserVo);
+            resultVo.setUsername(sysUser.getUsername());
+            resultVo.setNickName(sysUser.getNickName());
+            resultVo.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
             resultVo.setLoginId(sysUser.getId());
             resultVo.setLoginStatus(LoginStatus.SUCCESS);
             // 此方法可以用于获取登录用户的信息 StpUtil.getTokenInfo()
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-            resultVo.setTokenInfo(tokenInfo);
             resultVo.setToken(tokenInfo.getTokenValue());
         }else {
             resultVo.setLoginStatus(LoginStatus.ERROR);

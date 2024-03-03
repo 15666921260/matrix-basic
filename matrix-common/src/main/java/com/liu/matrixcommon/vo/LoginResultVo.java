@@ -16,31 +16,18 @@ import java.util.List;
 @Data
 @Schema(name = "LoginResultVo", description = "登录成功返回实体类")
 public class LoginResultVo {
-
-    /**
-     * 登录权限id
-     */
     @Schema(name = "loginId", description = "登录权限id")
     private Integer loginId;
-
-    @Schema(name = "tokenInfo", description = "sa-token的信息")
-    private SaTokenInfo tokenInfo;
-
     @Schema(name = "token", description = "token的内容")
     private String token;
-
-    @Schema(name = "sysUserVo", description = "用户对象")
-    private SysUserVo sysUserVo;
-
-    /**
-     * 登录状态
-     */
+    @Schema(name = "username", description = "用户名")
+    private String username;
+    @Schema(name = "nickName", description = "昵称")
+    private String nickName;
+    @Schema(name = "avatar", description = "头像")
+    private String avatar;
     @Schema(name = "loginStatus", description = "登录状态")
     private LoginStatus loginStatus;
-
-    /**
-     * 权限集合
-     */
     @Schema(name = "auths", description = "权限列表")
     private List<String> auths;
 
