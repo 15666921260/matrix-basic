@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.0.2</spring-boot.version>
@@ -34,6 +34,7 @@
         <slf4j.version>2.0.12</slf4j.version>
         <sa-token.version>1.37.0</sa-token.version>
         <swagger.version>2.2.0</swagger.version>
+        <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
         <hutool-all.version>5.8.25</hutool-all.version>
@@ -110,6 +111,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
         <!--  好用的工具包  -->
