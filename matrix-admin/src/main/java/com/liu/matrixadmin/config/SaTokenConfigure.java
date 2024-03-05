@@ -6,6 +6,7 @@ import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author liuweizhong
  * @since 2024-02-11
  */
+@Slf4j
 @Configuration    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
 public class SaTokenConfigure implements WebMvcConfigurer {
 
@@ -56,7 +58,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .setHeader("Access-Control-Allow-Headers", "*");
                     // 如果是预检请求，则立即返回到前端
                     SaRouter.match(SaHttpMethod.OPTIONS)
-                            .free(r -> System.out.println("--------OPTIONS预检请求，不做处理"))
+                            .free(r -> log.info("--------OPTIONS预检请求，不做处理"))
                             .back();
                 })
                 // 异常处理函数：每次认证函数发生异常时执行此函数
