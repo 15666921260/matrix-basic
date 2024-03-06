@@ -1,13 +1,20 @@
 # matrix-basic
 
 #### 介绍
-初始化项目
+个人练习使用的初始化项目
 
 #### 软件架构
 软件架构说明
-JDK17
-SpringBoot 3.0.2
 
+JDK21
+
+SpringBoot 3.1.0
+
+sa-token 权限校验
+
+Mybatis-plus
+
+swagger
 
 #### 安装教程
 
