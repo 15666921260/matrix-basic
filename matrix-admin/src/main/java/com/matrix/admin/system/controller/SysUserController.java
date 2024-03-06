@@ -5,6 +5,7 @@ import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.pojo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.utils.EncryptUtils;
 import com.matrix.common.vo.LoginParam;
 import com.matrix.common.vo.LoginResultVo;
 import io.swagger.v3.oas.annotations.Operation;
