@@ -16,6 +16,10 @@ Mybatis-plus
 
 swagger
 
+#### 前端部分
+
+https://gitee.com/liu-weizhong/matrix-basic-vue3
+
 #### 安装教程
 
 1.  xxxx
