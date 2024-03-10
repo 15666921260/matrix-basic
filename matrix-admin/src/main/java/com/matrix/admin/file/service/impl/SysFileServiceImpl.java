@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author liuweizhong
@@ -44,12 +45,18 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
     private SysFileMapper sysFileMapper;
 
     @Override
-    public void getImageFile(String fileUrl, String fileName, HttpServletResponse response) {
-        String fileTypeStr = getFileTypeStrByName(fileName);
-        String filePath = uploadPath + File.separator + fileUrl + File.separator + fileName;
+    public String imagePreview(String fileId, HttpServletResponse response) {
+        if (StringUtils.isBlank(fileId)){
+            return "文件id为空";
+        }
+        SysFile sysFile = sysFileMapper.selectById(fileId);
+        if (Objects.isNull(sysFile)) {
+            return "未找到文件映射数据！";
+        }
+        String filePath = uploadPath + sysFile.getFileUrl();
         File file = new File(filePath);
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-        response.setContentType("image/" + fileTypeStr);
+        response.setHeader("Content-Disposition", "attachment; filename=" + sysFile.getFileTempName());
+        response.setContentType("image/" + sysFile.getFileType());
         try (
                 FileInputStream fis = new FileInputStream(file);
                 ServletOutputStream out = response.getOutputStream()
@@ -62,6 +69,8 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         }catch (IOException e) {
             log.error("文件获取失败！", e);
         }
+
+        return null;
     }
 
     @Override
@@ -80,43 +89,33 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
         // 获取文件类型 默认无类型
         String fileType = FileType.NONE.getFileType();
-        String filename = file.getOriginalFilename();
-        if (StringUtils.isNotBlank(filename)){
-            String[] split = filename.split(SpecialStrEnum.POINT_SPLIT.getStr());
+        String fileSourceName = file.getOriginalFilename();
+        if (StringUtils.isNotBlank(fileSourceName)){
+            String[] split = fileSourceName.split(SpecialStrEnum.POINT_SPLIT.getStr());
             if (split.length == 2) {
                 fileType = split[1];
             }
         }
 
         // 上传文件
-        String fileName = DateUtil.format(new Date(), "yyyyMMddHHmmssSSS") + SpecialStrEnum.POINT.getStr() + fileType;
+        String fileTempName = DateUtil.format(new Date(), "yyyyMMddHHmmssSSS") + SpecialStrEnum.POINT.getStr() + fileType;
         try {
-            file.transferTo(new File(folder, fileName));
+            file.transferTo(new File(folder, fileTempName));
         } catch (IOException e) {
-            log.error("\n文件上传错误，路径：{}，文件名：{}", filePath, fileName, e);
+            log.error("\n文件上传错误，路径：{}，文件名：{}", filePath, fileTempName, e);
             return "";
         }
 
         SysFile sysFile = new SysFile();
         LocalDateTime now = LocalDateTime.now();
         sysFile.setFileType(fileType);
-        sysFile.setFileUrl(filePath + fileName);
+        sysFile.setFileUrl(filePath + fileTempName);
+        sysFile.setFileTempName(fileTempName);
+        sysFile.setFileSourceName(fileSourceName);
         sysFile.setCreateId(userId);
         sysFile.setCreateTime(now);
         sysFile.setUpdateId(userId);
         sysFileMapper.insert(sysFile);
         return sysFile.getId();
-    }
-
-    /**
-     * 根据文件名返回文件类型字符串
-     * @param fileName 文件名
-     * @return 文件类型字符串
-     */
-    public static String getFileTypeStrByName(String fileName) {
-        if (StringUtils.isEmpty(fileName) && !fileName.contains(SpecialStrEnum.POINT.getStr())){
-            return null;
-        }
-        return fileName.split(SpecialStrEnum.POINT.getStr())[1];
     }
 }

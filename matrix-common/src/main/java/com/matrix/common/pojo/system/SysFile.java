@@ -28,6 +28,18 @@ public class SysFile {
     @TableField("file_url")
     private String fileUrl;
 
+    /**
+     * 文件临时名称 带后缀
+     */
+    @TableField("file_temp_name")
+    private String fileTempName;
+
+    /**
+     * 文件源名称(上传时的，带后缀)
+     */
+    @TableField("file_source_name")
+    private String fileSourceName;
+
     @TableField("remarks")
     private String remarks;
 

@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 10/03/2024 20:49:52
+ Date: 10/03/2024 22:29:30
 */
 
 SET NAMES utf8mb4;
@@ -46,8 +46,10 @@ CREATE TABLE `sys_dic`  (
 DROP TABLE IF EXISTS `sys_file`;
 CREATE TABLE `sys_file`  (
   `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
-  `file_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件类型(jpg、doc等等)',
-  `file_url` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文件存放目录',
+  `file_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件类型(jpg、doc等等)',
+  `file_url` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件存放目录',
+  `file_temp_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件临时名(带后缀)',
+  `file_source_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件上传时的名(带后缀)',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -60,7 +62,10 @@ CREATE TABLE `sys_file`  (
 -- ----------------------------
 -- Records of sys_file
 -- ----------------------------
-INSERT INTO `sys_file` VALUES ('1766803303998394370', 'jpg', '\\202403\\10\\20240310202827917.jpg', NULL, '000000001', '2024-03-10 20:28:28', '000000001', NULL, 0);
+INSERT INTO `sys_file` VALUES ('1766829528619884545', 'jpg', '\\202403\\10\\20240310221240366.jpg', '20240310221240366.jpg', 'coding-1853305_640.jpg', NULL, '000000001', '2024-03-10 22:12:40', '000000001', NULL, 0);
+INSERT INTO `sys_file` VALUES ('1766830884588036098', 'jpg', '\\202403\\10\\20240310221803677.jpg', '20240310221803677.jpg', 'coding-1853305_640.jpg', NULL, '000000001', '2024-03-10 22:18:04', '000000001', NULL, 0);
+INSERT INTO `sys_file` VALUES ('1766833003823026178', 'jpg', '\\202403\\10\\20240310222628907.jpg', '20240310222628907.jpg', 'coding-1853305_640.jpg', NULL, '000000001', '2024-03-10 22:26:29', '000000001', NULL, 0);
+INSERT INTO `sys_file` VALUES ('1766833073398140930', 'png', '\\202403\\10\\20240310222645527.png', '20240310222645527.png', '微信截图_20231219231637.png', NULL, '000000001', '2024-03-10 22:26:46', '000000001', NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_user

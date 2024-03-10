@@ -30,12 +30,15 @@ public class SysFileController {
     @Resource
     private SysFileService fileService;
 
-    @GetMapping("/image/{fileUrl}/{fileName}")
+    @GetMapping("/imagePreview")
     @Operation(summary = "获取文件")
-    public void getImageFile(@PathVariable("fileUrl") String fileUrl,
-                        @PathVariable("fileName") String fileName, HttpServletResponse response) {
-        fileService.getImageFile(fileUrl, fileName, response);
-
+    public BaseResponse<String> imagePreview(@RequestParam("fileId") String fileId, HttpServletResponse response) {
+        String s = fileService.imagePreview(fileId, response);
+        if (StringUtils.isBlank(s)){
+            return BaseResponse.success("获取成功");
+        }else {
+            return BaseResponse.error(HttpStatus.ERROR.getCode(), s);
+        }
     }
 
     @PostMapping("/upload")

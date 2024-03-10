@@ -17,11 +17,11 @@ public interface SysFileService extends IService<SysFile> {
 
     /**
      * 获取文件
-     * @param fileUrl 文件路径
-     * @param fileName 文件名
+     * @param fileId 文件Id
      * @param response Http
+     * @return 返回数据 为空代表成功 有数据展示500与相应的数据
      */
-    void getImageFile(String fileUrl, String fileName, HttpServletResponse response);
+    String imagePreview(String fileId, HttpServletResponse response);
 
     /**
      * 上传文件接口
