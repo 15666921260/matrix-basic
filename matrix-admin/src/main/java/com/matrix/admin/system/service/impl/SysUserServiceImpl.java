@@ -7,7 +7,7 @@ import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.pojo.system.SysUser;
-import com.matrix.common.vo.LoginResultVo;
+import com.matrix.common.vo.system.LoginResultVo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

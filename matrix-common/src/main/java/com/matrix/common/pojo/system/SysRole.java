@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class SysRole {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private String id;
 
     @TableField("auth_name")
     private String roleName;

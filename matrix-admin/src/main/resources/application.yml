@@ -4,6 +4,9 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /matrix
+    multipart:
+      max-file-size: 10MB        # 设置单个文件最大大小为10MB
+      max-request-size: 100MB    # 设置多个文件大小为100MB
 
 spring:
   application:
@@ -33,4 +36,8 @@ springdoc:
     path: /swagger-ui.html
 
 # 自己的配置
+file:
+  local:
+    # 文件上传地址
+    upload-path: D:\fileNfs
 matrix:

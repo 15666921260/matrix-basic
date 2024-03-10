@@ -2,7 +2,7 @@ package com.matrix.admin.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysUser;
-import com.matrix.common.vo.LoginResultVo;
+import com.matrix.common.vo.system.LoginResultVo;
 
 import java.util.List;
 

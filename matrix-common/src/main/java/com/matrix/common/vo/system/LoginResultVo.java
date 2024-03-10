@@ -1,4 +1,4 @@
-package com.matrix.common.vo;
+package com.matrix.common.vo.system;
 
 import com.matrix.common.enums.system.LoginStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,7 +15,7 @@ import java.util.List;
 @Schema(name = "LoginResultVo", description = "登录成功返回实体类")
 public class LoginResultVo {
     @Schema(name = "loginId", description = "登录权限id")
-    private Integer loginId;
+    private String loginId;
     @Schema(name = "token", description = "token的内容")
     private String token;
     @Schema(name = "username", description = "用户名")

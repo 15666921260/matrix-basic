@@ -1,4 +1,4 @@
-package com.matrix.common.po.system;
+package com.matrix.common.bo.system;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.matrix.common.vo;
+package com.matrix.common.vo.system;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

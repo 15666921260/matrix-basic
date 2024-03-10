@@ -6,36 +6,27 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
+ * 系统文件总表
  * @author liuweizhong
- * @since 2024-02-11
+ * @since 2024-03-10
  */
 @Data
-@TableName("sys_user")
-public class SysUser {
+@TableName("sys_file")
+public class SysFile {
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
+    /**
+     * 文件类型 jpg、png、doc、pdf等
+     */
+    @TableField("file_type")
+    private String fileType;
 
-    @TableField("username")
-    private String username;
-
-    @TableField("password")
-    private String password;
-
-    @TableField("phone")
-    private String phone;
-
-    @TableField("nick_name")
-    private String nickName;
-
-    @TableField("real_name")
-    private String realName;
-
-    @TableField("avatar")
-    private String avatar;
-
-    @TableField("user_type")
-    private String userType;
+    /**
+     * 文件保存路径
+     */
+    @TableField("file_url")
+    private String fileUrl;
 
     @TableField("remarks")
     private String remarks;
