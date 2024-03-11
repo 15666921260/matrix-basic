@@ -48,4 +48,14 @@ public class SysFileController {
 
     }
 
+    /**
+     * 文件服务器连接测试接口
+     * 文件上传、预览前一刻调用测试，是否正常链接到服务器
+     * @return 是否访问成功
+     */
+    @GetMapping("/fileConnectTest")
+    @Operation(summary = "文件服务器连接测试接口")
+    public BaseResponse<Boolean> fileConnectTest(){
+        return BaseResponse.success(Boolean.TRUE);
+    }
 }
