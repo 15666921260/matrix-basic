@@ -3,21 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>matrix-admin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>matrix-admin</name>
     <description>matrix-admin</description>
 
     <parent>
         <groupId>com.liu</groupId>
         <artifactId>matrix-basic</artifactId>
-        <version>0.0.1</version>
+        <version>0.1.0</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.liu</groupId>
             <artifactId>matrix-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.1.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>mysql</groupId>

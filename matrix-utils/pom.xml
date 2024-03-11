@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.liu</groupId>
     <artifactId>matrix-utils</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>matrix-utils</name>
     <description>matrix-utils</description>
     <properties>
