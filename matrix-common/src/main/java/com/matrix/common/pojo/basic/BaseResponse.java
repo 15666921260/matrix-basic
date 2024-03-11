@@ -101,6 +101,16 @@ public class BaseResponse<T> implements Serializable {
     /**
      * 失败
      *
+     * @param httpStatus 返回的http枚举类型
+     * @return 返回
+     */
+    public static <T> BaseResponse<T> error(HttpStatus httpStatus, T data) {
+        return new BaseResponse<>(httpStatus, data);
+    }
+
+    /**
+     * 失败
+     *
      * @param code 返回的code
      * @param message 返回的message
      * @return 返回

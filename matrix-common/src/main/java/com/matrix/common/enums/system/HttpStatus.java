@@ -32,7 +32,9 @@ public enum HttpStatus {
     UNSUPPORTED_TYPE(415, "不支持的数据，媒体类型"),
     ERROR(500, "系统内部错误"),
     NOT_IMPLEMENTED(501, "接口未实现"),
-    WARN(601, "系统警告消息");
+    WARN(601, "系统警告消息"),
+    UNKNOWN(110, "未知异常");
+
 
     private final Integer code;
     private final String message;

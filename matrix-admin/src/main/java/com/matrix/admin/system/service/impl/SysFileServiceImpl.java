@@ -1,14 +1,11 @@
-package com.matrix.admin.file.service.impl;
+package com.matrix.admin.system.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.alibaba.druid.sql.dialect.odps.ast.OdpsAddFileStatement;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.matrix.admin.file.mappers.SysFileMapper;
-import com.matrix.admin.file.service.SysFileService;
+import com.matrix.admin.system.mappers.SysFileMapper;
+import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.SpecialStrEnum;
 import com.matrix.common.enums.system.FileType;
-import com.matrix.common.enums.system.HttpStatus;
-import com.matrix.common.pojo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysFile;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;

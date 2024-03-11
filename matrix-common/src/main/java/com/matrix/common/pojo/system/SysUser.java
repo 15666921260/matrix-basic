@@ -31,8 +31,8 @@ public class SysUser {
     @TableField("real_name")
     private String realName;
 
-    @TableField("avatar")
-    private String avatar;
+    @TableField("avatar_file_id")
+    private String avatarFileId;
 
     @TableField("user_type")
     private String userType;

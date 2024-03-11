@@ -22,8 +22,8 @@ public class LoginResultVo {
     private String username;
     @Schema(name = "nickName", description = "昵称")
     private String nickName;
-    @Schema(name = "avatar", description = "头像")
-    private String avatar;
+    @Schema(name = "avatarFileId", description = "头像文件id")
+    private String avatarFileId;
     @Schema(name = "loginStatus", description = "登录状态")
     private LoginStatus loginStatus;
     @Schema(name = "auths", description = "权限列表")

@@ -1,7 +1,7 @@
-package com.matrix.admin.file.controller;
+package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.matrix.admin.file.service.SysFileService;
+import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.system.HttpStatus;
 import com.matrix.common.pojo.basic.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 
 /**
@@ -32,13 +30,8 @@ public class SysFileController {
 
     @GetMapping("/imagePreview/{fileId}")
     @Operation(summary = "获取文件")
-    public BaseResponse<String> imagePreview(@PathVariable("fileId") String fileId, HttpServletResponse response) {
-        String s = fileService.imagePreview(fileId, response);
-        if (StringUtils.isBlank(s)){
-            return BaseResponse.success("获取成功");
-        }else {
-            return BaseResponse.error(HttpStatus.ERROR.getCode(), s);
-        }
+    public void imagePreview(@PathVariable("fileId") String fileId, HttpServletResponse response) {
+        fileService.imagePreview(fileId, response);
     }
 
     @PostMapping("/upload")
