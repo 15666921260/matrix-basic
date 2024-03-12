@@ -2,7 +2,7 @@ package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
-import com.matrix.common.pojo.basic.BaseResponse;
+import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.vo.system.SysMenuTreeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

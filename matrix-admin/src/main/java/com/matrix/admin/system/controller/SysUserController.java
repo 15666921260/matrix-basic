@@ -3,7 +3,7 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
-import com.matrix.common.pojo.basic.BaseResponse;
+import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.system.LoginParam;
 import com.matrix.common.vo.system.LoginResultVo;

@@ -1,4 +1,4 @@
-package com.matrix.common.pojo.basic;
+package com.matrix.common.vo.basic;
 
 import com.matrix.common.enums.system.HttpStatus;
 import io.swagger.v3.oas.annotations.media.Schema;

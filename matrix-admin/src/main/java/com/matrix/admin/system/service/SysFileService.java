@@ -1,11 +1,9 @@
 package com.matrix.admin.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.matrix.common.pojo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
