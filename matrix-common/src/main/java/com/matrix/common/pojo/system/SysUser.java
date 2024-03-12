@@ -45,13 +45,13 @@ public class SysUser {
     private String createId;
 
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @TableField("update_id")
     private String updateId;
 
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @TableLogic(value="0",delval="1")
     private Integer deleted;

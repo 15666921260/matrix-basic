@@ -104,12 +104,13 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         }
 
         SysFile sysFile = new SysFile();
+        LocalDateTime now = LocalDateTime.now();
         sysFile.setFileType(fileType);
         sysFile.setFileUrl(filePath + fileTempName);
         sysFile.setFileTempName(fileTempName);
         sysFile.setFileSourceName(fileSourceName);
         sysFile.setCreateId(userId);
-        sysFile.setCreateTime(new Date());
+        sysFile.setCreateTime(now);
         sysFile.setUpdateId(userId);
         sysFileMapper.insert(sysFile);
         return sysFile.getId();

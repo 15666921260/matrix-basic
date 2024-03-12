@@ -15,9 +15,9 @@
         <result property="hidden" column="hidden" javaType="Integer" jdbcType="TINYINT"/>
         <result property="status" column="status" javaType="Integer" jdbcType="TINYINT"/>
         <result property="createId" column="create_id" javaType="String" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" javaType="Date" jdbcType="DATE"/>
+        <result property="createTime" column="create_time"/>
         <result property="updateId" column="update_id" javaType="String" jdbcType="VARCHAR"/>
-        <result property="updateTime" column="update_time" javaType="Date" jdbcType="DATE"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <select id="getNotDisabledAllMenu" resultMap="SysMenuTreeVoResult">
