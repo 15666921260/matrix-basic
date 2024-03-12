@@ -3,7 +3,7 @@ package com.matrix.common.pojo.system;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 系统文件总表
@@ -47,13 +47,13 @@ public class SysFile {
     private String createId;
 
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @TableField("update_id")
     private String updateId;
 
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     @TableLogic(value="0",delval="1")
     private Integer deleted;

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,12 +61,12 @@ public class SysMenuTreeVo {
     private String createId;
 
     @Schema(description = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @Schema(description = "修改人ID")
     private String updateId;
 
     @Schema(description = "修改时间")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 }
