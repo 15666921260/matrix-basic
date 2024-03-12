@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.matrix.admin.system.mappers.SysMenuMapper">
+    <resultMap id="SysMenuTreeVoResult" type="com.matrix.common.vo.system.SysMenuTreeVo">
+        <id property="id" column="id" javaType="Long" jdbcType="bigint"/>
+        <result property="title" column="title" javaType="String" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" javaType="Long" jdbcType="bigint"/>
+        <result property="type" column="type" javaType="Integer" jdbcType="tinyint"/>
+        <result property="code" column="code" javaType="String" jdbcType="VARCHAR"/>
+        <result property="componentPath" column="component_path" javaType="String" jdbcType="VARCHAR"/>
+        <result property="routeRedirect" column="route_redirect" javaType="String" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" javaType="String" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" javaType="Integer" jdbcType="INTEGER"/>
+        <result property="hidden" column="hidden" javaType="Integer" jdbcType="tinyint"/>
+        <result property="status" column="status" javaType="Integer" jdbcType="tinyint"/>
+        <result property="createId" column="create_id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" javaType="LocalDateTime" jdbcType="DATE"/>
+        <result property="updateId" column="update_id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" javaType="LocalDateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="getNotDisabledAllMenu" resultMap="SysMenuTreeVoResult">
+        select id, title, parent_id, type, code, route_url, component_path, route_redirect, icon, sort, hidden, status,
+            create_id, create_time, update_id, update_time
+        from sys_menu
+        where status = 1
+          and type in (1, 2)
+        order by sort
+    </select>
+</mapper>

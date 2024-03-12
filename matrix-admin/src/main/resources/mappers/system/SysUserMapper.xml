@@ -5,16 +5,14 @@
 
     <select id="queryByUsername" resultType="com.matrix.common.pojo.system.SysUser" parameterType="string">
         SELECT
-            id,username,password,phone,nick_name,real_name,user_type,remarks,create_id,create_time,update_id,update_time,
-            deleted
+            id,username,password,phone,nick_name,real_name,user_type,remarks,create_id,create_time,update_id,update_time
         FROM sys_user
         WHERE username = #{username} AND deleted = 0
         LIMIT 1
     </select>
     <select id="queryAllUser" resultType="com.matrix.common.pojo.system.SysUser">
         SELECT
-            id,username,password,phone,nick_name,real_name,user_type,remarks,create_id,create_time,update_id,update_time,
-            deleted
+            id,username,password,phone,nick_name,real_name,user_type,remarks,create_id,create_time,update_id,update_time
         FROM sys_user
         WHERE deleted = 0
     </select>

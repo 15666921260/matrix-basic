@@ -17,8 +17,11 @@ public class SysRole {
     @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
-    @TableField("auth_name")
+    @TableField("role_name")
     private String roleName;
+
+    @TableField("role_type")
+    private Integer roleType;
 
     @TableField("remarks")
     private String remarks;
