@@ -20,7 +20,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mappers/**/*.xml
-  type-aliases-package: com.liu.matrixcommon.pojo.**
+  type-aliases-package: com.matrix.common.pojo.**
   global-config:
     db-config:
       #配置逻辑删除，mybatisplus官网
