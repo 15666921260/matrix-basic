@@ -26,6 +26,7 @@
         from sys_menu
         where status = 1
           and type in (1, 2)
+          and deleted = 0
         order by sort
     </select>
 </mapper>
