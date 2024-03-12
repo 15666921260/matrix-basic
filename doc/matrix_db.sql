@@ -11,17 +11,17 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 12/03/2024 01:00:30
+ Date: 12/03/2024 22:51:16
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sys_dic
+-- Table structure for sys_dict
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_dic`;
-CREATE TABLE `sys_dic`  (
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
   `dic_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典名',
@@ -37,7 +37,7 @@ CREATE TABLE `sys_dic`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sys_dic
+-- Records of sys_dict
 -- ----------------------------
 
 -- ----------------------------
@@ -75,6 +75,79 @@ INSERT INTO `sys_file` VALUES ('1767224930259075074', 'png', '\\202403\\12\\2024
 INSERT INTO `sys_file` VALUES ('1767225060790009857', 'png', '\\202403\\12\\20240312002422601.png', '20240312002422601.png', 'background.png', NULL, '000000001', '2024-03-12 00:24:23', '000000001', NULL, 0);
 INSERT INTO `sys_file` VALUES ('1767225933242990593', 'png', '\\202403\\12\\20240312002750623.png', '20240312002750623.png', 'wallhaven-x637oz_1920x1080.png', NULL, '000000001', '2024-03-12 00:27:51', '000000001', NULL, 0);
 INSERT INTO `sys_file` VALUES ('1767228887526178817', 'png', '\\202403\\12\\20240312003934972.png', '20240312003934972.png', 'logo.png', NULL, '000000001', '2024-03-12 00:39:35', '000000001', NULL, 0);
+
+-- ----------------------------
+-- Table structure for sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_menu`;
+CREATE TABLE `sys_menu`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `parent_id` bigint(0) NOT NULL COMMENT '父级id(根为0)',
+  `type` tinyint(0) NOT NULL COMMENT '菜单类型，1：目录，2：菜单，3：权限(按钮)',
+  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单编码',
+  `route_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '前端路由地址',
+  `component_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+  `route_redirect` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '重定向',
+  `icon` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+  `sort` int(0) NOT NULL COMMENT '排序',
+  `hidden` tinyint(0) NOT NULL COMMENT '是否显示,0：不显示，1：显示',
+  `status` tinyint(0) NOT NULL COMMENT '状态，0：禁用，1：启用',
+  `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
+  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统菜单' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `id` bigint(0) NOT NULL COMMENT '主键',
+  `role_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
+  `role_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '角色类型',
+  `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
+  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_menu`;
+CREATE TABLE `sys_role_menu`  (
+  `id` bigint(0) NOT NULL COMMENT '主键',
+  `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色id',
+  `menu_id` bigint(0) NULL DEFAULT NULL COMMENT '菜单id',
+  `is_choice` tinyint(1) NULL DEFAULT NULL COMMENT '是否用户选中 0：否，1：是',
+  `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
+  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色菜单映射表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_user
