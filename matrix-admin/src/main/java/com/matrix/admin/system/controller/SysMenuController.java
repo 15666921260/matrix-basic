@@ -30,7 +30,8 @@ public class SysMenuController {
 
     /**
      * 获取当前用户的导航菜单
-     *
+     * 采用目录-菜单-权限的设计方式，在获取菜单树时通过关联查询即可获取用户可访问到的菜单目录，可以使前端菜单与目录不在进行权限校验。
+     * 只需对权限(按钮)进行校验
      * @return 菜单
      */
     @GetMapping("/getMenuTreeList")

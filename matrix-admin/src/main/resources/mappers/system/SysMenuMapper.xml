@@ -29,4 +29,12 @@
           and deleted = 0
         order by sort
     </select>
+    <select id="getMenuByUserRole" resultType="com.matrix.common.vo.system.SysMenuTreeVo">
+        select sm.id, sm.title, sm.parent_id, sm.type, sm.code, sm.route_url, sm.component_path, sm.route_redirect,
+               sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id, sm.create_time, sm.update_id, sm.update_time
+        from sys_menu sm
+        left join sys_role_menu srm on sm.id = srm.menu_id
+        left join sys_user_role sur on sur.role_id = srm.role_id
+        where sur.user_id = #{userId}
+    </select>
 </mapper>
