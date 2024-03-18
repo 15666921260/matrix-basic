@@ -3,15 +3,15 @@
 
  Source Server         : localMysql
  Source Server Type    : MySQL
- Source Server Version : 80029
+ Source Server Version : 80029 (8.0.29)
  Source Host           : localhost:3306
  Source Schema         : matrix_db
 
  Target Server Type    : MySQL
- Target Server Version : 80029
+ Target Server Version : 80029 (8.0.29)
  File Encoding         : 65001
 
- Date: 17/03/2024 19:21:06
+ Date: 18/03/2024 23:21:06
 */
 
 SET NAMES utf8mb4;
@@ -22,19 +22,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
   `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
   `dic_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典名',
   `dic_value` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典值',
-  `sort_num` int(0) NULL DEFAULT NULL COMMENT '排序字段',
+  `sort_num` int NULL DEFAULT NULL COMMENT '排序字段',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict
@@ -52,10 +52,10 @@ CREATE TABLE `sys_file`  (
   `file_source_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件上传时的名(带后缀)',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件总表' ROW_FORMAT = Dynamic;
 
@@ -81,24 +81,24 @@ INSERT INTO `sys_file` VALUES ('1767228887526178817', 'png', '\\202403\\12\\2024
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
   `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `parent_id` bigint(0) NOT NULL COMMENT '父级id(根为0)',
-  `type` tinyint(0) NOT NULL COMMENT '菜单类型，1：目录，2：菜单，3：权限(按钮)',
+  `parent_id` bigint NOT NULL COMMENT '父级id(根为0)',
+  `type` tinyint NOT NULL COMMENT '菜单类型，1：目录，2：菜单，3：权限(按钮)',
   `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单编码',
   `route_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '前端路由地址',
   `component_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
   `route_redirect` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '重定向',
   `icon` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-  `sort` int(0) NOT NULL COMMENT '排序',
-  `hidden` tinyint(0) NOT NULL DEFAULT 0 COMMENT '是否显示,0：显示，1：不显示',
-  `status` tinyint(0) NOT NULL COMMENT '状态，0：禁用，1：启用',
+  `sort` int NOT NULL COMMENT '排序',
+  `hidden` tinyint NOT NULL DEFAULT 0 COMMENT '是否显示,0：显示，1：不显示',
+  `status` tinyint NOT NULL COMMENT '状态，0：禁用，1：启用',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统菜单' ROW_FORMAT = Dynamic;
 
@@ -112,15 +112,15 @@ INSERT INTO `sys_menu` VALUES (1, '数据大屏', 0, 2, NULL, '/screen', 'screen
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `id` bigint(0) NOT NULL COMMENT '主键',
+  `id` bigint NOT NULL COMMENT '主键',
   `role_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
   `role_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '角色类型',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
 
@@ -134,15 +134,15 @@ CREATE TABLE `sys_role`  (
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
   `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
-  `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色id',
-  `menu_id` bigint(0) NULL DEFAULT NULL COMMENT '菜单id',
+  `role_id` bigint NULL DEFAULT NULL COMMENT '角色id',
+  `menu_id` bigint NULL DEFAULT NULL COMMENT '菜单id',
   `is_choice` tinyint(1) NULL DEFAULT NULL COMMENT '是否用户选中 0：否，1：是',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色菜单映射表' ROW_FORMAT = Dynamic;
 
@@ -165,10 +165,10 @@ CREATE TABLE `sys_user`  (
   `user_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户类型',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户表' ROW_FORMAT = Dynamic;
 
@@ -184,13 +184,13 @@ DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
   `id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
   `user_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
-  `role_id` bigint(0) NOT NULL COMMENT '角色id',
+  `role_id` bigint NOT NULL COMMENT '角色id',
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建用户id',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新用户id',
-  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `deleted` int(0) NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
+  `update_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `deleted` int NULL DEFAULT 0 COMMENT '0 未删除 1 已删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户角色表' ROW_FORMAT = Dynamic;
 

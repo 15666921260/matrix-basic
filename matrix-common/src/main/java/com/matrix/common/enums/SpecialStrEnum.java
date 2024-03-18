@@ -19,7 +19,11 @@ public enum SpecialStrEnum {
     /**
      * split 方法使用
      */
-    POINT_SPLIT("\\.");
+    POINT_SPLIT("\\."),
+    /**
+     * 字符串0，如果restfull风格有的值为空，先传0替代
+     */
+    ZERO("0");
 
     private final String str;
 

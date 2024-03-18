@@ -42,13 +42,16 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
     private SysFileMapper sysFileMapper;
 
     @Override
-    public String imagePreview(String fileId, HttpServletResponse response) {
+    public void imagePreview(String fileId, HttpServletResponse response) {
+        if (SpecialStrEnum.ZERO.getStr().equals(fileId)) {
+            return;
+        }
         if (StringUtils.isBlank(fileId)){
-            return "文件id为空";
+            return;
         }
         SysFile sysFile = sysFileMapper.selectById(fileId);
         if (Objects.isNull(sysFile)) {
-            return "未找到文件映射数据！";
+            return;
         }
         String filePath = uploadPath + sysFile.getFileUrl();
         File file = new File(filePath);
@@ -67,7 +70,6 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
             log.error("文件获取失败！", e);
         }
 
-        return null;
     }
 
     @Override

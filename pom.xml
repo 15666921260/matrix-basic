@@ -28,7 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.0.2</spring-boot.version>
-        <mysql-connector.version>8.0.33</mysql-connector.version>
+        <postgresql.version>42.7.2</postgresql.version>
         <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
         <druid-version>1.2.11</druid-version>
         <slf4j.version>2.0.12</slf4j.version>
@@ -62,9 +62,9 @@
 
         <!-- 数据库 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>

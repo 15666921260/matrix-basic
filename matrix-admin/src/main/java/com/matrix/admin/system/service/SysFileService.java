@@ -15,11 +15,11 @@ public interface SysFileService extends IService<SysFile> {
 
     /**
      * 获取文件
-     * @param fileId 文件Id
+     *
+     * @param fileId   文件Id
      * @param response Http
-     * @return 返回数据 为空代表成功 有数据展示500与相应的数据
      */
-    String imagePreview(String fileId, HttpServletResponse response);
+    void imagePreview(String fileId, HttpServletResponse response);
 
     /**
      * 上传文件接口

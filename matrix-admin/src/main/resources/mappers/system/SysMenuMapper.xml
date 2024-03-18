@@ -24,7 +24,7 @@
         select id, title, parent_id, type, code, route_url, component_path, route_redirect, icon, sort, hidden, status,
             create_id, create_time, update_id, update_time
         from sys_menu
-        where status = 1
+        where status = true
           and type in (1, 2)
           and deleted = 0
         order by sort
