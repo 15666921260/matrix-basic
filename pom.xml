@@ -33,9 +33,11 @@
         <druid-version>1.2.11</druid-version>
         <slf4j.version>2.0.12</slf4j.version>
         <sa-token.version>1.37.0</sa-token.version>
+        <pagehelper.version>2.1.0</pagehelper.version>
         <swagger.version>2.2.0</swagger.version>
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
+        <fastjson2.version>2.0.47</fastjson2.version>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
         <hutool-all.version>5.8.25</hutool-all.version>
     </properties>
@@ -86,6 +88,13 @@
             <artifactId>druid</artifactId>
             <version>${druid-version}</version>
         </dependency>
+        <!--pagehelper分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
 
         <!--  整合swagger  -->
         <dependency>
@@ -113,6 +122,12 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
+        </dependency>
+        <!-- json工具包 -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${fastjson2.version}</version>
         </dependency>
         <!--  好用的工具包  -->
         <dependency>

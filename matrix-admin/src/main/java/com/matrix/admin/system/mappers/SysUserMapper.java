@@ -2,6 +2,8 @@ package com.matrix.admin.system.mappers;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.param.QueryUserParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,4 +25,12 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return 查询全部用户数据结果
      */
     List<SysUser> queryAllUser();
+
+    /**
+     * 分页查询用户表
+     * @param queryParam 查询参数
+     * @return 数据
+     */
+    List<SysUserVo> queryUserList(@Param("queryParam")QueryUserParam queryParam);
+
 }

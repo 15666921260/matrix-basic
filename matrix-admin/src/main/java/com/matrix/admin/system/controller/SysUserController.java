@@ -1,12 +1,16 @@
 package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
-import com.matrix.common.vo.system.LoginParam;
+import com.matrix.common.vo.basic.PageResponse;
+import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.param.LoginParam;
 import com.matrix.common.vo.system.LoginResultVo;
+import com.matrix.common.vo.system.param.QueryUserParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -59,6 +63,12 @@ public class SysUserController {
         return BaseResponse.success("是否登录："+StpUtil.isLogin());
     }
 
-
+    @Operation(summary = "查询用户数据")
+    @PostMapping("/queryUserList")
+    public PageResponse<SysUserVo> queryUserList(@RequestBody QueryUserParam queryUserParam) {
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return PageResponse.success(sysUserService.queryUserList(queryUserParam, loginId));
+    }
 
 }

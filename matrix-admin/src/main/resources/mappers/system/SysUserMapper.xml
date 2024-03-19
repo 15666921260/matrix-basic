@@ -16,4 +16,25 @@
         FROM sys_user
         WHERE deleted = 0
     </select>
+
+
+    <resultMap id="SysUserVoResult" type="com.matrix.common.vo.system.SysUserVo">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="phone" column="phone"/>
+        <result property="realName" column="real_name"/>
+        <result property="userType" column="user_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="queryUserList" resultMap="SysUserVoResult">
+        select id, username, nick_name, phone, real_name, user_type, create_time, update_time
+        from sys_user
+        where
+            deleted = 0
+            <if test="queryParam.username != null and queryParam.username != '' ">
+                and username like concat('%',#{queryParam.username},'%');
+            </if>
+    </select>
 </mapper>

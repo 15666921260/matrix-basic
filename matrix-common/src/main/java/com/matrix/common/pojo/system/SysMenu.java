@@ -1,9 +1,6 @@
 package com.matrix.common.pojo.system;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -16,6 +13,7 @@ import java.util.Date;
  * @since 2024-03-12
  */
 @Data
+@TableName("sys_menu")
 public class SysMenu {
 
     /**
