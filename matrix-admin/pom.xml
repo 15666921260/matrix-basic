@@ -39,6 +39,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!-- 下列配置在此处是因为该模块为主模块，如果将此配置放到外围会被其他子模块继承，导致打包时发生找不到指定模块的错误 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
