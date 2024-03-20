@@ -1,7 +1,9 @@
 package com.matrix.common.vo.system;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @Schema(name = "SysUserVo", description = "用户展示封装类")
 public class SysUserVo {
     @Schema(name = "id", description = "用户id")
-    private Integer id;
+    private String id;
     @Schema(name = "username", description = "用户名")
     private String username;
     @Schema(name = "nickName", description = "用户昵称")
@@ -26,7 +28,11 @@ public class SysUserVo {
     @Schema(name = "userType", description = "用户类型")
     private String userType;
     @Schema(name = "createTime", description = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @Schema(name = "updateTime", description = "更新时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 }

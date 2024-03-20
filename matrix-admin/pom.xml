@@ -25,6 +25,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.liu</groupId>
+            <artifactId>matrix-utils</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

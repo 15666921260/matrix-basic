@@ -1,7 +1,7 @@
 package com.matrix.admin.system.service.impl;
 
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.martix.util.DateUtils;
 import com.matrix.admin.system.mappers.SysFileMapper;
 import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.SpecialStrEnum;
@@ -75,8 +75,8 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
     @Override
     public String uploadFile(MultipartFile file, String userId, HttpServletRequest request) {
         // 拼接文件目录
-        String folderYearMonth = DateUtil.format(new Date(), "yyyyMM");
-        String folderDay = DateUtil.format(new Date(), "dd");
+        String folderYearMonth = DateUtils.date2StrFormat(new Date(), "yyyyMM");
+        String folderDay = DateUtils.date2StrFormat(new Date(), "dd");
 
         String filePath = File.separator + folderYearMonth + File.separator + folderDay + File.separator;
 
@@ -91,13 +91,13 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         String fileSourceName = file.getOriginalFilename();
         if (StringUtils.isNotBlank(fileSourceName)){
             String[] split = fileSourceName.split(SpecialStrEnum.POINT_SPLIT.getStr());
-            if (split.length == 2) {
-                fileType = split[1];
+            if (split.length != 0) {
+                fileType = split[split.length - 1];
             }
         }
 
         // 上传文件
-        String fileTempName = DateUtil.format(new Date(), "yyyyMMddHHmmssSSS") + SpecialStrEnum.POINT.getStr() + fileType;
+        String fileTempName = DateUtils.date2StrFormat(new Date(), "yyyyMMddHHmmssSSS") + SpecialStrEnum.POINT.getStr() + fileType;
         try {
             file.transferTo(new File(folder, fileTempName));
         } catch (IOException e) {

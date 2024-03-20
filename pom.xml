@@ -37,9 +37,7 @@
         <swagger.version>2.2.0</swagger.version>
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
-        <fastjson2.version>2.0.47</fastjson2.version>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
-        <hutool-all.version>5.8.25</hutool-all.version>
     </properties>
 
 
@@ -123,12 +121,6 @@
             <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
-        <!-- json工具包 -->
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>${fastjson2.version}</version>
-        </dependency>
         <!--  好用的工具包  -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -140,12 +132,6 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.vsersion}</version>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool-all.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>
