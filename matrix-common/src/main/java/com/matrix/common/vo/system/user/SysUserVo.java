@@ -1,4 +1,4 @@
-package com.matrix.common.vo.system;
+package com.matrix.common.vo.system.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;

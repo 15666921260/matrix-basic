@@ -1,13 +1,13 @@
 package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.basic.PageResponse;
-import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.user.AddUserVo;
+import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.LoginParam;
 import com.matrix.common.vo.system.LoginResultVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
@@ -71,4 +71,15 @@ public class SysUserController {
         return PageResponse.success(sysUserService.queryUserList(queryUserParam, loginId));
     }
 
+    @Operation(summary = "添加用户")
+    @PostMapping("/addUser")
+    public BaseResponse<String> addUser(@RequestBody AddUserVo addUserVo) {
+        return BaseResponse.success(sysUserService.addUser(addUserVo));
+    }
+
+    @Operation(summary = "修改用户")
+    @PostMapping("/editUser")
+    public BaseResponse<String> editUser(@RequestBody AddUserVo addUserVo) {
+        return BaseResponse.success(sysUserService.editUser(addUserVo));
+    }
 }

@@ -6,22 +6,31 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 角色菜单权限关联表
+ * 字典类型
  * @author liuweizhong
- * @since 2024-03-17
+ * @since 2024-03-21
  */
 @Data
-@TableName("sys_role_menu")
-public class SysRoleMenu {
+@TableName("sys_dict_type")
+public class SysDictType {
 
+    /**
+     * id数据库自增
+     */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
-    @TableField("role_id")
-    private String roleId;
+    /**
+     * 字典类型名
+     */
+    @TableField("type_name")
+    private String typeName;
 
-    @TableField("role_id")
-    private Long menuId;
+    /**
+     * 是否需要枚举类， true 需要， false 不需要
+     */
+    @TableField("need_enum")
+    private Boolean needEnum;
 
     @TableField("remarks")
     private String remarks;
@@ -40,4 +49,11 @@ public class SysRoleMenu {
 
     @TableLogic(value="0",delval="1")
     private Integer deleted;
+
+    /**
+     * 是否禁用 true禁用 false 不禁用
+     */
+    @TableField("disable")
+    private Boolean disable;
+
 }

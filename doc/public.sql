@@ -12,7 +12,7 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 19/03/2024 01:06:09
+ Date: 22/03/2024 00:05:46
 */
 
 
@@ -32,8 +32,8 @@ CACHE 1;
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."sys_dict";
 CREATE TABLE "public"."sys_dict" (
-  "id" int8 NOT NULL,
-  "type" varchar(50) COLLATE "pg_catalog"."default",
+  "id" varchar(64) COLLATE "pg_catalog"."default" NOT NULL,
+  "type" int4,
   "dic_name" varchar(50) COLLATE "pg_catalog"."default",
   "dic_value" varchar(50) COLLATE "pg_catalog"."default",
   "sort_num" int4,
@@ -42,11 +42,12 @@ CREATE TABLE "public"."sys_dict" (
   "create_time" timestamp(0),
   "update_id" varchar(64) COLLATE "pg_catalog"."default",
   "update_time" timestamp(0),
-  "deleted" int2 DEFAULT 0
+  "deleted" int2 DEFAULT 0,
+  "disable" bool DEFAULT false
 )
 ;
 COMMENT ON COLUMN "public"."sys_dict"."id" IS '主键';
-COMMENT ON COLUMN "public"."sys_dict"."type" IS '字典类型';
+COMMENT ON COLUMN "public"."sys_dict"."type" IS '字典类型id';
 COMMENT ON COLUMN "public"."sys_dict"."dic_name" IS '字典名';
 COMMENT ON COLUMN "public"."sys_dict"."dic_value" IS '字典值';
 COMMENT ON COLUMN "public"."sys_dict"."sort_num" IS '排序字段';
@@ -56,10 +57,44 @@ COMMENT ON COLUMN "public"."sys_dict"."create_time" IS '创建时间';
 COMMENT ON COLUMN "public"."sys_dict"."update_id" IS '更新用户id';
 COMMENT ON COLUMN "public"."sys_dict"."update_time" IS '更新时间';
 COMMENT ON COLUMN "public"."sys_dict"."deleted" IS '0 未删除 1 已删除';
+COMMENT ON COLUMN "public"."sys_dict"."disable" IS '是否禁用 true 禁用 false 不禁用';
 COMMENT ON TABLE "public"."sys_dict" IS '系统字典表';
 
 -- ----------------------------
 -- Records of sys_dict
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_dict_type
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."sys_dict_type";
+CREATE TABLE "public"."sys_dict_type" (
+  "id" int4 NOT NULL,
+  "type_name" varchar(100) COLLATE "pg_catalog"."default",
+  "remarks" varchar(255) COLLATE "pg_catalog"."default",
+  "create_id" varchar(64) COLLATE "pg_catalog"."default",
+  "create_time" timestamp(0),
+  "update_id" varchar(64) COLLATE "pg_catalog"."default",
+  "update_time" timestamp(0),
+  "deleted" int2 DEFAULT 0,
+  "need_enum" bool DEFAULT false,
+  "disable" bool DEFAULT false
+)
+;
+COMMENT ON COLUMN "public"."sys_dict_type"."id" IS '主键';
+COMMENT ON COLUMN "public"."sys_dict_type"."type_name" IS '字典类型名';
+COMMENT ON COLUMN "public"."sys_dict_type"."remarks" IS '备注';
+COMMENT ON COLUMN "public"."sys_dict_type"."create_id" IS '创建用户id';
+COMMENT ON COLUMN "public"."sys_dict_type"."create_time" IS '创建时间';
+COMMENT ON COLUMN "public"."sys_dict_type"."update_id" IS '更新用户id';
+COMMENT ON COLUMN "public"."sys_dict_type"."update_time" IS '更新时间';
+COMMENT ON COLUMN "public"."sys_dict_type"."deleted" IS '0 未删除 1 已删除';
+COMMENT ON COLUMN "public"."sys_dict_type"."need_enum" IS '代码中是否需要枚举类 true 需要 false不需要';
+COMMENT ON COLUMN "public"."sys_dict_type"."disable" IS '是否禁用 true 禁用 false 不禁用';
+COMMENT ON TABLE "public"."sys_dict_type" IS '系统字典类型表';
+
+-- ----------------------------
+-- Records of sys_dict_type
 -- ----------------------------
 
 -- ----------------------------
@@ -109,6 +144,8 @@ INSERT INTO "public"."sys_file" VALUES ('1767224930259075074', 'png', '\202403\1
 INSERT INTO "public"."sys_file" VALUES ('1767225060790009857', 'png', '\202403\12\20240312002422601.png', '20240312002422601.png', 'background.png', NULL, '000000001', '2024-03-12 00:24:23', '000000001', NULL, 0);
 INSERT INTO "public"."sys_file" VALUES ('1767225933242990593', 'png', '\202403\12\20240312002750623.png', '20240312002750623.png', 'wallhaven-x637oz_1920x1080.png', NULL, '000000001', '2024-03-12 00:27:51', '000000001', NULL, 0);
 INSERT INTO "public"."sys_file" VALUES ('1767228887526178817', 'png', '\202403\12\20240312003934972.png', '20240312003934972.png', 'logo.png', NULL, '000000001', '2024-03-12 00:39:35', '000000001', NULL, 0);
+INSERT INTO "public"."sys_file" VALUES ('1769775045494665217', 'jpg', '\202403\19\20240319011706309.jpg', '20240319011706309.jpg', 'pexels-alexis-ricardo-alaurin-16427628.jpg', NULL, '000000001', '2024-03-19 01:17:06', '000000001', '2024-03-19 01:17:06', 0);
+INSERT INTO "public"."sys_file" VALUES ('1770483702859546625', 'jpg', '\202403\21\20240321001303396.jpg', '20240321001303396.jpg', 'pexels-alim-18748124.jpg', NULL, '000000001', '2024-03-21 00:13:03', '000000001', '2024-03-21 00:13:03', 0);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -265,6 +302,16 @@ COMMENT ON TABLE "public"."sys_user" IS '系统用户表';
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO "public"."sys_user" VALUES ('000000001', 'admin', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000002', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000003', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000004', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000005', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000006', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000007', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000008', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000009', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000010', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000011', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -305,9 +352,22 @@ OWNED BY "public"."sys_menu"."id";
 SELECT setval('"public"."sys_enum_id_seq"', 1, false);
 
 -- ----------------------------
+-- Indexes structure for table sys_dict
+-- ----------------------------
+CREATE INDEX "type" ON "public"."sys_dict" USING btree (
+  "type" "pg_catalog"."int4_ops" ASC NULLS LAST
+);
+COMMENT ON INDEX "public"."type" IS '字典类型索引';
+
+-- ----------------------------
 -- Primary Key structure for table sys_dict
 -- ----------------------------
 ALTER TABLE "public"."sys_dict" ADD CONSTRAINT "sys_dict_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table sys_dict_type
+-- ----------------------------
+ALTER TABLE "public"."sys_dict_type" ADD CONSTRAINT "sys_dict_type_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table sys_file

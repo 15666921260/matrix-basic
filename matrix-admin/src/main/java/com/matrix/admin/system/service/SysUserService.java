@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.system.LoginResultVo;
-import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.user.AddUserVo;
+import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -37,4 +37,24 @@ public interface SysUserService extends IService<SysUser> {
      * @return 返回的数据
      */
     PageInfo<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId);
+
+    /**
+     * 获取当前登录用户
+     * @return
+     */
+    SysUser getLoginUser();
+
+    /**
+     * 添加用户
+     * @param addUserVo 添加的用户数据
+     * @return 返回值
+     */
+    String addUser(AddUserVo addUserVo);
+
+    /**
+     * 修改用户
+     * @param addUserVo 添加的用户数据
+     * @return 返回值
+     */
+    String editUser(AddUserVo addUserVo);
 }

@@ -8,11 +8,15 @@ import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.system.LoginStatus;
+import com.matrix.common.enums.system.UserTypeEnum;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.utils.EncryptUtils;
 import com.matrix.common.vo.system.LoginResultVo;
-import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.user.AddUserVo;
+import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +41,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return resultVo;
         }
 
-        if (password.equals(sysUser.getPassword())){
+        String s = EncryptUtils.encryptMd5(password);
+        if (s.equals(sysUser.getPassword())){
             StpUtil.login(sysUser.getId());
             resultVo.setUsername(sysUser.getUsername());
             resultVo.setNickName(sysUser.getNickName());
@@ -64,5 +69,47 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         PageHelper.startPage(queryUserParam.getPageNum(), queryUserParam.getPageSize());
         List<SysUserVo> sysUserVos = sysUserMapper.queryUserList(queryUserParam);
         return new PageInfo<>(sysUserVos);
+    }
+
+    @Override
+    public SysUser getLoginUser() {
+        return sysUserMapper.selectById((String) StpUtil.getLoginId());
+    }
+
+    @Override
+    public String addUser(AddUserVo addUserVo) {
+        if (StringUtils.isBlank(addUserVo.getUsername()) && StringUtils.isBlank(addUserVo.getPassword())) {
+            return "error";
+        }
+        SysUser sysUser = new SysUser();
+        addUserVo2SysUser(addUserVo, sysUser);
+        this.save(sysUser);
+        return "success";
+    }
+
+    @Override
+    public String editUser(AddUserVo addUserVo) {
+        if (StringUtils.isBlank(addUserVo.getId()) && StringUtils.isBlank(addUserVo.getUsername())
+                && StringUtils.isBlank(addUserVo.getPassword())) {
+            return "error";
+        }
+        SysUser sysUser = new SysUser();
+        addUserVo2SysUser(addUserVo, sysUser);
+        this.updateById(sysUser);
+        return "success";
+    }
+
+    private void addUserVo2SysUser(AddUserVo addUserVo, SysUser sysUser) {
+        if (StringUtils.isNotBlank(addUserVo.getId())) {
+            sysUser.setId(addUserVo.getId());
+        }
+        sysUser.setUsername(addUserVo.getUsername());
+        sysUser.setPassword(EncryptUtils.encryptMd5(addUserVo.getPassword()));
+        sysUser.setNickName(addUserVo.getNickName());
+        sysUser.setPhone(addUserVo.getPhone());
+        if (StringUtils.isBlank(addUserVo.getUserType())) {
+            addUserVo.setUserType(UserTypeEnum.NORMAL.getUserType());
+        }
+        sysUser.setUserType(addUserVo.getUserType());
     }
 }

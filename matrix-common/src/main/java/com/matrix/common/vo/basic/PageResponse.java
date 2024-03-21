@@ -2,7 +2,6 @@ package com.matrix.common.vo.basic;
 
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.enums.system.HttpStatus;
-import com.matrix.common.vo.system.SysUserVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

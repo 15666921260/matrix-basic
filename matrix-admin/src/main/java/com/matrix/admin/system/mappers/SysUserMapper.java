@@ -2,7 +2,7 @@ package com.matrix.admin.system.mappers;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.common.pojo.system.SysUser;
-import com.matrix.common.vo.system.SysUserVo;
+import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
 import org.apache.ibatis.annotations.Param;
 
