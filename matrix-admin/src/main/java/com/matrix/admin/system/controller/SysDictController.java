@@ -48,4 +48,10 @@ public class SysDictController {
     public PageResponse<DictTypeVo> pageDictType(@RequestBody QueryDictTypeParam dictTypeParam) {
         return PageResponse.success(sysDictService.queryDictType(dictTypeParam));
     }
+
+    @GetMapping("/deleteDictTypeById/{dictTypeId}")
+    @Operation(summary = "根据字典类型id删除字典类型和相关字典项")
+    public BaseResponse<String> deleteDictTypeById(@PathVariable("dictTypeId") Integer dictTypeId) {
+        return BaseResponse.success(sysDictService.deleteDictTypeById(dictTypeId));
+    }
 }

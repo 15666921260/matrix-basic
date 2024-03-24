@@ -41,7 +41,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             sysDictType.setCreateTime(now);
             sysDictTypeMapper.insert(sysDictType);
         }else {
-            sysDictTypeMapper.updateById(dictTypeVo2SysDictType(dictTypeVo, loginId, now));
+            SysDictType sysDictType = dictTypeVo2SysDictType(dictTypeVo, loginId, now);
+            sysDictType.setId(dictTypeVo.getId());
+            sysDictTypeMapper.updateById(sysDictType);
         }
         return "success";
     }
@@ -84,5 +86,18 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     @Override
     public List<DictVo> queryDict(Integer typeId) {
         return null;
+    }
+
+    @Override
+    public String deleteDictTypeById(Integer dictTypeId) {
+        if (Objects.isNull(dictTypeId)) {
+            return "字典类型id为空";
+        }
+        int i = sysDictTypeMapper.deleteById(dictTypeId);
+        Integer integer = sysDictMapper.deleteDictByTypeId(dictTypeId);
+        if ( i == 0 && integer.equals(0)) {
+            return "未删除任何数据";
+        }
+        return "success";
     }
 }

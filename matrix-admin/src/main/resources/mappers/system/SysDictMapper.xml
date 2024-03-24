@@ -6,8 +6,14 @@
     <resultMap id="DictVoResult" type="com.matrix.common.vo.system.dict.DictVo">
 
     </resultMap>
+
     <select id="queryDictByTypeId" resultType="com.matrix.common.vo.system.dict.DictVo">
 
 
     </select>
+
+    <delete id="deleteDictByTypeId" parameterType="Integer">
+        DELETE FROM sys_dict
+        WHERE type = #{typeId};
+    </delete>
 </mapper>

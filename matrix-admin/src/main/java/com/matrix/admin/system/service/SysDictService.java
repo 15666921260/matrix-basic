@@ -50,9 +50,16 @@ public interface SysDictService extends IService<SysDict> {
 
     /**
      * 根据字典类型id查询字典项
-     * @param typeId
-     * @return
+     * @param typeId 字典类型id
+     * @return 返回的数据
      */
     List<DictVo> queryDict(Integer typeId);
+
+    /**
+     * 根据字典类型id删除字典类型和相关字典项
+     * @param dictTypeId 字典类型id
+     * @return 返回的数据
+     */
+    String deleteDictTypeById(Integer dictTypeId);
 
 }
