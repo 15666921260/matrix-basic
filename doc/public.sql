@@ -12,15 +12,26 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 22/03/2024 00:05:46
+ Date: 24/03/2024 14:18:08
 */
 
 
 -- ----------------------------
--- Sequence structure for sys_enum_id_seq
+-- Sequence structure for sys_dict_type_1_id_seq
 -- ----------------------------
-DROP SEQUENCE IF EXISTS "public"."sys_enum_id_seq";
-CREATE SEQUENCE "public"."sys_enum_id_seq" 
+DROP SEQUENCE IF EXISTS "public"."sys_dict_type_1_id_seq";
+CREATE SEQUENCE "public"."sys_dict_type_1_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for sys_menu_1_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."sys_menu_1_id_seq";
+CREATE SEQUENCE "public"."sys_menu_1_id_seq" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -32,7 +43,7 @@ CACHE 1;
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."sys_dict";
 CREATE TABLE "public"."sys_dict" (
-  "id" varchar(64) COLLATE "pg_catalog"."default" NOT NULL,
+  "id" varchar(50) COLLATE "pg_catalog"."default" NOT NULL,
   "type" int4,
   "dic_name" varchar(50) COLLATE "pg_catalog"."default",
   "dic_value" varchar(50) COLLATE "pg_catalog"."default",
@@ -69,7 +80,7 @@ COMMENT ON TABLE "public"."sys_dict" IS '系统字典表';
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."sys_dict_type";
 CREATE TABLE "public"."sys_dict_type" (
-  "id" int4 NOT NULL,
+  "id" int4 NOT NULL DEFAULT nextval('sys_dict_type_1_id_seq'::regclass),
   "type_name" varchar(100) COLLATE "pg_catalog"."default",
   "remarks" varchar(255) COLLATE "pg_catalog"."default",
   "create_id" varchar(64) COLLATE "pg_catalog"."default",
@@ -96,6 +107,7 @@ COMMENT ON TABLE "public"."sys_dict_type" IS '系统字典类型表';
 -- ----------------------------
 -- Records of sys_dict_type
 -- ----------------------------
+INSERT INTO "public"."sys_dict_type" VALUES (2, '用户类型', '用于描述用户的类型', '000000001', '2024-03-24 14:00:08', '000000001', '2024-03-24 14:00:08', 0, 'f', 'f');
 
 -- ----------------------------
 -- Table structure for sys_file
@@ -152,7 +164,7 @@ INSERT INTO "public"."sys_file" VALUES ('1770483702859546625', 'jpg', '\202403\2
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."sys_menu";
 CREATE TABLE "public"."sys_menu" (
-  "id" int8 NOT NULL DEFAULT nextval('sys_enum_id_seq'::regclass),
+  "id" int8 NOT NULL DEFAULT nextval('sys_menu_1_id_seq'::regclass),
   "title" varchar(64) COLLATE "pg_catalog"."default",
   "parent_id" int8 NOT NULL,
   "type" int2 NOT NULL,
@@ -347,9 +359,16 @@ COMMENT ON TABLE "public"."sys_user_role" IS '系统用户角色表';
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-ALTER SEQUENCE "public"."sys_enum_id_seq"
+ALTER SEQUENCE "public"."sys_dict_type_1_id_seq"
+OWNED BY "public"."sys_dict_type"."id";
+SELECT setval('"public"."sys_dict_type_1_id_seq"', 2, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."sys_menu_1_id_seq"
 OWNED BY "public"."sys_menu"."id";
-SELECT setval('"public"."sys_enum_id_seq"', 1, false);
+SELECT setval('"public"."sys_menu_1_id_seq"', 1, false);
 
 -- ----------------------------
 -- Indexes structure for table sys_dict
@@ -367,7 +386,7 @@ ALTER TABLE "public"."sys_dict" ADD CONSTRAINT "sys_dict_pkey" PRIMARY KEY ("id"
 -- ----------------------------
 -- Primary Key structure for table sys_dict_type
 -- ----------------------------
-ALTER TABLE "public"."sys_dict_type" ADD CONSTRAINT "sys_dict_type_pkey" PRIMARY KEY ("id");
+ALTER TABLE "public"."sys_dict_type" ADD CONSTRAINT "sys_dict_type_1_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table sys_file
@@ -377,7 +396,7 @@ ALTER TABLE "public"."sys_file" ADD CONSTRAINT "sys_file_pkey" PRIMARY KEY ("id"
 -- ----------------------------
 -- Primary Key structure for table sys_menu
 -- ----------------------------
-ALTER TABLE "public"."sys_menu" ADD CONSTRAINT "sys_enum_pkey" PRIMARY KEY ("id");
+ALTER TABLE "public"."sys_menu" ADD CONSTRAINT "sys_menu_1_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table sys_role
