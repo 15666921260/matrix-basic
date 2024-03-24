@@ -32,7 +32,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param dictTypeId 字典类型id
      * @return 返回的数据
      */
-    DictTypeVo getDictTypeDetail(String dictTypeId);
+    DictTypeVo getDictTypeDetail(Integer dictTypeId);
 
     /**
      * 添加字典项

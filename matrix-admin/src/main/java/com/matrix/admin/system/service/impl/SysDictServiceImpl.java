@@ -47,7 +47,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public DictTypeVo getDictTypeDetail(String dictTypeId) {
+    public DictTypeVo getDictTypeDetail(Integer dictTypeId) {
         SysDictType sysDictType = sysDictTypeMapper.selectById(dictTypeId);
         DictTypeVo dictTypeVo = new DictTypeVo();
         dictTypeVo.setId(sysDictType.getId());

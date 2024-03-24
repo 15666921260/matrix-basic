@@ -39,7 +39,7 @@ public class SysDictController {
 
     @GetMapping("/getDictTypeDetail/{dictTypeId}")
     @Operation(summary = "获取字典类型详情字典类型")
-    public BaseResponse<DictTypeVo> getDictTypeDetail(@PathVariable String dictTypeId) {
+    public BaseResponse<DictTypeVo> getDictTypeDetail(@PathVariable("dictTypeId") Integer dictTypeId) {
         return BaseResponse.success(sysDictService.getDictTypeDetail(dictTypeId));
     }
 
