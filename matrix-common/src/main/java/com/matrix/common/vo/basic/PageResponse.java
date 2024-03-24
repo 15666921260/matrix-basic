@@ -56,4 +56,8 @@ public class PageResponse<T> implements Serializable {
                 pageInfo.getPageNum(), pageInfo.getPages());
     }
 
+    public static <T> PageResponse<T> build(HttpStatus httpStatus, PageInfo<T> pageInfo) {
+        return new PageResponse<>(httpStatus, pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPageSize(),
+                pageInfo.getPageNum(), pageInfo.getPages());
+    }
 }

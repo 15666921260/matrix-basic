@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 public class PageQueryBaseParam {
 
     @Schema(name = "pageSize", description = "分页容量")
-    private Integer pageSize;
+    private Integer pageSize = 10;
 
     @Schema(name = "pageNum", description = "页数")
-    private Integer pageNum;
+    private Integer pageNum = 1;
 
 }
