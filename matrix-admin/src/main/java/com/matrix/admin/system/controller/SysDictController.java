@@ -1,7 +1,6 @@
 package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.service.SysDictService;
 import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.vo.basic.PageResponse;
@@ -60,5 +59,19 @@ public class SysDictController {
     @Operation(summary = "根据字典类型分页查询字典项")
     public PageResponse<DictVo> pageDictItem(@RequestBody QueryDictItemParam queryDictItemParam){
         return PageResponse.success(sysDictService.pageDictItem(queryDictItemParam));
+    }
+
+    @GetMapping("/getDictItemById")
+    @Operation(summary = "根据字典项id查询字典项详情")
+    public BaseResponse<DictVo> getDictItemById(@RequestParam("id") String id){
+        return BaseResponse.success(sysDictService.getDictItemById(id));
+    }
+
+    @PostMapping("/addOrEditDictItem")
+    @Operation(summary = "添加或修改字典项")
+    public BaseResponse<String> addOrEditDictItem(@RequestBody DictVo dictVo) {
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysDictService.addOrEditDictItem(dictVo, loginId));
     }
 }

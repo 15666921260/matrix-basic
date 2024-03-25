@@ -14,7 +14,7 @@ import lombok.Data;
 public class DictVo {
 
     @Schema(name = "id", description = "字典id")
-    private Long id;
+    private String id;
 
     @Schema(name = "typeName", description = "字典类型名")
     private String typeName;

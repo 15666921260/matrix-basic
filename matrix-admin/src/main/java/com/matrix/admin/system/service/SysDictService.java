@@ -10,6 +10,8 @@ import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -69,5 +71,20 @@ public interface SysDictService extends IService<SysDict> {
      * @return 分页数据
      */
     PageInfo<DictVo> pageDictItem(QueryDictItemParam queryDictItemParam);
+
+    /**
+     * 根据字典项id查询字典详情
+     * @param id 字典项id
+     * @return 结果
+     */
+    DictVo getDictItemById(String id);
+
+    /**
+     * 添加或修改字典项
+     * @param dictVo 字典项数据
+     * @param loginId 登录用户的id
+     * @return 结果
+     */
+    String addOrEditDictItem(DictVo dictVo, String loginId);
 
 }
