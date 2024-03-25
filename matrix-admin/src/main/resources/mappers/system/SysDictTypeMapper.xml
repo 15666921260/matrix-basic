@@ -21,6 +21,7 @@
             <if test="typeName != null and typeName != '' " >
                 and type_name like concat('%',#{typeName},'%')
             </if>
+        order by id
     </select>
 
 </mapper>
