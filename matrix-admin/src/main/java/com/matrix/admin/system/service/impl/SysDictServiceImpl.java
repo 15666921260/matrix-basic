@@ -80,11 +80,6 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public String addDict(DictVo dictVo) {
-        return null;
-    }
-
-    @Override
     public PageInfo<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam) {
         PageHelper.startPage(dictTypeParam.getPageNum(), dictTypeParam.getPageSize());
         List<DictTypeVo> dictTypeVos = sysDictTypeMapper.queryDictType(dictTypeParam.getTypeName());
@@ -93,7 +88,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public List<DictVo> queryDict(Integer typeId) {
-        return null;
+        return sysDictMapper.queryDictByTypeId(typeId);
     }
 
     @Override

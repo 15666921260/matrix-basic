@@ -38,13 +38,6 @@ public interface SysDictService extends IService<SysDict> {
     DictTypeVo getDictTypeDetail(Integer dictTypeId);
 
     /**
-     * 添加字典项
-     * @param dictVo 要添加的数据
-     * @return 返回的数据
-     */
-    String addDict(DictVo dictVo);
-
-    /**
      * 根据类型名查询字典类型
      * @param dictTypeParam 查询参数
      * @return 返回的数据
