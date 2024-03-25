@@ -87,4 +87,10 @@ public interface SysDictService extends IService<SysDict> {
      */
     String addOrEditDictItem(DictVo dictVo, String loginId);
 
+    /**
+     * 根据字典项id删除字典项
+     * @param dictItemId 字典项id
+     * @return 结果
+     */
+    String deleteDictItemTypeById(String dictItemId);
 }

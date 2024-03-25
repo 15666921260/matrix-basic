@@ -164,4 +164,16 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         sysDict.setDisable(dictVo.getDisable());
         sysDict.setSortNum(dictVo.getSortNum());
     }
+
+    @Override
+    public String deleteDictItemTypeById(String dictItemId) {
+        int i = sysDictMapper.deleteById(dictItemId);
+        if (i != 0){
+            return "success";
+        }else {
+            return "没有数据被删除";
+        }
+    }
+
+
 }

@@ -74,4 +74,10 @@ public class SysDictController {
         String loginId = (String) StpUtil.getLoginId();
         return BaseResponse.success(sysDictService.addOrEditDictItem(dictVo, loginId));
     }
+
+    @PostMapping("/deleteDictItemTypeById")
+    @Operation(summary = "根据字典项id删除字典项")
+    public BaseResponse<String> deleteDictItemTypeById(@RequestParam("dictItemId") String dictItemId) {
+        return BaseResponse.success(sysDictService.deleteDictItemTypeById(dictItemId));
+    }
 }
