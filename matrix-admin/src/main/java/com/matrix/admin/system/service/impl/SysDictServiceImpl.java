@@ -35,14 +35,20 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     @Override
     public String addOrEditDictType(DictTypeVo dictTypeVo, String loginId) {
         LocalDateTime now = LocalDateTime.now();
+        SysDictType sysDictType;
         if (Objects.isNull(dictTypeVo.getId())) {
-            SysDictType sysDictType = dictTypeVo2SysDictType(dictTypeVo, loginId, now);
+            sysDictType = dictTypeVo2SysDictType(dictTypeVo, loginId, now);
             sysDictType.setCreateId(loginId);
             sysDictType.setCreateTime(now);
             sysDictTypeMapper.insert(sysDictType);
         }else {
-            SysDictType sysDictType = dictTypeVo2SysDictType(dictTypeVo, loginId, now);
-            sysDictType.setId(dictTypeVo.getId());
+            sysDictType = sysDictTypeMapper.selectById(dictTypeVo.getId());
+            sysDictType.setTypeName(dictTypeVo.getTypeName());
+            sysDictType.setDisable(dictTypeVo.getDisable());
+            sysDictType.setRemarks(dictTypeVo.getRemarks());
+            sysDictType.setNeedEnum(dictTypeVo.getNeedEnum());
+            sysDictType.setUpdateId(loginId);
+            sysDictType.setUpdateTime(now);
             sysDictTypeMapper.updateById(sysDictType);
         }
         return "success";
