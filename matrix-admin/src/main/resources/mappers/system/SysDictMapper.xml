@@ -20,7 +20,8 @@
             sys_dict
         LEFT JOIN sys_dict_type sdt on sys_dict.type = sdt.id
         WHERE
-            sys_dict.type = #{typeId}
+            sys_dict.deleted = 0
+            AND sys_dict.type = #{typeId}
     </select>
 
     <delete id="deleteDictByTypeId" parameterType="Integer">
