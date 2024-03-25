@@ -10,6 +10,7 @@ import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.pojo.system.SysDictType;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
+import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -105,5 +106,12 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             return "未删除任何数据";
         }
         return "success";
+    }
+
+    @Override
+    public PageInfo<DictVo> pageDictItem(QueryDictItemParam dictItemParam) {
+        PageHelper.startPage(dictItemParam.getPageNum(), dictItemParam.getPageSize());
+        List<DictVo> dictVos = sysDictMapper.queryDictByTypeId(dictItemParam.getTypeId());
+        return new PageInfo<>(dictVos);
     }
 }

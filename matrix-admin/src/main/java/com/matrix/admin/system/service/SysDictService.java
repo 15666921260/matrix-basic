@@ -7,6 +7,7 @@ import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
+import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -61,5 +62,12 @@ public interface SysDictService extends IService<SysDict> {
      * @return 返回的数据
      */
     String deleteDictTypeById(Integer dictTypeId);
+
+    /**
+     * 根据字典类型id分页查询字典项
+     * @param queryDictItemParam 查询参数
+     * @return 分页数据
+     */
+    PageInfo<DictVo> pageDictItem(QueryDictItemParam queryDictItemParam);
 
 }

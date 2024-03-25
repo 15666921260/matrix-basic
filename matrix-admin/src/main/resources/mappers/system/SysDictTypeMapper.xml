@@ -4,7 +4,7 @@
 <mapper namespace="com.matrix.admin.system.mappers.SysDictTypeMapper">
 
     <resultMap id="DictTypeVoResult" type="com.matrix.common.vo.system.dict.DictTypeVo">
-        <result property="id" column="id"/>
+        <id property="id" column="id"/>
         <result property="typeName" column="type_name"/>
         <result property="needEnum" column="need_enum"/>
         <result property="remarks" column="remarks"/>

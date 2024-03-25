@@ -4,12 +4,23 @@
 <mapper namespace="com.matrix.admin.system.mappers.SysDictMapper">
 
     <resultMap id="DictVoResult" type="com.matrix.common.vo.system.dict.DictVo">
-
+        <id property="id" column="id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="dicName" column="dic_name"/>
+        <result property="dicValue" column="dic_value"/>
+        <result property="sortNum" column="sort_num"/>
+        <result property="disable" column="disable"/>
+        <result property="remarks" column="remarks"/>
     </resultMap>
 
-    <select id="queryDictByTypeId" resultType="com.matrix.common.vo.system.dict.DictVo">
-
-
+    <select id="queryDictByTypeId" resultMap="DictVoResult">
+        SELECT
+            sys_dict.id, sdt.type_name, sys_dict.dic_name, sys_dict.dic_value, sys_dict.sort_num, sys_dict.disable, sys_dict.remarks
+        FROM
+            sys_dict
+        LEFT JOIN sys_dict_type sdt on sys_dict.type = sdt.id
+        WHERE
+            sys_dict.type = #{typeId}
     </select>
 
     <delete id="deleteDictByTypeId" parameterType="Integer">

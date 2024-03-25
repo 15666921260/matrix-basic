@@ -7,6 +7,7 @@ import com.matrix.common.vo.basic.BaseResponse;
 import com.matrix.common.vo.basic.PageResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
+import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,9 +50,15 @@ public class SysDictController {
         return PageResponse.success(sysDictService.queryDictType(dictTypeParam));
     }
 
-    @GetMapping("/deleteDictTypeById/{dictTypeId}")
+    @GetMapping("/deleteDictTypeById")
     @Operation(summary = "根据字典类型id删除字典类型和相关字典项")
-    public BaseResponse<String> deleteDictTypeById(@PathVariable("dictTypeId") Integer dictTypeId) {
+    public BaseResponse<String> deleteDictTypeById(@RequestParam("dictTypeId") Integer dictTypeId) {
         return BaseResponse.success(sysDictService.deleteDictTypeById(dictTypeId));
+    }
+
+    @GetMapping("/pageDictItem")
+    @Operation(summary = "根据字典类型分页查询字典项")
+    public PageResponse<DictVo> pageDictItem(@RequestBody QueryDictItemParam queryDictItemParam){
+        return PageResponse.success(sysDictService.pageDictItem(queryDictItemParam));
     }
 }

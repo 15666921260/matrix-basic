@@ -36,11 +36,6 @@ public class DictVo {
      */
     @TableField("sort_num")
     private Integer sortNum;
-    /**
-     * 是否需要枚举类， true 需要， false 不需要
-     */
-    @Schema(name = "needEnum", description = "是否需要枚举类")
-    private Boolean needEnum;
 
     @Schema(name = "remarks", description = "备注")
     private String remarks;
