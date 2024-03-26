@@ -1,4 +1,4 @@
-package com.matrix.common.vo.basic;
+package com.matrix.common.vo.basic.response;
 
 import com.matrix.common.enums.system.HttpStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -75,6 +75,28 @@ public class BaseResponse<T> implements Serializable {
      */
     public static <T> BaseResponse<T> build(Integer code, String message, T data) {
         return new BaseResponse<>(code, data, message);
+    }
+
+    /**
+     * 构建自定义结果集
+     * 返回值 403 就是服务器以理解请求但是不处理
+     * @param message 返回的message
+     * @param data 返回的数据
+     * @return 返回
+     * @param <T> 类型
+     */
+    public static <T> BaseResponse<T> buildCustom(String message, T data) {
+        return new BaseResponse<>(HttpStatus.FORBIDDEN.getCode(), data, message);
+    }
+
+    /**
+     * 构建自定义结果集 只有消息
+     * 返回值 403 就是服务器以理解请求但是不处理
+     * @param message 返回的message
+     * @return 返回
+     */
+    public static BaseResponse<String> buildCustom(String message) {
+        return new BaseResponse<>(HttpStatus.FORBIDDEN.getCode(), message, message);
     }
 
     /**

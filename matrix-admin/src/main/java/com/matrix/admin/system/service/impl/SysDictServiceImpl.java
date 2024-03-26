@@ -6,8 +6,10 @@ import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysDictMapper;
 import com.matrix.admin.system.mappers.SysDictTypeMapper;
 import com.matrix.admin.system.service.SysDictService;
+import com.matrix.common.enums.DeletedEnum;
 import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.pojo.system.SysDictType;
+import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
@@ -92,16 +94,16 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public String deleteDictTypeById(Integer dictTypeId) {
+    public BaseResponse<String> deleteDictTypeById(Integer dictTypeId) {
         if (Objects.isNull(dictTypeId)) {
-            return "字典类型id为空";
+            return BaseResponse.buildCustom("字典类型id为空");
         }
         int i = sysDictTypeMapper.deleteById(dictTypeId);
         Integer integer = sysDictMapper.deleteDictByTypeId(dictTypeId);
         if ( i == 0 && integer.equals(0)) {
-            return "未删除任何数据";
+            return BaseResponse.success("未删除任何数据");
         }
-        return "success";
+        return BaseResponse.success("success");
     }
 
     @Override
@@ -113,20 +115,15 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public DictVo getDictItemById(String id) {
-        SysDict sysDict = sysDictMapper.selectById(id);
-        DictVo dictVo = new DictVo();
-        dictVo.setId(sysDict.getId());
-        dictVo.setTypeName(sysDict.getDicName());
-        dictVo.setDicValue(sysDict.getDicValue());
-        dictVo.setDicName(sysDict.getDicName());
-        dictVo.setSortNum(sysDict.getSortNum());
-        dictVo.setDisable(sysDict.getDisable());
-        dictVo.setRemarks(sysDict.getRemarks());
-        return dictVo;
+        return sysDictMapper.getDictById(id);
     }
 
     @Override
-    public String addOrEditDictItem(DictVo dictVo, String loginId) {
+    public BaseResponse<String> addOrEditDictItem(DictVo dictVo, String loginId) {
+        SysDictType sysDictType = sysDictTypeMapper.selectById(dictVo.getType());
+        if (Objects.isNull(sysDictType) || DeletedEnum.DELETE_NO.getValue().equals(sysDictType.getDeleted())) {
+            return BaseResponse.buildCustom("传入了一个非法的字典类型数据", "原因是可能该数据并不存在，或者已被删除");
+        }
         LocalDateTime now = LocalDateTime.now();
         SysDict sysDict;
         if (StringUtils.isBlank(dictVo.getId())) {
@@ -140,7 +137,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             dictVo2SysDict(dictVo, loginId, now, sysDict);
             sysDictMapper.updateById(sysDict);
         }
-        return "success";
+        return BaseResponse.success("success");
     }
 
     /**
@@ -151,6 +148,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
      * @param sysDict sysDict
      */
     private void dictVo2SysDict(DictVo dictVo, String loginId, LocalDateTime now, SysDict sysDict) {
+        sysDict.setType(dictVo.getType());
         sysDict.setDicName(dictVo.getDicName());
         sysDict.setDicValue(dictVo.getDicValue());
         sysDict.setRemarks(dictVo.getRemarks());
@@ -161,12 +159,12 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public String deleteDictItemTypeById(String dictItemId) {
+    public BaseResponse<String> deleteDictItemTypeById(String dictItemId) {
         int i = sysDictMapper.deleteById(dictItemId);
         if (i != 0){
-            return "success";
+            return BaseResponse.success("success");
         }else {
-            return "没有数据被删除";
+            return BaseResponse.success("没有数据被删除");
         }
     }
 

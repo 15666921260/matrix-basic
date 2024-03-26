@@ -28,4 +28,11 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
      * @return 删除个数
      */
     Integer deleteDictByTypeId(@Param("typeId") Integer typeId);
+
+    /**
+     * 根据字典项id查询详情
+     * @param itemId 字典项id
+     * @return 详情
+     */
+    DictVo getDictById(@Param("itemId") String itemId);
 }

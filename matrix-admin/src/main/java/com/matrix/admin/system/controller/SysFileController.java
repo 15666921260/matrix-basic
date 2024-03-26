@@ -3,7 +3,7 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.system.HttpStatus;
-import com.matrix.common.vo.basic.BaseResponse;
+import com.matrix.common.vo.basic.response.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;

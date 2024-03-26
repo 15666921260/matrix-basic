@@ -19,6 +19,9 @@ public class DictVo {
     @Schema(name = "typeName", description = "字典类型名")
     private String typeName;
 
+    @Schema(name = "type", description = "字典类型id")
+    private Integer type;
+
     /**
      * 字典名
      */

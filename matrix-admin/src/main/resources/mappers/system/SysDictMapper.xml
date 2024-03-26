@@ -6,6 +6,7 @@
     <resultMap id="DictVoResult" type="com.matrix.common.vo.system.dict.DictVo">
         <id property="id" column="id"/>
         <result property="typeName" column="type_name"/>
+        <result property="type" column="type"/>
         <result property="dicName" column="dic_name"/>
         <result property="dicValue" column="dic_value"/>
         <result property="sortNum" column="sort_num"/>
@@ -22,10 +23,24 @@
         WHERE
             sys_dict.deleted = 0
             AND sys_dict.type = #{typeId}
+        ORDER BY sys_dict.sort_num
     </select>
 
-    <delete id="deleteDictByTypeId" parameterType="Integer">
-        DELETE FROM sys_dict
-        WHERE type = #{typeId};
-    </delete>
+    <select id="getDictById" resultMap="DictVoResult">
+        SELECT
+            sys_dict.id, sdt.type_name,sys_dict.type, sys_dict.dic_name, sys_dict.dic_value, sys_dict.sort_num, sys_dict.disable, sys_dict.remarks
+        FROM
+            sys_dict
+                LEFT JOIN sys_dict_type sdt on sys_dict.type = sdt.id
+        WHERE
+            sys_dict.deleted = 0
+          AND sys_dict.id = #{itemId}
+        LIMIT 1
+    </select>
+    <!-- delete语句只针对mapper原生的有用 -->
+    <update id="deleteDictByTypeId" parameterType="Integer">
+        UPDATE sys_dict
+        SET deleted = 1
+        WHERE type = #{typeId}
+    </update>
 </mapper>

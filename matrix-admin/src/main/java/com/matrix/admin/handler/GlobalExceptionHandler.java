@@ -2,7 +2,7 @@ package com.matrix.admin.handler;
 
 import cn.dev33.satoken.exception.SaTokenException;
 import com.matrix.common.enums.system.HttpStatus;
-import com.matrix.common.vo.basic.BaseResponse;
+import com.matrix.common.vo.basic.response.BaseResponse;
 import org.springframework.web.bind.annotation.*;
 
 /**

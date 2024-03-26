@@ -2,8 +2,8 @@ package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysDictService;
-import com.matrix.common.vo.basic.BaseResponse;
-import com.matrix.common.vo.basic.PageResponse;
+import com.matrix.common.vo.basic.response.BaseResponse;
+import com.matrix.common.vo.basic.response.PageResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
@@ -52,10 +52,10 @@ public class SysDictController {
     @GetMapping("/deleteDictTypeById")
     @Operation(summary = "根据字典类型id删除字典类型和相关字典项")
     public BaseResponse<String> deleteDictTypeById(@RequestParam("dictTypeId") Integer dictTypeId) {
-        return BaseResponse.success(sysDictService.deleteDictTypeById(dictTypeId));
+        return sysDictService.deleteDictTypeById(dictTypeId);
     }
 
-    @GetMapping("/pageDictItem")
+    @PostMapping("/pageDictItem")
     @Operation(summary = "根据字典类型分页查询字典项")
     public PageResponse<DictVo> pageDictItem(@RequestBody QueryDictItemParam queryDictItemParam){
         return PageResponse.success(sysDictService.pageDictItem(queryDictItemParam));
@@ -72,12 +72,18 @@ public class SysDictController {
     public BaseResponse<String> addOrEditDictItem(@RequestBody DictVo dictVo) {
         // 获取当前登录用户的id
         String loginId = (String) StpUtil.getLoginId();
-        return BaseResponse.success(sysDictService.addOrEditDictItem(dictVo, loginId));
+        return sysDictService.addOrEditDictItem(dictVo, loginId);
     }
 
-    @PostMapping("/deleteDictItemTypeById")
+    @GetMapping("/getDictDetail")
+    @Operation(summary = "根据id查询字典项详情")
+    public BaseResponse<DictVo> getDictDetail(@RequestParam("dictItemId") String dictItemId){
+        return BaseResponse.success(sysDictService.getDictItemById(dictItemId));
+    }
+
+    @GetMapping("/deleteDictItemTypeById")
     @Operation(summary = "根据字典项id删除字典项")
     public BaseResponse<String> deleteDictItemTypeById(@RequestParam("dictItemId") String dictItemId) {
-        return BaseResponse.success(sysDictService.deleteDictItemTypeById(dictItemId));
+        return sysDictService.deleteDictItemTypeById(dictItemId);
     }
 }

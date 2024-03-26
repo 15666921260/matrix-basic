@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @TableName("sys_dict")
 public class SysDict {
 
-
     /**
      * id数据库自增
      */

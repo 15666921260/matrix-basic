@@ -1,4 +1,4 @@
-package com.matrix.common.vo.basic;
+package com.matrix.common.vo.basic.response;
 
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.enums.system.HttpStatus;
