@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 用户类型 枚举类
  * @author liuweizhong
  * @since 2024-03-17
  */
