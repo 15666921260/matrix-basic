@@ -37,7 +37,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         List<SysMenuTreeVo> sysMenuTreeVos;
         // 判断是否是超级管理员
         SysUser sysUser = sysUserMapper.selectById(userId);
-        if (Objects.nonNull(sysUser) && UserTypeEnum.ADMIN.getTypeName().equals(sysUser.getUserType())){
+        if (Objects.nonNull(sysUser) && UserTypeEnum.ADMIN.getTypeId().equals(sysUser.getUserType())){
             sysMenuTreeVos = sysMenuMapper.getNotDisabledAllMenu();
         }else {
             sysMenuTreeVos = sysMenuMapper.getMenuByUserRole(userId);
