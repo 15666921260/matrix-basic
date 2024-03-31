@@ -33,4 +33,11 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      */
     List<SysUserVo> queryUserList(@Param("queryParam")QueryUserParam queryParam);
 
+    /**
+     * 检测 username是否在数据库中存在
+     * @param username
+     * @return
+     */
+    Integer checkUserName(@Param("username") String username);
+
 }

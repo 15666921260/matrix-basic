@@ -25,4 +25,6 @@ public class AddUserVo {
     private String realName;
     @Schema(name = "userType", description = "用户类型")
     private String userType;
+    @Schema(name = "remarks", description = "备注")
+    private String remarks;
 }

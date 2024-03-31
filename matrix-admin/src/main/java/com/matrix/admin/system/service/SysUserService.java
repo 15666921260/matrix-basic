@@ -47,14 +47,23 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 添加用户
      * @param addUserVo 添加的用户数据
+     * @param loginId 登录用户的id
      * @return 返回值
      */
-    String addUser(AddUserVo addUserVo);
+    String addUser(AddUserVo addUserVo, String loginId);
 
     /**
      * 修改用户
      * @param addUserVo 添加的用户数据
+     * @param loginId 登录用户的id
      * @return 返回值
      */
-    String editUser(AddUserVo addUserVo);
+    String editUser(AddUserVo addUserVo, String loginId);
+
+    /**
+     * 根据用户id查询详情
+     * @param user 参数里边只有id有用
+     * @return 结果
+     */
+    AddUserVo detailUserById(SysUserVo user);
 }

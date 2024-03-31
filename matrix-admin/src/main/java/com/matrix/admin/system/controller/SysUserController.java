@@ -6,6 +6,7 @@ import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.basic.response.PageResponse;
+import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.LoginParam;
@@ -71,15 +72,25 @@ public class SysUserController {
         return PageResponse.success(sysUserService.queryUserList(queryUserParam, loginId));
     }
 
+    @Operation(summary = "根据用户id查询详情")
+    @PostMapping("/detailUserById")
+    public BaseResponse<AddUserVo> detailUserById(@RequestBody SysUserVo user){
+        return BaseResponse.success(sysUserService.detailUserById(user));
+    }
+
     @Operation(summary = "添加用户")
     @PostMapping("/addUser")
     public BaseResponse<String> addUser(@RequestBody AddUserVo addUserVo) {
-        return BaseResponse.success(sysUserService.addUser(addUserVo));
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysUserService.addUser(addUserVo, loginId));
     }
 
     @Operation(summary = "修改用户")
     @PostMapping("/editUser")
     public BaseResponse<String> editUser(@RequestBody AddUserVo addUserVo) {
-        return BaseResponse.success(sysUserService.editUser(addUserVo));
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysUserService.editUser(addUserVo, loginId));
     }
 }

@@ -14,6 +14,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 字典类型与字典项控制层
  *
@@ -85,5 +87,11 @@ public class SysDictController {
     @Operation(summary = "根据字典项id删除字典项")
     public BaseResponse<String> deleteDictItemTypeById(@RequestParam("dictItemId") String dictItemId) {
         return sysDictService.deleteDictItemTypeById(dictItemId);
+    }
+
+    @GetMapping("/selectDictItemByDictTypeId")
+    @Operation(summary = "根据字典类型id查询字典项列表")
+    public BaseResponse<List<DictVo>> selectDictItemByDictTypeId(@RequestParam("dictTypeId") Integer dictTypeId){
+        return BaseResponse.success(sysDictService.queryDict(dictTypeId));
     }
 }

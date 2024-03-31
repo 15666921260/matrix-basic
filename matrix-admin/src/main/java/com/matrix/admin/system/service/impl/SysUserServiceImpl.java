@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
+import com.matrix.common.enums.SysDefault;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.enums.system.UserTypeEnum;
 import com.matrix.common.pojo.system.SysUser;
@@ -19,6 +20,7 @@ import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -77,26 +79,60 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public String addUser(AddUserVo addUserVo) {
+    public String addUser(AddUserVo addUserVo, String loginId) {
         if (StringUtils.isBlank(addUserVo.getUsername()) && StringUtils.isBlank(addUserVo.getPassword())) {
-            return "error";
+            return "用户名或密码是空";
+        }
+        SysUser sysUserDb = sysUserMapper.queryByUsername(addUserVo.getUsername());
+        if (Objects.nonNull(sysUserDb)) {
+            return "该用户名已存在";
         }
         SysUser sysUser = new SysUser();
         addUserVo2SysUser(addUserVo, sysUser);
+        LocalDateTime now = LocalDateTime.now();
+        sysUser.setCreateId(loginId);
+        sysUser.setCreateTime(now);
+        sysUser.setUpdateId(loginId);
+        sysUser.setUpdateTime(now);
         this.save(sysUser);
         return "success";
     }
 
     @Override
-    public String editUser(AddUserVo addUserVo) {
+    public String editUser(AddUserVo addUserVo, String loginId) {
         if (StringUtils.isBlank(addUserVo.getId()) && StringUtils.isBlank(addUserVo.getUsername())
                 && StringUtils.isBlank(addUserVo.getPassword())) {
-            return "error";
+            return "用户名或密码是空";
+        }
+        SysUser sysUserDb = sysUserMapper.queryByUsername(addUserVo.getUsername());
+        if (Objects.nonNull(sysUserDb) && !sysUserDb.getId().equals(addUserVo.getId())) {
+            return "该用户名已存在";
         }
         SysUser sysUser = new SysUser();
+        LocalDateTime now = LocalDateTime.now();
         addUserVo2SysUser(addUserVo, sysUser);
+        sysUser.setUpdateId(loginId);
+        sysUser.setUpdateTime(now);
         this.updateById(sysUser);
         return "success";
+    }
+
+    @Override
+    public AddUserVo detailUserById(SysUserVo user) {
+        SysUser sysUser = sysUserMapper.selectById(user.getId());
+        return sysUser2AddUserVo(sysUser);
+    }
+
+    private AddUserVo sysUser2AddUserVo(SysUser sysUser) {
+        AddUserVo userVo = new AddUserVo();
+        userVo.setId(sysUser.getId());
+        userVo.setUsername(sysUser.getUsername());
+        userVo.setRealName(sysUser.getRealName());
+        userVo.setPhone(sysUser.getPhone());
+        userVo.setUserType(sysUser.getUserType());
+        userVo.setNickName(sysUser.getNickName());
+        userVo.setRemarks(sysUser.getRemarks());
+        return userVo;
     }
 
     private void addUserVo2SysUser(AddUserVo addUserVo, SysUser sysUser) {
@@ -104,9 +140,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             sysUser.setId(addUserVo.getId());
         }
         sysUser.setUsername(addUserVo.getUsername());
-        sysUser.setPassword(EncryptUtils.encryptMd5(addUserVo.getPassword()));
+        if (StringUtils.isBlank(addUserVo.getPassword())) {
+            sysUser.setPassword(SysDefault.PASSWORD.getValue());
+        }else {
+            sysUser.setPassword(EncryptUtils.encryptMd5(addUserVo.getPassword()));
+        }
         sysUser.setNickName(addUserVo.getNickName());
         sysUser.setPhone(addUserVo.getPhone());
+        sysUser.setRealName(addUserVo.getRealName());
+        sysUser.setRemarks(addUserVo.getRemarks());
         if (StringUtils.isBlank(addUserVo.getUserType())) {
             addUserVo.setUserType(UserTypeEnum.NORMAL.getUserType());
         }
