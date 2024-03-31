@@ -66,4 +66,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return 结果
      */
     AddUserVo detailUserById(SysUserVo user);
+
+    /**
+     * 根据id删除用户
+     * @param user 要删除的用户
+     * @return 处理结果
+     */
+    String deleteUserById(SysUserVo user);
 }

@@ -7,6 +7,7 @@ import com.matrix.admin.system.mappers.SysDictMapper;
 import com.matrix.admin.system.mappers.SysDictTypeMapper;
 import com.matrix.admin.system.service.SysDictService;
 import com.matrix.common.enums.DeletedEnum;
+import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.pojo.system.SysDictType;
 import com.matrix.common.vo.basic.response.BaseResponse;
@@ -55,7 +56,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             sysDictType.setUpdateTime(now);
             sysDictTypeMapper.updateById(sysDictType);
         }
-        return "success";
+        return SysDefault.SUCCESS.getValue();
     }
 
     @Override
@@ -103,7 +104,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         if ( i == 0 && integer.equals(0)) {
             return BaseResponse.success("未删除任何数据");
         }
-        return BaseResponse.success("success");
+        return BaseResponse.success(SysDefault.SUCCESS.getValue());
     }
 
     @Override
@@ -137,7 +138,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             dictVo2SysDict(dictVo, loginId, now, sysDict);
             sysDictMapper.updateById(sysDict);
         }
-        return BaseResponse.success("success");
+        return BaseResponse.success(SysDefault.SUCCESS.getValue());
     }
 
     /**
@@ -162,7 +163,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     public BaseResponse<String> deleteDictItemTypeById(String dictItemId) {
         int i = sysDictMapper.deleteById(dictItemId);
         if (i != 0){
-            return BaseResponse.success("success");
+            return BaseResponse.success(SysDefault.SUCCESS.getValue());
         }else {
             return BaseResponse.success("没有数据被删除");
         }

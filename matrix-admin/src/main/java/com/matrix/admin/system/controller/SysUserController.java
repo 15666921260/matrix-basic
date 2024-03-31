@@ -93,4 +93,10 @@ public class SysUserController {
         String loginId = (String) StpUtil.getLoginId();
         return BaseResponse.success(sysUserService.editUser(addUserVo, loginId));
     }
+
+    @Operation(summary = "根据id删除单个用户")
+    @PostMapping("/deleteUserById")
+    public BaseResponse<String> deleteUserById(@RequestBody SysUserVo user){
+        return BaseResponse.success(sysUserService.deleteUserById(user));
+    }
 }

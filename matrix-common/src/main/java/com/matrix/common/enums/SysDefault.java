@@ -15,7 +15,11 @@ public enum SysDefault {
     /**
      * 系统默认密码，加密后的
      */
-    PASSWORD("系统默认密码", "634d6cb6778c4f2d1d2470ff898d0430");
+    PASSWORD("系统默认密码", "634d6cb6778c4f2d1d2470ff898d0430"),
+    /**
+     * 接口返回类型为string时，成功时返回的数据
+     */
+    SUCCESS("系统默认成功返回", "success");
 
     private final String illustrate;
 

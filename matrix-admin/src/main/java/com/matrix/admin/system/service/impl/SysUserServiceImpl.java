@@ -95,7 +95,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         sysUser.setUpdateId(loginId);
         sysUser.setUpdateTime(now);
         this.save(sysUser);
-        return "success";
+        return  SysDefault.SUCCESS.getValue();
     }
 
     @Override
@@ -114,13 +114,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         sysUser.setUpdateId(loginId);
         sysUser.setUpdateTime(now);
         this.updateById(sysUser);
-        return "success";
+        return  SysDefault.SUCCESS.getValue();
     }
 
     @Override
     public AddUserVo detailUserById(SysUserVo user) {
         SysUser sysUser = sysUserMapper.selectById(user.getId());
         return sysUser2AddUserVo(sysUser);
+    }
+
+    @Override
+    public String deleteUserById(SysUserVo user) {
+        sysUserMapper.deleteById(user.getId());
+        return SysDefault.SUCCESS.getValue();
     }
 
     private AddUserVo sysUser2AddUserVo(SysUser sysUser) {
