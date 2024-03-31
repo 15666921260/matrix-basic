@@ -119,26 +119,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public AddUserVo detailUserById(SysUserVo user) {
-        SysUser sysUser = sysUserMapper.selectById(user.getId());
-        return sysUser2AddUserVo(sysUser);
+        return sysUserMapper.addUserVoById(user.getId());
     }
 
     @Override
     public String deleteUserById(SysUserVo user) {
         sysUserMapper.deleteById(user.getId());
         return SysDefault.SUCCESS.getValue();
-    }
-
-    private AddUserVo sysUser2AddUserVo(SysUser sysUser) {
-        AddUserVo userVo = new AddUserVo();
-        userVo.setId(sysUser.getId());
-        userVo.setUsername(sysUser.getUsername());
-        userVo.setRealName(sysUser.getRealName());
-        userVo.setPhone(sysUser.getPhone());
-        userVo.setUserType(sysUser.getUserType());
-        userVo.setNickName(sysUser.getNickName());
-        userVo.setRemarks(sysUser.getRemarks());
-        return userVo;
     }
 
     private void addUserVo2SysUser(AddUserVo addUserVo, SysUser sysUser) {
@@ -158,6 +145,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (StringUtils.isBlank(addUserVo.getUserType())) {
             addUserVo.setUserType(UserTypeEnum.NORMAL.getUserType());
         }
-        sysUser.setUserType(addUserVo.getUserType());
+        sysUser.setUserType(addUserVo.getUserTypeId());
     }
 }

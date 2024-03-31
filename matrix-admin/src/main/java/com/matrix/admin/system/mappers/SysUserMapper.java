@@ -2,6 +2,7 @@ package com.matrix.admin.system.mappers;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
 import org.apache.ibatis.annotations.Param;
@@ -39,5 +40,12 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return
      */
     Integer checkUserName(@Param("username") String username);
+
+    /**
+     * 根据userId查询数据
+     * @param userId 条件
+     * @return 结果
+     */
+    AddUserVo addUserVoById(@Param("userId") String userId);
 
 }

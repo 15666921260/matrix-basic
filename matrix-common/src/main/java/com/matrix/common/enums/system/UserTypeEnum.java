@@ -15,12 +15,14 @@ public enum UserTypeEnum {
     /**
      * 超级管理员
      */
-    ADMIN("admin"),
+    ADMIN("admin", "超级管理员"),
     /**
      * 普通用户
      */
-    NORMAL("normal")
+    NORMAL("normal", "普通用户")
     ;
 
     private final String userType;
+
+    private final String typeName;
 }
