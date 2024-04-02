@@ -40,7 +40,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 获取当前登录用户
-     * @return
+     * @return 返回结果
      */
     SysUser getLoginUser();
 

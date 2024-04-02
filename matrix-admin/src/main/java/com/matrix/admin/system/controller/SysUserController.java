@@ -6,7 +6,6 @@ import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.basic.response.PageResponse;
-import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.LoginParam;

@@ -9,7 +9,6 @@ import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
-import com.matrix.common.vo.system.user.SysUserVo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +63,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @param sysRole 转换结果数据
      * @param dateTime 时间
      * @param userId 登录用户的id
-     * @return 转换结果
      */
     private void roleVo2SysRole(SysRole sysRole, RoleVo roleVo, LocalDateTime dateTime, String userId) {
         sysRole.setId(roleVo.getId());
