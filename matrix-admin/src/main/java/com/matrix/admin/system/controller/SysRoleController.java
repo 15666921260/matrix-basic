@@ -42,4 +42,10 @@ public class SysRoleController {
         return BaseResponse.success(sysRoleService.addOrEditRole(roleVo, loginId));
     }
 
+    @PostMapping("/deleteRole")
+    @Operation(summary = "删除指定角色")
+    public BaseResponse<String> deleteRole(@RequestBody RoleVo roleVo){
+        return BaseResponse.success(sysRoleService.deleteRole(roleVo));
+    }
+
 }

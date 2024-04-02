@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysRoleMapper;
 import com.matrix.admin.system.service.SysRoleService;
+import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
@@ -48,7 +49,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             this.roleVo2SysRole(sysRole, roleVo, now, userId);
             sysRoleMapper.updateById(sysRole);
         }
-        return "success";
+        return SysDefault.SUCCESS.getValue();
+    }
+
+    @Override
+    public String deleteRole(RoleVo roleVo) {
+        sysRoleMapper.deleteById(roleVo.getId());
+        return SysDefault.SUCCESS.getValue();
     }
 
     /**

@@ -26,4 +26,11 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 结果
      */
     String addOrEditRole(RoleVo roleVo, String userId);
+
+    /**
+     * 删除指定的角色
+     * @param roleVo 要删除的角色
+     * @return 处理结果
+     */
+    String deleteRole(RoleVo roleVo);
 }
