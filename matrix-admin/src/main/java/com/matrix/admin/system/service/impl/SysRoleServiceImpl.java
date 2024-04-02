@@ -12,7 +12,9 @@ import com.matrix.common.vo.system.user.SysUserVo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author liuweizhong
@@ -31,4 +33,39 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         List<RoleVo> roleVos = sysRoleMapper.selectByRoleName(param.getRoleName());
         return new PageInfo<>(roleVos);
     }
+
+    @Override
+    public String addOrEditRole(RoleVo roleVo, String userId) {
+        LocalDateTime now = LocalDateTime.now();
+        if (Objects.isNull(roleVo.getId())) {
+            SysRole sysRole = new SysRole();
+            this.roleVo2SysRole(sysRole, roleVo, now, userId);
+            sysRole.setCreateId(userId);
+            sysRole.setCreateTime(now);
+            sysRoleMapper.insert(sysRole);
+        } else {
+            SysRole sysRole = sysRoleMapper.selectById(roleVo.getId());
+            this.roleVo2SysRole(sysRole, roleVo, now, userId);
+            sysRoleMapper.updateById(sysRole);
+        }
+        return "success";
+    }
+
+    /**
+     * roleVo到SysRole转换
+     * @param roleVo 待转换数据
+     * @param sysRole 转换结果数据
+     * @param dateTime 时间
+     * @param userId 登录用户的id
+     * @return 转换结果
+     */
+    private void roleVo2SysRole(SysRole sysRole, RoleVo roleVo, LocalDateTime dateTime, String userId) {
+        sysRole.setId(roleVo.getId());
+        sysRole.setRoleName(roleVo.getRoleName());
+        sysRole.setRoleType(roleVo.getRoleType());
+        sysRole.setRemarks(roleVo.getRemarks());
+        sysRole.setUpdateId(userId);
+        sysRole.setUpdateTime(dateTime);
+    }
+
 }

@@ -7,16 +7,18 @@
         <id property="id" column="id"/>
         <result property="roleName" column="role_name"/>
         <result property="roleType" column="role_type"/>
+        <result property="roleTypeStr" column="role_type_str"/>
         <result property="remarks" column="remarks"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
     <select id="selectByRoleName" resultMap="RoleVoResult">
         SELECT
-            id, role_name, role_type, remarks, create_time
+            sys_role.id, sys_role.role_name, sys_role.role_type, sd.dic_name role_type_str, sys_role.remarks, sys_role.create_time
         FROM
             sys_role
+            LEFT JOIN sys_dict sd on sys_role.role_type = sd.id
         WHERE
-            deleted = 0
+            sys_role.deleted = 0
             <if test="roleName != null and roleName != ''">
                 AND role_name like concat('%',#{roleName},'%')
             </if>

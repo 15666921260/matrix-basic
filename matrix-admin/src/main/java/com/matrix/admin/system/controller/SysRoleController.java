@@ -1,5 +1,6 @@
 package com.matrix.admin.system.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysRoleService;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.basic.response.PageResponse;
@@ -31,6 +32,14 @@ public class SysRoleController {
     @Operation(summary = "分页查询角色")
     public PageResponse<RoleVo> pageRoleVo(@RequestBody QueryRoleParam param) {
         return PageResponse.success(sysRoleService.pageRoleVo(param));
+    }
+
+    @PostMapping("/addOrEditRole")
+    @Operation(summary = "添加或编辑角色")
+    public BaseResponse<String> addOrEditRole(@RequestBody RoleVo roleVo){
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysRoleService.addOrEditRole(roleVo, loginId));
     }
 
 }

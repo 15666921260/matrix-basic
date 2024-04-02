@@ -20,13 +20,16 @@ import java.time.LocalDateTime;
 public class RoleVo {
 
     @Schema(name = "id", description = "id")
-    private String id;
+    private Long id;
 
     @Schema(name = "roleName", description = "角色名")
     private String roleName;
 
-    @Schema(name = "roleType", description = "角色类型")
+    @Schema(name = "roleType", description = "角色类型字典id")
     private String roleType;
+
+    @Schema(name = "roleTypeStr", description = "角色类型字符值")
+    private String roleTypeStr;
 
     @Schema(name = "remarks", description = "备注")
     private String remarks;

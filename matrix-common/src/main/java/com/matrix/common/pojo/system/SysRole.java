@@ -16,7 +16,7 @@ import java.util.Date;
 public class SysRole {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private String id;
+    private Long id;
 
     @TableField("role_name")
     private String roleName;

@@ -19,4 +19,11 @@ public interface SysRoleService extends IService<SysRole> {
      */
     PageInfo<RoleVo> pageRoleVo(QueryRoleParam param);
 
+    /**
+     * 添加或者编辑角色
+     * @param roleVo 角色
+     * @param userId 用户id
+     * @return 结果
+     */
+    String addOrEditRole(RoleVo roleVo, String userId);
 }
