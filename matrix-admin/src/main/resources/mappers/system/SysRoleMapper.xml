@@ -3,4 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.matrix.admin.system.mappers.SysRoleMapper">
 
+    <resultMap id="RoleVoResult" type="com.matrix.common.vo.system.role.RoleVo">
+        <id property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleType" column="role_type"/>
+        <result property="remarks" column="remarks"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <select id="selectByRoleName" resultMap="RoleVoResult">
+        SELECT
+            id, role_name, role_type, remarks, create_time
+        FROM
+            sys_role
+        WHERE
+            deleted = 0
+            <if test="roleName != null and roleName != ''">
+                AND role_name like concat('%',#{roleName},'%')
+            </if>
+    </select>
 </mapper>

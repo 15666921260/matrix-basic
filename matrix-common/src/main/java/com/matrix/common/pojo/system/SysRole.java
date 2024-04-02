@@ -22,7 +22,7 @@ public class SysRole {
     private String roleName;
 
     @TableField("role_type")
-    private Integer roleType;
+    private String roleType;
 
     @TableField("remarks")
     private String remarks;
