@@ -17,7 +17,7 @@ public enum MenuTypeEnum {
      */
     DIRECTORY(1, "目录", "1775806060151427073"),
     MENU(2, "菜单", "1775806105957421058"),
-    AUTHOR(3, "权限(按钮)", "1775806184999079937")
+    AUTHOR(3, "权限", "1775806184999079937")
     ;
 
     private final Integer menuType;
