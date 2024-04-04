@@ -1,10 +1,8 @@
-package com.matrix.common.vo.system;
+package com.matrix.common.vo.system.menu;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
  * @since 2024-03-12
  */
 @Data
+@Schema(description = "菜单用户树展示的实体类")
 public class SysMenuTreeVo {
 
     private static final long serialVersionUID = 1L;

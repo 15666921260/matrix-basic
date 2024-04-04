@@ -3,14 +3,13 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.common.vo.basic.response.BaseResponse;
-import com.matrix.common.vo.system.SysMenuTreeVo;
+import com.matrix.common.vo.system.menu.SysMenuListVo;
+import com.matrix.common.vo.system.menu.SysMenuTreeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +40,17 @@ public class SysMenuController {
         String loginId = (String) StpUtil.getLoginId();
         List<SysMenuTreeVo> list = sysMenuService.getMenuTreeListByLoginUser(loginId);
         return BaseResponse.success(list);
+    }
+
+    /**
+     * 根据父id获取菜单列表
+     * @param parentId 父id
+     * @return 菜单列表
+     */
+    @GetMapping("/getMenuListVoByParentId")
+    @Operation(summary = "获取菜单list")
+    public BaseResponse<List<SysMenuListVo>> getMenuListVoByParentId(@RequestParam("parentId") Long parentId) {
+        return BaseResponse.success(sysMenuService.getMenuListVoByParentId(parentId));
     }
 
 }

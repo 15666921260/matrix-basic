@@ -2,7 +2,8 @@ package com.matrix.admin.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysMenu;
-import com.matrix.common.vo.system.SysMenuTreeVo;
+import com.matrix.common.vo.system.menu.SysMenuListVo;
+import com.matrix.common.vo.system.menu.SysMenuTreeVo;
 
 import java.util.List;
 
@@ -19,4 +20,10 @@ public interface SysMenuService extends IService<SysMenu> {
      */
     List<SysMenuTreeVo> getMenuTreeListByLoginUser(String userId);
 
+    /**
+     * 获取菜单列表根据父id
+     * @param parentId 父id 默认是0
+     * @return 菜单列表
+     */
+    List<SysMenuListVo> getMenuListVoByParentId(Long parentId);
 }
