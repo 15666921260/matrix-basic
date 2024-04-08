@@ -41,6 +41,7 @@
     <resultMap id="SysMenuListVoResult" type="com.matrix.common.vo.system.menu.SysMenuListVo">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
+        <result property="parentId" column="parent_id"/>
         <result property="type" column="type"/>
         <result property="status" column="status"/>
         <result property="sort" column="sort"/>
@@ -48,14 +49,19 @@
         <result property="componentPath" column="component_path"/>
         <result property="hidden" column="hidden"/>
         <result property="updateTime" column="update_time"/>
-        <result property="withItem" column="with_item"/>
     </resultMap>
 
     <select id="getMenuListVoByParentId" resultMap="SysMenuListVoResult">
         select
-            sm.id, sm.title, sm.type, sm.status, sm.sort, sm.route_url, sm.component_path, sm.hidden, sm.update_time,
-            (select count(1) from sys_menu smc where smc.parent_id = sm.id) as with_item
+            sm.id, sm.title, sm.parent_id, sm.type, sm.status, sm.sort, sm.route_url, sm.component_path, sm.hidden, sm.update_time
         from sys_menu sm
-        where sm.parent_id = #{parentId}
+        where sm.deleted = 0 and sm.parent_id = #{parentId}
+    </select>
+    <select id="getAllMenuListVo" resultMap="SysMenuListVoResult">
+        select
+            sm.id, sm.title, sm.parent_id, sm.type, sm.status, sm.sort, sm.route_url, sm.component_path, sm.hidden, sm.update_time
+        from sys_menu sm
+        where sm.deleted = 0
+        order by sort
     </select>
 </mapper>

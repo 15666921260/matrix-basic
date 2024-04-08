@@ -41,7 +41,7 @@ public class SysMenu {
     private Integer type;
 
     /**
-     * 菜单编码
+     * 菜单编码(权限编码)
      */
     @TableField("code")
     private String code;

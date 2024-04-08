@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 菜单列表展示类
@@ -18,6 +19,9 @@ public class SysMenuListVo {
 
     @Schema(description = "主键")
     private Long id;
+
+    @Schema(description = "父主键")
+    private Long parentId;
 
     @Schema(description = "菜单名称")
     private String title;
@@ -48,10 +52,7 @@ public class SysMenuListVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    @Schema(description = "子项个数")
-    private Integer withItem;
-
-    @Schema(description = "是否有子项")
-    private Boolean isChild;
+    @Schema(description = "子项")
+    private List<SysMenuListVo> children;
 
 }

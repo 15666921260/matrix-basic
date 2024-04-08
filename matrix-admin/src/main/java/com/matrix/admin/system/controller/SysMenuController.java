@@ -3,6 +3,8 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.common.vo.basic.response.BaseResponse;
+import com.matrix.common.vo.system.menu.MenuTreeSelect;
+import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,13 +46,42 @@ public class SysMenuController {
 
     /**
      * 根据父id获取菜单列表
-     * @param parentId 父id
      * @return 菜单列表
      */
-    @GetMapping("/getMenuListVoByParentId")
+    @GetMapping("/getAllMenuListVo")
     @Operation(summary = "获取菜单list")
-    public BaseResponse<List<SysMenuListVo>> getMenuListVoByParentId(@RequestParam("parentId") Long parentId) {
-        return BaseResponse.success(sysMenuService.getMenuListVoByParentId(parentId));
+    public BaseResponse<List<SysMenuListVo>> getAllMenuListVo() {
+        return BaseResponse.success(sysMenuService.getAllMenuListVo());
+    }
+
+    /**
+     * 获取树形下拉菜单
+     * @return 菜单列表
+     */
+    @GetMapping("/getMenuTreeSelect")
+    @Operation(summary = "获取树形下拉菜单")
+    public BaseResponse<List<MenuTreeSelect>> getMenuTreeSelect() {
+        return BaseResponse.success(sysMenuService.getMenuTreeSelect());
+    }
+
+    @PostMapping("/addOrEditMenu")
+    @Operation(summary = "新增或编辑菜单")
+    public BaseResponse<String> addOrEditMenu(@RequestBody SysMenuDetail menuDetail){
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysMenuService.addOrEditMenu(menuDetail, loginId));
+    }
+
+    @GetMapping("/getMenuDetailById")
+    @Operation(summary = "获取菜单详情")
+    public BaseResponse<SysMenuDetail> getMenuDetailById(@RequestParam("menuId") Long menuId){
+        return BaseResponse.success(sysMenuService.getMenuDetailById(menuId));
+    }
+
+    @GetMapping("/deleteById")
+    @Operation(summary = "获取菜单详情")
+    public BaseResponse<String> deleteById(@RequestParam("menuId") Long menuId){
+        return BaseResponse.success(sysMenuService.deleteById(menuId));
     }
 
 }
