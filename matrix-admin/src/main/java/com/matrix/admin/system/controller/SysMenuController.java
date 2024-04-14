@@ -101,7 +101,9 @@ public class SysMenuController {
     @PostMapping("/setRoleMenuAssociation")
     @Operation(summary = "设置角色和菜单的关联")
     public BaseResponse<String> setRoleMenuAssociation(@RequestBody RoleMenuAssociation roleMenu) {
-        return BaseResponse.success(sysRoleMenuService.setRoleMenuAssociation(roleMenu));
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysRoleMenuService.setRoleMenuAssociation(roleMenu, loginId));
     }
 
 }

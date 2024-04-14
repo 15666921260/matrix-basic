@@ -15,6 +15,6 @@ public interface SysRoleMenuService extends IService<SysRoleMenu> {
      * @param roleMenu 角色菜单关联类
      * @return 返回结果
      */
-    String setRoleMenuAssociation(RoleMenuAssociation roleMenu);
+    String setRoleMenuAssociation(RoleMenuAssociation roleMenu, String loginId);
 
 }

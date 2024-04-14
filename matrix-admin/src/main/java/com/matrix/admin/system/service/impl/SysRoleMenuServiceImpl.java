@@ -10,6 +10,7 @@ import com.matrix.common.vo.system.menu.RoleMenuAssociation;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     private SysMenuService sysMenuService;
 
     @Override
-    public String setRoleMenuAssociation(RoleMenuAssociation roleMenu) {
+    public String setRoleMenuAssociation(RoleMenuAssociation roleMenu, String loginId) {
         Long roleId = roleMenu.getRoleId();
         if (roleId.equals(0L)) {
             return "角色id为0，无效角色 -->检测是否正确传值";
@@ -42,9 +43,34 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         List<Long> addList = this.getListNotDataBySourceList(pubMenuIds, menuIds);
         // 声明需要取消关联的菜单id集合  -- menuCheckedKeys 有的 menuIds 中没有的数据
         List<Long> deleteList = this.getListNotDataBySourceList(pubMenuIds, menuCheckedKeys);
+        // 添加操作
+        List<SysRoleMenu> addSysRoleMenus = this.buildRoleMenuByAssociation(addList, roleId, loginId);
+        this.saveBatch(addSysRoleMenus);
+        // todo liuweizhong 删除操作
 
 
         return SysDefault.SUCCESS.getValue();
+    }
+
+    /**
+     * 构建关联实体类集合
+     * @param associationData 关联数据
+     * @param roleId 角色id
+     * @param loginId 操作用户
+     * @return 实体类集合
+     */
+    private List<SysRoleMenu> buildRoleMenuByAssociation(List<Long> associationData, Long roleId, String loginId){
+        List<SysRoleMenu> res = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        associationData.forEach(x -> {
+            SysRoleMenu sysRoleMenu = new SysRoleMenu();
+            sysRoleMenu.setRoleId(roleId);
+            sysRoleMenu.setMenuId(x);
+            sysRoleMenu.setCreateId(loginId);
+            sysRoleMenu.setCreateTime(now);
+            res.add(sysRoleMenu);
+        });
+        return res;
     }
 
     /**
