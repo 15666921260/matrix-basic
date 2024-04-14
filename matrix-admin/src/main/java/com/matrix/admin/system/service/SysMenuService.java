@@ -2,6 +2,7 @@ package com.matrix.admin.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysMenu;
+import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
@@ -55,4 +56,17 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return 处理结果
      */
     String deleteById(Long menuId);
+
+    /**
+     * 获取菜单树形数据，用于编辑权限
+     * @return 菜单树形数据
+     */
+    List<TreeData> getAllMenuTreeData();
+
+    /**
+     * 根据角色id获取选中菜单的id集合
+     * @param roleId 角色id
+     * @return 结果返回
+     */
+    List<Long> getMenuCheckedKeys(Long roleId);
 }

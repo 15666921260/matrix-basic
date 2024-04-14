@@ -2,6 +2,7 @@ package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
+import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
@@ -79,9 +80,21 @@ public class SysMenuController {
     }
 
     @GetMapping("/deleteById")
-    @Operation(summary = "获取菜单详情")
+    @Operation(summary = "删除指定菜单")
     public BaseResponse<String> deleteById(@RequestParam("menuId") Long menuId){
         return BaseResponse.success(sysMenuService.deleteById(menuId));
+    }
+
+    @GetMapping("/getAllMenuTreeData")
+    @Operation(summary = "获取菜单树形数据，用于编辑权限")
+    public BaseResponse<List<TreeData>> getAllMenuTreeData() {
+        return BaseResponse.success(sysMenuService.getAllMenuTreeData());
+    }
+
+    @GetMapping("/getMenuCheckedKeys")
+    @Operation(summary = "根据角色id获取选中菜单的id集合")
+    public BaseResponse<List<Long>> getMenuCheckedKeys(@RequestParam("roleId") Long roleId) {
+        return BaseResponse.success(sysMenuService.getMenuCheckedKeys(roleId));
     }
 
 }

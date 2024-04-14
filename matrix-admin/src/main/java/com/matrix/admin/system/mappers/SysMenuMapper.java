@@ -35,8 +35,15 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
     List<SysMenuListVo> getMenuListVoByParentId(@Param("parentId") Long parentId);
 
     /**
-     * 获取全部菜单列表
+     * 获取全部菜单与权限列表
      * @return 菜单列表
      */
     List<SysMenuListVo> getAllMenuListVo();
+
+    /**
+     * 根据角色id返回菜单集合
+     * @param roleId 角色id
+     * @return 返回结果
+     */
+    List<SysMenuListVo> getMenuListByRoleId(@Param("roleId") Long roleId);
 }

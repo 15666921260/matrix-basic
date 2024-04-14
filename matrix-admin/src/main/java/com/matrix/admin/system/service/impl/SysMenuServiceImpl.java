@@ -10,6 +10,7 @@ import com.matrix.common.enums.system.MenuTypeEnum;
 import com.matrix.common.enums.system.UserTypeEnum;
 import com.matrix.common.pojo.system.SysMenu;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
@@ -172,5 +173,36 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public String deleteById(Long menuId) {
         sysMenuMapper.deleteById(menuId);
         return SysDefault.SUCCESS.getValue();
+    }
+
+    @Override
+    public List<TreeData> getAllMenuTreeData() {
+        List<SysMenuListVo> allMenuListVo = sysMenuMapper.getAllMenuListVo();
+        return this.buildBaseMenuTreeData(0L, allMenuListVo);
+    }
+
+    /**
+     * 设置基础的TreeData的树形数据
+     * @param parentId 父id
+     * @param sysMenuTreeVos 菜单
+     * @return 结果集
+     */
+    private List<TreeData> buildBaseMenuTreeData(Long parentId, List<SysMenuListVo> sysMenuTreeVos) {
+        List<TreeData> treeDataList = new ArrayList<>();
+        sysMenuTreeVos.stream()
+                .filter(vo -> vo.getParentId().equals(parentId)).forEach(vo -> {
+                    TreeData treeData = new TreeData();
+                    treeData.setId(vo.getId());
+                    treeData.setLabel(vo.getTitle());
+                    treeData.setChildren(buildBaseMenuTreeData(vo.getId(), sysMenuTreeVos));
+                    treeDataList.add(treeData);
+                });
+        return treeDataList;
+    }
+
+    @Override
+    public List<Long> getMenuCheckedKeys(Long roleId) {
+        List<SysMenuListVo> menuList = sysMenuMapper.getMenuListByRoleId(roleId);
+        return menuList.stream().map(SysMenuListVo::getId).collect(Collectors.toList());
     }
 }
