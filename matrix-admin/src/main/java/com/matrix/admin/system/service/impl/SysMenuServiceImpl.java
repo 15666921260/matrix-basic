@@ -1,7 +1,6 @@
 package com.matrix.admin.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.matrix.admin.system.mappers.SysDictMapper;
 import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysMenuService;
@@ -15,7 +14,6 @@ import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -37,8 +35,6 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     private SysUserMapper sysUserMapper;
     @Resource
     private SysMenuMapper sysMenuMapper;
-    @Resource
-    private SysDictMapper sysDictMapper;
 
     @Override
     public List<SysMenuTreeVo> getMenuTreeListByLoginUser(String userId) {
@@ -189,14 +185,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     private List<TreeData> buildBaseMenuTreeData(Long parentId, List<SysMenuListVo> sysMenuTreeVos) {
         List<TreeData> treeDataList = new ArrayList<>();
-        sysMenuTreeVos.stream()
-                .filter(vo -> vo.getParentId().equals(parentId)).forEach(vo -> {
-                    TreeData treeData = new TreeData();
-                    treeData.setId(vo.getId());
-                    treeData.setLabel(vo.getTitle());
-                    treeData.setChildren(buildBaseMenuTreeData(vo.getId(), sysMenuTreeVos));
-                    treeDataList.add(treeData);
-                });
+        sysMenuTreeVos.stream().filter(vo -> vo.getParentId().equals(parentId)).forEach(vo -> {
+            TreeData treeData = new TreeData();
+            treeData.setId(vo.getId());
+            treeData.setLabel(vo.getTitle());
+            treeData.setChildren(buildBaseMenuTreeData(vo.getId(), sysMenuTreeVos));
+            treeDataList.add(treeData);
+        });
         return treeDataList;
     }
 

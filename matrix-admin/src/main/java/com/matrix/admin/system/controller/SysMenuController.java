@@ -2,6 +2,7 @@ package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
+import com.matrix.admin.system.service.SysRoleMenuService;
 import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.system.menu.*;
@@ -26,6 +27,9 @@ public class SysMenuController {
 
     @Resource
     private SysMenuService sysMenuService;
+
+    @Resource
+    private SysRoleMenuService sysRoleMenuService;
 
     /**
      * 获取当前用户的导航菜单
@@ -97,8 +101,7 @@ public class SysMenuController {
     @PostMapping("/setRoleMenuAssociation")
     @Operation(summary = "设置角色和菜单的关联")
     public BaseResponse<String> setRoleMenuAssociation(@RequestBody RoleMenuAssociation roleMenu) {
-        System.out.println(roleMenu.toString());
-        return BaseResponse.success("");
+        return BaseResponse.success(sysRoleMenuService.setRoleMenuAssociation(roleMenu));
     }
 
 }

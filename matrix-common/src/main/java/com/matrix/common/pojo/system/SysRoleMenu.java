@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 @TableName("sys_role_menu")
 public class SysRoleMenu {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private String id;
 
     @TableField("role_id")
-    private String roleId;
+    private Long roleId;
 
     @TableField("role_id")
     private Long menuId;
