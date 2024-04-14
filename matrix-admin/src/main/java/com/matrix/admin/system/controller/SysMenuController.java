@@ -4,10 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.basic.response.BaseResponse;
-import com.matrix.common.vo.system.menu.MenuTreeSelect;
-import com.matrix.common.vo.system.menu.SysMenuDetail;
-import com.matrix.common.vo.system.menu.SysMenuListVo;
-import com.matrix.common.vo.system.menu.SysMenuTreeVo;
+import com.matrix.common.vo.system.menu.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -95,6 +92,13 @@ public class SysMenuController {
     @Operation(summary = "根据角色id获取选中菜单的id集合")
     public BaseResponse<List<Long>> getMenuCheckedKeys(@RequestParam("roleId") Long roleId) {
         return BaseResponse.success(sysMenuService.getMenuCheckedKeys(roleId));
+    }
+
+    @PostMapping("/setRoleMenuAssociation")
+    @Operation(summary = "设置角色和菜单的关联")
+    public BaseResponse<String> setRoleMenuAssociation(@RequestBody RoleMenuAssociation roleMenu) {
+        System.out.println(roleMenu.toString());
+        return BaseResponse.success("");
     }
 
 }
