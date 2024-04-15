@@ -20,7 +20,7 @@ public class SysRoleMenu {
     @TableField("role_id")
     private Long roleId;
 
-    @TableField("role_id")
+    @TableField("menu_id")
     private Long menuId;
 
     @TableField("remarks")

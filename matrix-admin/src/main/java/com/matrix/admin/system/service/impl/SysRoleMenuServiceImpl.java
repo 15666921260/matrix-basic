@@ -8,6 +8,7 @@ import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRoleMenu;
 import com.matrix.common.vo.system.menu.RoleMenuAssociation;
 import jakarta.annotation.Resource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,8 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
 
     @Resource
     private SysMenuService sysMenuService;
+    @Resource
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
     public String setRoleMenuAssociation(RoleMenuAssociation roleMenu, String loginId) {
@@ -46,8 +49,10 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         // 添加操作
         List<SysRoleMenu> addSysRoleMenus = this.buildRoleMenuByAssociation(addList, roleId, loginId);
         this.saveBatch(addSysRoleMenus);
-        // todo liuweizhong 删除操作
-
+        // 删除操作
+        if(CollectionUtils.isNotEmpty(deleteList)) {
+            sysRoleMenuMapper.deleteByRoleIdAndMenuIds(roleId, deleteList);
+        }
 
         return SysDefault.SUCCESS.getValue();
     }
