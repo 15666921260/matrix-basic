@@ -12,7 +12,7 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 17/04/2024 02:06:07
+ Date: 17/04/2024 02:11:24
 */
 
 
@@ -446,18 +446,6 @@ ALTER TABLE "public"."sys_role_menu" ADD CONSTRAINT "sys_role_menu_pkey" PRIMARY
 -- Primary Key structure for table sys_user
 -- ----------------------------
 ALTER TABLE "public"."sys_user" ADD CONSTRAINT "sys_user_pkey" PRIMARY KEY ("id");
-
--- ----------------------------
--- Indexes structure for table sys_user_role
--- ----------------------------
-CREATE INDEX "role_id" ON "public"."sys_user_role" USING btree (
-  "role_id" "pg_catalog"."int8_ops" ASC NULLS LAST
-);
-COMMENT ON INDEX "public"."role_id" IS 'roleId索引';
-CREATE INDEX "user_id" ON "public"."sys_user_role" USING btree (
-  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
-);
-COMMENT ON INDEX "public"."user_id" IS 'userId建索引';
 
 -- ----------------------------
 -- Primary Key structure for table sys_user_role
