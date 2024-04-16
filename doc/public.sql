@@ -12,7 +12,7 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 24/03/2024 14:18:08
+ Date: 17/04/2024 02:00:42
 */
 
 
@@ -32,6 +32,17 @@ CACHE 1;
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."sys_menu_1_id_seq";
 CREATE SEQUENCE "public"."sys_menu_1_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for sys_role_1_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."sys_role_1_id_seq";
+CREATE SEQUENCE "public"."sys_role_1_id_seq" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
@@ -74,6 +85,12 @@ COMMENT ON TABLE "public"."sys_dict" IS '系统字典表';
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
+INSERT INTO "public"."sys_dict" VALUES ('1772685899080802305', 2, '超级管理员', 'admin', 1, '超级管理员类型的用户', '000000001', '2024-03-27 02:03:48', '000000001', '2024-03-27 02:16:35', 0, 'f');
+INSERT INTO "public"."sys_dict" VALUES ('1772686480121929730', 2, '普通用户', 'normal', 2, '一般的用户', '000000001', '2024-03-27 02:06:06', '000000001', '2024-03-27 02:16:56', 0, 'f');
+INSERT INTO "public"."sys_dict" VALUES ('1774815398174109697', 3, '默认类型', 'default', 1, '一般的角色类型', '000000001', '2024-04-01 23:05:40', '000000001', '2024-04-01 23:05:40', 0, 'f');
+INSERT INTO "public"."sys_dict" VALUES ('1775806060151427073', 4, '目录', '1', 1, '是目录', '000000001', '2024-04-04 16:42:12', '000000001', '2024-04-04 16:42:12', 0, 'f');
+INSERT INTO "public"."sys_dict" VALUES ('1775806105957421058', 4, '菜单', '2', 2, '', '000000001', '2024-04-04 16:42:23', '000000001', '2024-04-04 16:42:27', 0, 'f');
+INSERT INTO "public"."sys_dict" VALUES ('1775806184999079937', 4, '权限(按钮)', '3', 3, '', '000000001', '2024-04-04 16:42:42', '000000001', '2024-04-04 16:42:42', 0, 'f');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -107,7 +124,9 @@ COMMENT ON TABLE "public"."sys_dict_type" IS '系统字典类型表';
 -- ----------------------------
 -- Records of sys_dict_type
 -- ----------------------------
-INSERT INTO "public"."sys_dict_type" VALUES (2, '用户类型', '用于描述用户的类型', '000000001', '2024-03-24 14:00:08', '000000001', '2024-03-24 14:00:08', 0, 'f', 'f');
+INSERT INTO "public"."sys_dict_type" VALUES (3, '角色类型', '描述角色类型的字典', '000000001', '2024-04-01 23:04:47', '000000001', '2024-04-01 23:04:47', 0, 'f', 'f');
+INSERT INTO "public"."sys_dict_type" VALUES (4, '菜单类型', '描述菜单类型的字典', '000000001', '2024-04-04 16:41:21', '000000001', '2024-04-04 17:02:16', 0, 't', 'f');
+INSERT INTO "public"."sys_dict_type" VALUES (2, '用户类型', '用于描述用户的类型', '000000001', '2024-03-24 14:00:08', '000000001', '2024-03-25 20:39:31', 0, 't', 'f');
 
 -- ----------------------------
 -- Table structure for sys_file
@@ -188,7 +207,7 @@ COMMENT ON COLUMN "public"."sys_menu"."id" IS '主键';
 COMMENT ON COLUMN "public"."sys_menu"."title" IS '名称';
 COMMENT ON COLUMN "public"."sys_menu"."parent_id" IS '父级id(根为0)';
 COMMENT ON COLUMN "public"."sys_menu"."type" IS '菜单类型，1：目录，2：菜单，3：权限(按钮)';
-COMMENT ON COLUMN "public"."sys_menu"."code" IS '菜单编码';
+COMMENT ON COLUMN "public"."sys_menu"."code" IS '菜单编码(权限编码)';
 COMMENT ON COLUMN "public"."sys_menu"."route_url" IS '前端路由地址';
 COMMENT ON COLUMN "public"."sys_menu"."component_path" IS '组件路径';
 COMMENT ON COLUMN "public"."sys_menu"."route_redirect" IS '重定向';
@@ -207,16 +226,21 @@ COMMENT ON TABLE "public"."sys_menu" IS '系统枚举类';
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO "public"."sys_menu" VALUES (1, '数据大屏', 0, 2, NULL, '/screen', 'screen/index', NULL, 'Platform', 1, 'f', 't', NULL, NULL, '2024-03-12 23:46:29', NULL, '2024-03-17 13:16:26', 0);
+INSERT INTO "public"."sys_menu" VALUES (5, '角色管理', 3, 2, 'system:role', '/acl/role', 'acl/role/index', '', 'Share', 2, 'f', 't', '', '000000001', '2024-04-09 00:39:57', '000000001', '2024-04-13 18:30:52', 0);
+INSERT INTO "public"."sys_menu" VALUES (7, '字典管理', 3, 2, 'system:dict', '/acl/dict', 'acl/dict/index', '', 'Collection', 4, 'f', 't', '', '000000001', '2024-04-09 00:43:02', '000000001', '2024-04-13 19:36:02', 0);
+INSERT INTO "public"."sys_menu" VALUES (4, '用户管理', 3, 2, 'system:user', '/acl/user', 'acl/user/index', NULL, 'User', 1, 'f', 't', '', '000000001', '2024-04-09 00:36:39', '000000001', '2024-04-14 19:28:13', 0);
+INSERT INTO "public"."sys_menu" VALUES (1, '数据大屏', 0, 2, 'dataScreen', '/screen', 'screen/index', NULL, 'Platform', 2, 'f', 't', NULL, NULL, '2024-03-12 23:46:29', '000000001', '2024-04-09 00:34:41', 0);
+INSERT INTO "public"."sys_menu" VALUES (6, '菜单管理', 3, 2, 'system:permission', '/acl/permission', 'acl/permission/index', NULL, 'Tickets', 3, 'f', 't', '', '000000001', '2024-04-09 00:41:46', '000000001', '2024-04-09 00:41:46', 0);
+INSERT INTO "public"."sys_menu" VALUES (3, '系统管理', 0, 1, 'system', '', '', NULL, 'SetUp', 3, 'f', 't', '', '000000001', '2024-04-09 00:22:32', '000000001', '2024-04-09 02:24:18', 0);
 
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."sys_role";
 CREATE TABLE "public"."sys_role" (
-  "id" int8 NOT NULL,
+  "id" int8 NOT NULL DEFAULT nextval('sys_role_1_id_seq'::regclass),
   "role_name" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-  "role_type" int2 NOT NULL,
+  "role_type" varchar(64) COLLATE "pg_catalog"."default" NOT NULL,
   "remarks" varchar(255) COLLATE "pg_catalog"."default",
   "create_id" varchar(64) COLLATE "pg_catalog"."default",
   "create_time" timestamp(0),
@@ -227,18 +251,20 @@ CREATE TABLE "public"."sys_role" (
 ;
 COMMENT ON COLUMN "public"."sys_role"."id" IS '主键';
 COMMENT ON COLUMN "public"."sys_role"."role_name" IS '角色名称';
-COMMENT ON COLUMN "public"."sys_role"."role_type" IS '角色类型';
+COMMENT ON COLUMN "public"."sys_role"."role_type" IS '角色类型(字典id)';
 COMMENT ON COLUMN "public"."sys_role"."remarks" IS '备注';
 COMMENT ON COLUMN "public"."sys_role"."create_id" IS '创建用户id';
 COMMENT ON COLUMN "public"."sys_role"."create_time" IS '创建时间';
 COMMENT ON COLUMN "public"."sys_role"."update_id" IS '更新用户id';
 COMMENT ON COLUMN "public"."sys_role"."update_time" IS '更新时间';
 COMMENT ON COLUMN "public"."sys_role"."deleted" IS '0 未删除 1 已删除';
-COMMENT ON TABLE "public"."sys_role" IS '系统角色表';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO "public"."sys_role" VALUES (1, '测试1111', '1774815398174109697', '测试收拾收', '000000001', '2024-04-02 23:24:30', '000000001', '2024-04-03 00:24:44', 0);
+INSERT INTO "public"."sys_role" VALUES (3, '测试delete', '1774815398174109697', 'aaa', '000000001', '2024-04-03 00:27:33', '000000001', '2024-04-03 00:27:33', 1);
+INSERT INTO "public"."sys_role" VALUES (2, '测试1', '1774815398174109697', '打发打发vascdvsadfasdfvasdbvsadgfsadfsadfsadfasdfasdfasdfasdfasdfasdfasdftgfsdf', '000000001', '2024-04-02 23:25:20', '000000001', '2024-04-03 00:29:33', 0);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -272,6 +298,10 @@ COMMENT ON TABLE "public"."sys_role_menu" IS '系统角色菜单映射表';
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO "public"."sys_role_menu" VALUES ('1779881633588912129', 1, 4, NULL, NULL, '000000001', '2024-04-15 22:37:01', NULL, NULL, 0);
+INSERT INTO "public"."sys_role_menu" VALUES ('1779882375481597954', 2, 4, NULL, NULL, '000000001', '2024-04-15 22:40:02', NULL, NULL, 0);
+INSERT INTO "public"."sys_role_menu" VALUES ('1779898731702722561', 1, 7, NULL, NULL, '000000001', '2024-04-15 23:45:01', NULL, NULL, 0);
+INSERT INTO "public"."sys_role_menu" VALUES ('1780270911041040386', 2, 5, NULL, NULL, '000000001', '2024-04-17 00:23:56', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -301,7 +331,7 @@ COMMENT ON COLUMN "public"."sys_user"."avatar_file_id" IS '头像文件id';
 COMMENT ON COLUMN "public"."sys_user"."phone" IS '手机号';
 COMMENT ON COLUMN "public"."sys_user"."nick_name" IS '昵称';
 COMMENT ON COLUMN "public"."sys_user"."real_name" IS '真实姓名(姓_名字)';
-COMMENT ON COLUMN "public"."sys_user"."user_type" IS '用户类型';
+COMMENT ON COLUMN "public"."sys_user"."user_type" IS '用户类型(字典id)';
 COMMENT ON COLUMN "public"."sys_user"."remarks" IS '备注';
 COMMENT ON COLUMN "public"."sys_user"."create_id" IS '创建用户id';
 COMMENT ON COLUMN "public"."sys_user"."create_time" IS '创建时间';
@@ -313,17 +343,11 @@ COMMENT ON TABLE "public"."sys_user" IS '系统用户表';
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO "public"."sys_user" VALUES ('000000001', 'admin', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000002', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000003', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000004', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000005', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000006', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000007', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000008', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000009', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000010', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
-INSERT INTO "public"."sys_user" VALUES ('000000011', 'admin1', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', 'admin', NULL, '0', '2024-03-07 02:05:50', '0', '2024-03-17 19:04:48', 0);
+INSERT INTO "public"."sys_user" VALUES ('1774449728542375937', 'dasbaaa', '634d6cb6778c4f2d1d2470ff898d0430', NULL, '19216581742', '大傻逼', '我的手机1', '', '我的天呀真实的 ', '000000001', '2024-03-31 22:52:38', '000000001', '2024-04-05 02:35:49', 0);
+INSERT INTO "public"."sys_user" VALUES ('000000001', 'admin', '634d6cb6778c4f2d1d2470ff898d0430', '1767228887526178817', '15666921260', 'admin', '刘伟中', '1772685899080802305', NULL, '0', '2024-03-07 02:05:50', '000000001', '2024-04-01 01:00:12', 0);
+INSERT INTO "public"."sys_user" VALUES ('1774445679524917249', '145245', '634d6cb6778c4f2d1d2470ff898d0430', NULL, '18259264318', '我爱你', '刘伟中1', '1772686480121929730', NULL, NULL, NULL, '000000001', '2024-04-01 01:00:27', 0);
+INSERT INTO "public"."sys_user" VALUES ('1774447836269588482', 'ccesg', '634d6cb6778c4f2d1d2470ff898d0430', NULL, '18367549216', 'dfasdf', NULL, '1772686480121929730', NULL, NULL, NULL, '000000001', '2024-04-01 01:00:31', 0);
+INSERT INTO "public"."sys_user" VALUES ('1774465088377286658', 'admin222', 'e10adc3949ba59abbe56e057f20f883e', NULL, '18254716158', '111', '111', '1772686480121929730', 'adfasdfas', '000000001', '2024-03-31 23:53:40', '000000001', '2024-03-31 23:53:40', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -355,20 +379,30 @@ COMMENT ON TABLE "public"."sys_user_role" IS '系统用户角色表';
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO "public"."sys_user_role" VALUES ('1780269954043473921', '1774449728542375937', 1, NULL, '000000001', '2024-04-17 00:20:08', NULL, NULL, 0);
+INSERT INTO "public"."sys_user_role" VALUES ('1780269954043473922', '1774449728542375937', 2, NULL, '000000001', '2024-04-17 00:20:08', NULL, NULL, 0);
+INSERT INTO "public"."sys_user_role" VALUES ('1780270036012756994', '1774465088377286658', 2, NULL, '000000001', '2024-04-17 00:20:27', NULL, NULL, 0);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."sys_dict_type_1_id_seq"
 OWNED BY "public"."sys_dict_type"."id";
-SELECT setval('"public"."sys_dict_type_1_id_seq"', 2, true);
+SELECT setval('"public"."sys_dict_type_1_id_seq"', 4, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."sys_menu_1_id_seq"
 OWNED BY "public"."sys_menu"."id";
-SELECT setval('"public"."sys_menu_1_id_seq"', 1, false);
+SELECT setval('"public"."sys_menu_1_id_seq"', 7, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."sys_role_1_id_seq"
+OWNED BY "public"."sys_role"."id";
+SELECT setval('"public"."sys_role_1_id_seq"', 3, true);
 
 -- ----------------------------
 -- Indexes structure for table sys_dict
@@ -401,7 +435,17 @@ ALTER TABLE "public"."sys_menu" ADD CONSTRAINT "sys_menu_1_pkey" PRIMARY KEY ("i
 -- ----------------------------
 -- Primary Key structure for table sys_role
 -- ----------------------------
-ALTER TABLE "public"."sys_role" ADD CONSTRAINT "sys_role_pkey" PRIMARY KEY ("id");
+ALTER TABLE "public"."sys_role" ADD CONSTRAINT "sys_role_1_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table sys_role_menu
+-- ----------------------------
+CREATE INDEX "menu_id" ON "public"."sys_role_menu" USING btree (
+  "menu_id" "pg_catalog"."int8_ops" ASC NULLS LAST
+);
+CREATE INDEX "sysrolemenu_roleId" ON "public"."sys_role_menu" USING btree (
+  "role_id" "pg_catalog"."int8_ops" ASC NULLS LAST
+);
 
 -- ----------------------------
 -- Primary Key structure for table sys_role_menu
@@ -412,6 +456,18 @@ ALTER TABLE "public"."sys_role_menu" ADD CONSTRAINT "sys_role_menu_pkey" PRIMARY
 -- Primary Key structure for table sys_user
 -- ----------------------------
 ALTER TABLE "public"."sys_user" ADD CONSTRAINT "sys_user_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Indexes structure for table sys_user_role
+-- ----------------------------
+CREATE INDEX "role_id" ON "public"."sys_user_role" USING btree (
+  "role_id" "pg_catalog"."int8_ops" ASC NULLS LAST
+);
+COMMENT ON INDEX "public"."role_id" IS 'roleId索引';
+CREATE INDEX "user_id" ON "public"."sys_user_role" USING btree (
+  "user_id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+COMMENT ON INDEX "public"."user_id" IS 'userId建索引';
 
 -- ----------------------------
 -- Primary Key structure for table sys_user_role

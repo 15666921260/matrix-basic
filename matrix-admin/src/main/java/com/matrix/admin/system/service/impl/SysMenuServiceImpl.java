@@ -15,6 +15,7 @@ import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
  * @author liuweizhong
  * @since 2024-03-12
  */
+@Slf4j
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
 
@@ -59,6 +61,21 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      */
     private List<SysMenuTreeVo> buildMenuTree(Long parentId, List<SysMenuTreeVo> sysMenuTreeVos) {
         // 确保都有父节点
+        List<SysMenuTreeVo> sysCheckMenuTreeVos = checkMenuTreeIsParent(sysMenuTreeVos);
+        // 进行树化结构
+        return sysCheckMenuTreeVos.stream()
+                .filter(vo -> vo.getParentId().equals(parentId))
+                .peek(item -> item.setChildren(buildMenuTree(item.getId(), sysMenuTreeVos)))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 检查都有父节点
+     * @param sysMenuTreeVos 待检测集合
+     * @return 完成检测后的数据
+     */
+    private List<SysMenuTreeVo> checkMenuTreeIsParent(List<SysMenuTreeVo> sysMenuTreeVos) {
+        // 确保都有父节点
         Map<Long, SysMenuTreeVo> mapById = sysMenuTreeVos.stream().collect(Collectors.toMap(SysMenuTreeVo::getId, x -> x));
         List<Long> menuParentIds = new ArrayList<>();
         sysMenuTreeVos.forEach(vo -> {
@@ -70,12 +87,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         if (CollectionUtils.isNotEmpty(menuParentIds)) {
             List<SysMenuTreeVo> menuListVoByIds = sysMenuMapper.getMenuListVoByIds(menuParentIds);
             sysMenuTreeVos.addAll(menuListVoByIds);
+            checkMenuTreeIsParent(sysMenuTreeVos);
+        }else {
+            return sysMenuTreeVos;
         }
-        // 进行树化结构
-        return sysMenuTreeVos.stream()
-                .filter(vo -> vo.getParentId().equals(parentId))
-                .peek(item -> item.setChildren(buildMenuTree(item.getId(), sysMenuTreeVos)))
-                .collect(Collectors.toList());
+        return sysMenuTreeVos;
     }
 
     @Override
