@@ -20,4 +20,17 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      */
     List<RoleVo> selectByRoleName(@Param("roleName") String roleName);
 
+    /**
+     * 查询所有角色信息
+     * @return 结果集
+     */
+    List<RoleVo> queryAllRoleVo();
+
+    /**
+     * 根据用户id查询角色信息
+     * @param userId 用户
+     * @return 角色信息
+     */
+    List<RoleVo> queryRoleVoByUserId(@Param("userId") String userId);
+
 }

@@ -6,11 +6,14 @@ import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.basic.response.PageResponse;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
+import com.matrix.common.vo.system.role.UserRoleAssociation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author liuweizhong
@@ -31,6 +34,12 @@ public class SysRoleController {
         return PageResponse.success(sysRoleService.pageRoleVo(param));
     }
 
+    @GetMapping("/queryAllRoleVo")
+    @Operation(summary = "查询所有角色")
+    public BaseResponse<List<RoleVo>> queryAllRoleVo() {
+        return BaseResponse.success(sysRoleService.queryAllRoleVo());
+    }
+
     @PostMapping("/addOrEditRole")
     @Operation(summary = "添加或编辑角色")
     public BaseResponse<String> addOrEditRole(@RequestBody RoleVo roleVo){
@@ -45,4 +54,23 @@ public class SysRoleController {
         return BaseResponse.success(sysRoleService.deleteRole(roleVo));
     }
 
+    @GetMapping("/queryRoleVoByUserId")
+    @Operation(summary = "根据用户id查询角色")
+    public BaseResponse<List<RoleVo>> queryRoleVoByUserId(@RequestParam("userId") String userId) {
+        return BaseResponse.success(sysRoleService.queryRoleVoByUserId(userId));
+    }
+
+    @GetMapping("/queryRoleIdByUserId")
+    @Operation(summary = "根据用户id查询角色id集合")
+    public BaseResponse<List<Long>> queryRoleIdByUserId(@RequestParam("userId") String userId) {
+        return BaseResponse.success(sysRoleService.queryRoleIdByUserId(userId));
+    }
+
+    @PostMapping("/saveUserRoleAssociation")
+    @Operation(summary = "保存用户角色关联关系")
+    public BaseResponse<String> saveUserRoleAssociation(@RequestBody UserRoleAssociation userRoleAssociation) {
+        // 获取当前登录用户的id
+        String loginId = (String) StpUtil.getLoginId();
+        return BaseResponse.success(sysRoleService.saveUserRoleAssociation(userRoleAssociation, loginId));
+    }
 }

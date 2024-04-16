@@ -23,4 +23,20 @@
                 AND role_name like concat('%',#{roleName},'%')
             </if>
     </select>
+    <select id="queryAllRoleVo" resultMap="RoleVoResult">
+        SELECT
+            sys_role.id, sys_role.role_name, sys_role.role_type, sys_role.remarks, sys_role.create_time
+        FROM
+            sys_role
+        WHERE
+            sys_role.deleted = 0
+    </select>
+    <select id="queryRoleVoByUserId" resultMap="RoleVoResult">
+        SELECT
+            sys_role.id, sys_role.role_name, sys_role.role_type, sys_role.remarks, sys_role.create_time
+        FROM
+            sys_user_role
+        LEFT JOIN sys_role ON sys_user_role.role_id = sys_role.id
+        WHERE sys_user_role.user_id = #{userId}
+    </select>
 </mapper>

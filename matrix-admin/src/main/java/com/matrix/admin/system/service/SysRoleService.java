@@ -5,6 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
+import com.matrix.common.vo.system.role.UserRoleAssociation;
+
+import java.util.List;
 
 /**
  * @author liuweizhong
@@ -33,4 +36,32 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 处理结果
      */
     String deleteRole(RoleVo roleVo);
+
+    /**
+     * 查询所有的角色
+     * @return 角色集合
+     */
+    List<RoleVo> queryAllRoleVo();
+
+    /**
+     * 查询用户的角色
+     * @param userId 用户id
+     * @return 角色集合
+     */
+    List<RoleVo> queryRoleVoByUserId(String userId);
+
+    /**
+     * 查询用户的角色ids
+     * @param userId 用户id
+     * @return 角色id集合
+     */
+    List<Long> queryRoleIdByUserId(String userId);
+
+    /**
+     * 保存用户角色关联
+     * @param userRoleAssociation 用户角色关联
+     * @param loginId 登录id
+     * @return 返回结果
+     */
+    String saveUserRoleAssociation(UserRoleAssociation userRoleAssociation, String loginId);
 }
