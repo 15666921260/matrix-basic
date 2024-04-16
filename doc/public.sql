@@ -12,7 +12,7 @@
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 17/04/2024 02:00:42
+ Date: 17/04/2024 02:06:07
 */
 
 
@@ -436,16 +436,6 @@ ALTER TABLE "public"."sys_menu" ADD CONSTRAINT "sys_menu_1_pkey" PRIMARY KEY ("i
 -- Primary Key structure for table sys_role
 -- ----------------------------
 ALTER TABLE "public"."sys_role" ADD CONSTRAINT "sys_role_1_pkey" PRIMARY KEY ("id");
-
--- ----------------------------
--- Indexes structure for table sys_role_menu
--- ----------------------------
-CREATE INDEX "menu_id" ON "public"."sys_role_menu" USING btree (
-  "menu_id" "pg_catalog"."int8_ops" ASC NULLS LAST
-);
-CREATE INDEX "sysrolemenu_roleId" ON "public"."sys_role_menu" USING btree (
-  "role_id" "pg_catalog"."int8_ops" ASC NULLS LAST
-);
 
 -- ----------------------------
 -- Primary Key structure for table sys_role_menu
