@@ -109,7 +109,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         List<Long> longs = sysUserRoleMapper.queryRoleIdByUserId(userId);
         // 当前关联的角色id集合
         List<Long> roleIds = userRoleAssociation.getRoleIds();
-        // todo 和角色菜单关联的写法类似
         // 获取两者共有的数据
         List<Long> pubRoleId = longs.stream().filter(roleIds::contains).toList();
 
