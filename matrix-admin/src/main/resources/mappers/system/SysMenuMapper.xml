@@ -29,6 +29,7 @@
           and deleted = 0
         order by sort
     </select>
+    <!--  todo 能不能直接把父级都查出来  -->
     <select id="getMenuByUserRole" resultType="com.matrix.common.vo.system.menu.SysMenuTreeVo">
         select sm.id, sm.title, sm.parent_id, sm.type, sm.code, sm.route_url, sm.component_path, sm.route_redirect,
                sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id, sm.create_time, sm.update_id, sm.update_time
@@ -71,5 +72,14 @@
         from sys_role_menu srm
         left join sys_menu sm on sm.id = srm.menu_id
         where sm.deleted = 0 and srm.role_id = #{roleId}
+    </select>
+    <select id="getMenuListVoByIds" resultType="com.matrix.common.vo.system.menu.SysMenuTreeVo">
+        select sm.id, sm.title, sm.parent_id, sm.type, sm.code, sm.route_url, sm.component_path, sm.route_redirect,
+               sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id, sm.create_time, sm.update_id, sm.update_time
+        from sys_menu sm
+        where sm.deleted = 0 and sm.id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

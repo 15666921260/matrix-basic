@@ -15,13 +15,12 @@ import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
 import jakarta.annotation.Resource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -59,6 +58,20 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @return 菜单树
      */
     private List<SysMenuTreeVo> buildMenuTree(Long parentId, List<SysMenuTreeVo> sysMenuTreeVos) {
+        // 确保都有父节点
+        Map<Long, SysMenuTreeVo> mapById = sysMenuTreeVos.stream().collect(Collectors.toMap(SysMenuTreeVo::getId, x -> x));
+        List<Long> menuParentIds = new ArrayList<>();
+        sysMenuTreeVos.forEach(vo -> {
+            SysMenuTreeVo sysMenuTreeVo = mapById.get(vo.getParentId());
+            if (Objects.isNull(sysMenuTreeVo) && vo.getParentId() != 0L) {
+                menuParentIds.add(vo.getParentId());
+            }
+        });
+        if (CollectionUtils.isNotEmpty(menuParentIds)) {
+            List<SysMenuTreeVo> menuListVoByIds = sysMenuMapper.getMenuListVoByIds(menuParentIds);
+            sysMenuTreeVos.addAll(menuListVoByIds);
+        }
+        // 进行树化结构
         return sysMenuTreeVos.stream()
                 .filter(vo -> vo.getParentId().equals(parentId))
                 .peek(item -> item.setChildren(buildMenuTree(item.getId(), sysMenuTreeVos)))
