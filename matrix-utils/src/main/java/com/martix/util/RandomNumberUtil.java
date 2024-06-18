@@ -10,6 +10,7 @@ import java.util.Random;
  * @since 2024-06-15
  */
 public class RandomNumberUtil {
+    private static final char[] NUMBERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
     /**
      * 生成 唯一的 ID
@@ -24,9 +25,7 @@ public class RandomNumberUtil {
      * @return 返回结果只包含数字 默认长度为 16
      */
     public static String newNumId() {
-        Random rand = new Random();
-        char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-        return NanoIdUtils.randomNanoId(rand, chars, 16);
+        return NanoIdUtils.randomNanoId(new Random(), NUMBERS, 16);
     }
 
     /**
@@ -34,8 +33,6 @@ public class RandomNumberUtil {
      * @return 返回结果只包含数字 指定长度
      */
     public static String newNumId(int size) {
-        Random rand = new Random();
-        char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-        return NanoIdUtils.randomNanoId(rand, chars, size);
+        return NanoIdUtils.randomNanoId(new Random(), NUMBERS, size);
     }
 }
