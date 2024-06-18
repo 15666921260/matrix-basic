@@ -135,11 +135,11 @@
         </dependency>
 
         <!-- 集成工作流引擎 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-engine</artifactId>
             <version>${flowable-engine.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
