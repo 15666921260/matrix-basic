@@ -10,6 +10,7 @@ import com.matrix.common.vo.system.menu.RoleMenuAssociation;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
+    @Transactional
     public String setRoleMenuAssociation(RoleMenuAssociation roleMenu, String loginId) {
         Long roleId = roleMenu.getRoleId();
         if (roleId.equals(0L)) {

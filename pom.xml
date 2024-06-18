@@ -38,6 +38,7 @@
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
+        <flowable-engine.version>6.8.0</flowable-engine.version>
     </properties>
 
 
@@ -131,6 +132,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.vsersion}</version>
+        </dependency>
+
+        <!-- 集成工作流引擎 -->
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-engine</artifactId>
+            <version>${flowable-engine.version}</version>
         </dependency>
     </dependencies>
 
