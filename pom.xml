@@ -134,6 +134,7 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.vsersion}</version>
         </dependency>
+        <!-- 里边依赖了 hutool-core、hutool-json -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
