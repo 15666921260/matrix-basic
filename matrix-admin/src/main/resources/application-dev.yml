@@ -46,7 +46,9 @@ logging:
     path: logs/
   level:
     org.apache.ibatis: DEBUG
+    # 设置项目日志级别
     com.matrix.*: DEBUG
+    # 设置mybatis-plus日志级别
     com.baomidou.mybatisplus: DEBUG
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
