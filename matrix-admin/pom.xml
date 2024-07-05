@@ -47,6 +47,7 @@
             <!-- 下列配置在此处是因为该模块为主模块，如果将此配置放到外围会被其他子模块继承，导致打包时发生找不到指定模块的错误。直接打最上层的包即可 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
+                <!-- 可以直接启动jar的插件 -->
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!-- 指定启动类 -->
