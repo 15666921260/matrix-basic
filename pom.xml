@@ -38,7 +38,7 @@
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
-        <flowable-engine.version>6.8.0</flowable-engine.version>
+        <flowable-boot.version>7.0.1</flowable-boot.version>
         <hutool-http.version>5.8.28</hutool-http.version>
     </properties>
 
@@ -115,6 +115,14 @@
             </exclusions>
         </dependency>
 
+        <!-- 整合flowable工作流引擎 -->
+        <!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter</artifactId>
+            <version>${flowable-boot.version}</version>
+        </dependency>
+
         <!-- 工具包 -->
         <!-- lombok 含有slf4j包 -->
         <dependency>
@@ -141,12 +149,14 @@
             <version>${hutool-http.version}</version>
         </dependency>
 
-        <!-- 集成工作流引擎 -->
-       <!-- <dependency>
-            <groupId>org.flowable</groupId>
-            <artifactId>flowable-engine</artifactId>
-            <version>${flowable-engine.version}</version>
-        </dependency>-->
+        <!-- 单元测试 -->
+        <!-- junit5 单元测试 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.11.0-M2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
