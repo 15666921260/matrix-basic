@@ -23,7 +23,6 @@ import java.util.List;
  * @author liuweizhong
  * @since 2024-02-11
  */
-@Slf4j
 @Tag(name = "SysUserControllerApi", description = "用户管理")
 @RestController
 @RequestMapping("/user")

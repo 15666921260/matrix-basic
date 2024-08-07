@@ -19,7 +19,6 @@ import java.util.List;
  * @author liuweizhong
  * @since 2024-03-12
  */
-@Slf4j
 @Tag(name = "SysMenuController", description = "系统菜单管理(菜单的设置功能)")
 @RestController
 @RequestMapping("/sysMenu")

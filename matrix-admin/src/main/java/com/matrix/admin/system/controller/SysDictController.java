@@ -22,7 +22,6 @@ import java.util.List;
  * @author liuweizhong
  * @since 2024-03-21
  */
-@Slf4j
 @Tag(name = "SysDictController", description = "系统字典管理")
 @RestController
 @RequestMapping("/sysDict")

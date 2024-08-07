@@ -19,7 +19,6 @@ import java.util.List;
  * @author liuweizhong
  * @since 2024-03-12
  */
-@Slf4j
 @Tag(name = "SysRoleController", description = "系统角色管理(角色的设置功能)")
 @RestController
 @RequestMapping("/sysRole")

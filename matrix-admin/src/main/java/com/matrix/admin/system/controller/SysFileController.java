@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @author liuweizhong
  * @since 2024-03-03
  */
-@Slf4j
 @Tag(name = "SysFileController", description = "系统文件管理(文件的上传、下载、图片预览功能)")
 @RestController
 @RequestMapping("/sysFile")
