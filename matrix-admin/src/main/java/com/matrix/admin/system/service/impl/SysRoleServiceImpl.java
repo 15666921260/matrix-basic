@@ -1,6 +1,7 @@
 package com.matrix.admin.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysRoleMapper;
@@ -39,10 +40,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public PageInfo<RoleVo> pageRoleVo(QueryRoleParam param) {
-        // 只有紧跟着PageHelper.startPage(pageNum,pageSize)的sql语句才被pagehelper起作用
-        PageHelper.startPage(param.getPageNum(), param.getPageSize());
-        List<RoleVo> roleVos = sysRoleMapper.selectByRoleName(param.getRoleName());
-        return new PageInfo<>(roleVos);
+        Page<RoleVo> page = PageHelper.startPage(param.getPageNum(), param.getPageSize())
+                .doSelectPage(() -> sysRoleMapper.selectByRoleName(param.getRoleName()));
+        return page.toPageInfo();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.matrix.admin.system.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysUserMapper;
@@ -68,9 +69,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public PageInfo<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId) {
         // 只有紧跟着PageHelper.startPage(pageNum,pageSize)的sql语句才被pagehelper起作用
-        PageHelper.startPage(queryUserParam.getPageNum(), queryUserParam.getPageSize());
-        List<SysUserVo> sysUserVos = sysUserMapper.queryUserList(queryUserParam);
-        return new PageInfo<>(sysUserVos);
+        Page<SysUserVo> page = PageHelper.startPage(queryUserParam.getPageNum(), queryUserParam.getPageSize())
+                .doSelectPage(() -> sysUserMapper.queryUserList(queryUserParam));
+        return page.toPageInfo();
     }
 
     @Override

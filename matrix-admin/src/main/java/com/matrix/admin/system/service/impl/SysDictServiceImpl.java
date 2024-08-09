@@ -1,6 +1,7 @@
 package com.matrix.admin.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysDictMapper;
@@ -84,9 +85,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public PageInfo<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam) {
-        PageHelper.startPage(dictTypeParam.getPageNum(), dictTypeParam.getPageSize());
-        List<DictTypeVo> dictTypeVos = sysDictTypeMapper.queryDictType(dictTypeParam.getTypeName());
-        return new PageInfo<>(dictTypeVos);
+        Page<DictTypeVo> page = PageHelper.startPage(dictTypeParam.getPageNum(), dictTypeParam.getPageSize())
+                .doSelectPage(() -> sysDictTypeMapper.queryDictType(dictTypeParam.getTypeName()));
+        return page.toPageInfo();
     }
 
     @Override
@@ -109,9 +110,10 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public PageInfo<DictVo> pageDictItem(QueryDictItemParam dictItemParam) {
-        PageHelper.startPage(dictItemParam.getPageNum(), dictItemParam.getPageSize());
-        List<DictVo> dictVos = sysDictMapper.queryDictByTypeId(dictItemParam.getTypeId());
-        return new PageInfo<>(dictVos);
+        Page<DictVo> page = PageHelper.startPage(dictItemParam.getPageNum(), dictItemParam.getPageSize()).doSelectPage(() ->
+                sysDictMapper.queryDictByTypeId(dictItemParam.getTypeId())
+        );
+        return page.toPageInfo();
     }
 
     @Override
