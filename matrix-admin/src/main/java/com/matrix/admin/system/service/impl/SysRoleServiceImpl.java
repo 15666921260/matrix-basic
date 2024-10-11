@@ -53,11 +53,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             this.roleVo2SysRole(sysRole, roleVo, now, userId);
             sysRole.setCreateId(userId);
             sysRole.setCreateTime(now);
-            sysRoleMapper.insert(sysRole);
+            this.save(sysRole);
         } else {
             SysRole sysRole = sysRoleMapper.selectById(roleVo.getId());
+            if (Objects.isNull(sysRole)) {
+                sysRole = new SysRole();
+                roleVo.setId(null);
+                sysRole.setCreateId(userId);
+                sysRole.setCreateTime(now);
+            }
             this.roleVo2SysRole(sysRole, roleVo, now, userId);
-            sysRoleMapper.updateById(sysRole);
+            this.saveOrUpdate(sysRole);
         }
         return SysDefault.SUCCESS.getValue();
     }
