@@ -5,14 +5,14 @@
  Source Server Type    : PostgreSQL
  Source Server Version : 160002 (160002)
  Source Host           : localhost:5432
- Source Catalog        : matrix_db
+ Source Catalog        : matrix_db_learning
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 160002 (160002)
  File Encoding         : 65001
 
- Date: 17/04/2024 02:11:24
+ Date: 12/10/2024 00:31:44
 */
 
 
@@ -177,6 +177,7 @@ INSERT INTO "public"."sys_file" VALUES ('1767225933242990593', 'png', '\202403\1
 INSERT INTO "public"."sys_file" VALUES ('1767228887526178817', 'png', '\202403\12\20240312003934972.png', '20240312003934972.png', 'logo.png', NULL, '000000001', '2024-03-12 00:39:35', '000000001', NULL, 0);
 INSERT INTO "public"."sys_file" VALUES ('1769775045494665217', 'jpg', '\202403\19\20240319011706309.jpg', '20240319011706309.jpg', 'pexels-alexis-ricardo-alaurin-16427628.jpg', NULL, '000000001', '2024-03-19 01:17:06', '000000001', '2024-03-19 01:17:06', 0);
 INSERT INTO "public"."sys_file" VALUES ('1770483702859546625', 'jpg', '\202403\21\20240321001303396.jpg', '20240321001303396.jpg', 'pexels-alim-18748124.jpg', NULL, '000000001', '2024-03-21 00:13:03', '000000001', '2024-03-21 00:13:03', 0);
+INSERT INTO "public"."sys_file" VALUES ('1782815948895399938', 'png', '\202404\24\20240424005659984.png', '20240424005659984.png', '165.png', NULL, '000000001', '2024-04-24 00:57:00', '000000001', '2024-04-24 00:57:00', 0);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -229,9 +230,12 @@ COMMENT ON TABLE "public"."sys_menu" IS '系统枚举类';
 INSERT INTO "public"."sys_menu" VALUES (5, '角色管理', 3, 2, 'system:role', '/acl/role', 'acl/role/index', '', 'Share', 2, 'f', 't', '', '000000001', '2024-04-09 00:39:57', '000000001', '2024-04-13 18:30:52', 0);
 INSERT INTO "public"."sys_menu" VALUES (7, '字典管理', 3, 2, 'system:dict', '/acl/dict', 'acl/dict/index', '', 'Collection', 4, 'f', 't', '', '000000001', '2024-04-09 00:43:02', '000000001', '2024-04-13 19:36:02', 0);
 INSERT INTO "public"."sys_menu" VALUES (4, '用户管理', 3, 2, 'system:user', '/acl/user', 'acl/user/index', NULL, 'User', 1, 'f', 't', '', '000000001', '2024-04-09 00:36:39', '000000001', '2024-04-14 19:28:13', 0);
+INSERT INTO "public"."sys_menu" VALUES (6, '菜单管理', 3, 2, 'system:permission', '/acl/permission', 'acl/permission/index', NULL, 'Tickets', 3, 'f', 't', '', '000000001', '2024-04-09 00:41:46', '000000001', '2024-07-16 15:03:53', 0);
+INSERT INTO "public"."sys_menu" VALUES (9, '测试', 8, 2, 'test:total', '/test/total', 'test/total/index', NULL, 'Histogram', 1, 'f', 't', '', '000000001', '2024-04-24 00:50:16', '000000001', '2024-08-08 02:04:30', 0);
+INSERT INTO "public"."sys_menu" VALUES (11, '测试2', 8, 2, 'Test02', '/test/ftt', 'test/ftt/index', NULL, 'ChatLineSquare', 2, 'f', 't', '', '000000001', '2024-08-08 02:05:54', '000000001', '2024-08-08 02:05:54', 0);
+INSERT INTO "public"."sys_menu" VALUES (3, '系统管理', 0, 1, 'system', '/acl', '', NULL, 'SetUp', 99, 'f', 't', '', '000000001', '2024-04-09 00:22:32', '000000001', '2024-04-24 00:47:05', 0);
+INSERT INTO "public"."sys_menu" VALUES (8, '测试目录', 0, 1, 'testDirectory', '/test', '', NULL, 'Operation', 90, 'f', 't', '', '000000001', '2024-04-24 00:48:29', '000000001', '2024-08-08 02:23:37', 0);
 INSERT INTO "public"."sys_menu" VALUES (1, '数据大屏', 0, 2, 'dataScreen', '/screen', 'screen/index', NULL, 'Platform', 2, 'f', 't', NULL, NULL, '2024-03-12 23:46:29', '000000001', '2024-04-09 00:34:41', 0);
-INSERT INTO "public"."sys_menu" VALUES (6, '菜单管理', 3, 2, 'system:permission', '/acl/permission', 'acl/permission/index', NULL, 'Tickets', 3, 'f', 't', '', '000000001', '2024-04-09 00:41:46', '000000001', '2024-04-09 00:41:46', 0);
-INSERT INTO "public"."sys_menu" VALUES (3, '系统管理', 0, 1, 'system', '', '', NULL, 'SetUp', 3, 'f', 't', '', '000000001', '2024-04-09 00:22:32', '000000001', '2024-04-09 02:24:18', 0);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -380,7 +384,6 @@ COMMENT ON TABLE "public"."sys_user_role" IS '系统用户角色表';
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO "public"."sys_user_role" VALUES ('1780269954043473921', '1774449728542375937', 1, NULL, '000000001', '2024-04-17 00:20:08', NULL, NULL, 0);
-INSERT INTO "public"."sys_user_role" VALUES ('1780269954043473922', '1774449728542375937', 2, NULL, '000000001', '2024-04-17 00:20:08', NULL, NULL, 0);
 INSERT INTO "public"."sys_user_role" VALUES ('1780270036012756994', '1774465088377286658', 2, NULL, '000000001', '2024-04-17 00:20:27', NULL, NULL, 0);
 
 -- ----------------------------
@@ -395,7 +398,7 @@ SELECT setval('"public"."sys_dict_type_1_id_seq"', 4, true);
 -- ----------------------------
 ALTER SEQUENCE "public"."sys_menu_1_id_seq"
 OWNED BY "public"."sys_menu"."id";
-SELECT setval('"public"."sys_menu_1_id_seq"', 7, true);
+SELECT setval('"public"."sys_menu_1_id_seq"', 11, true);
 
 -- ----------------------------
 -- Alter sequences owned by

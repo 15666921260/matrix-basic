@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/matrix_db
+    url: jdbc:postgresql://localhost:5432/matrix_db_learning
     username: postgres
     password: lwz.541666
     type: com.alibaba.druid.pool.DruidDataSource
