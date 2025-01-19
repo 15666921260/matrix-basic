@@ -1,6 +1,6 @@
 package com.matrix.common.vo.system.dict;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.mybatisflex.annotation.Column;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -25,19 +25,19 @@ public class DictVo {
     /**
      * 字典名
      */
-    @TableField("dic_name")
+    @Column("dic_name")
     private String dicName;
 
     /**
      * 字典值
      */
-    @TableField("dic_value")
+    @Column("dic_value")
     private String dicValue;
 
     /**
      * 排序字段
      */
-    @TableField("sort_num")
+    @Column("sort_num")
     private Integer sortNum;
 
     @Schema(name = "remarks", description = "备注")

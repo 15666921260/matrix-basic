@@ -28,8 +28,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <postgresql.version>42.7.2</postgresql.version>
-        <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
-        <druid-version>1.2.11</druid-version>
         <slf4j.version>2.0.12</slf4j.version>
         <sa-token.version>1.39.0</sa-token.version>
         <pagehelper.version>2.1.0</pagehelper.version>
@@ -39,6 +37,7 @@
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
         <flowable-engine.version>6.8.0</flowable-engine.version>
         <hutool-http.version>5.8.28</hutool-http.version>
+        <mybatis.flex.version>1.10.5</mybatis.flex.version>
     </properties>
 
 
@@ -68,30 +67,30 @@
             <version>${postgresql.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis.plus.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+            <version>${mybatis.flex.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid-version}</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
         <!--pagehelper分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.version}</version>
+            <!-- 解决与mybatis-flex的依赖冲突 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 

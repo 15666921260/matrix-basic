@@ -1,6 +1,5 @@
 package com.matrix.admin.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -14,6 +13,7 @@ import com.matrix.common.pojo.system.SysUserRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
 import com.matrix.common.vo.system.role.UserRoleAssociation;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -55,7 +55,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             sysRole.setCreateTime(now);
             this.save(sysRole);
         } else {
-            SysRole sysRole = sysRoleMapper.selectById(roleVo.getId());
+            SysRole sysRole = sysRoleMapper.selectOneById(roleVo.getId());
             if (Objects.isNull(sysRole)) {
                 sysRole = new SysRole();
                 roleVo.setId(null);

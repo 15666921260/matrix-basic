@@ -1,6 +1,5 @@
 package com.matrix.admin.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,6 +15,7 @@ import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -48,21 +48,21 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             sysDictType.setCreateTime(now);
             sysDictTypeMapper.insert(sysDictType);
         }else {
-            sysDictType = sysDictTypeMapper.selectById(dictTypeVo.getId());
+            sysDictType = sysDictTypeMapper.selectOneById(dictTypeVo.getId());
             sysDictType.setTypeName(dictTypeVo.getTypeName());
             sysDictType.setDisable(dictTypeVo.getDisable());
             sysDictType.setRemarks(dictTypeVo.getRemarks());
             sysDictType.setNeedEnum(dictTypeVo.getNeedEnum());
             sysDictType.setUpdateId(loginId);
             sysDictType.setUpdateTime(now);
-            sysDictTypeMapper.updateById(sysDictType);
+            sysDictTypeMapper.update(sysDictType);
         }
         return SysDefault.SUCCESS.getValue();
     }
 
     @Override
     public DictTypeVo getDictTypeDetail(Integer dictTypeId) {
-        SysDictType sysDictType = sysDictTypeMapper.selectById(dictTypeId);
+        SysDictType sysDictType = sysDictTypeMapper.selectOneById(dictTypeId);
         DictTypeVo dictTypeVo = new DictTypeVo();
         dictTypeVo.setId(sysDictType.getId());
         dictTypeVo.setTypeName(sysDictType.getTypeName());
@@ -123,7 +123,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public BaseResponse<String> addOrEditDictItem(DictVo dictVo, String loginId) {
-        SysDictType sysDictType = sysDictTypeMapper.selectById(dictVo.getType());
+        SysDictType sysDictType = sysDictTypeMapper.selectOneById(dictVo.getType());
         if (Objects.isNull(sysDictType) || DeletedEnum.DELETE_NO.getValue().equals(sysDictType.getDeleted())) {
             return BaseResponse.buildCustom("传入了一个非法的字典类型数据", "原因是可能该数据并不存在，或者已被删除");
         }
@@ -136,9 +136,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             sysDict.setCreateId(loginId);
             sysDictMapper.insert(sysDict);
         }else {
-            sysDict = sysDictMapper.selectById(dictVo.getId());
+            sysDict = sysDictMapper.selectOneById(dictVo.getId());
             dictVo2SysDict(dictVo, loginId, now, sysDict);
-            sysDictMapper.updateById(sysDict);
+            sysDictMapper.update(sysDict);
         }
         return BaseResponse.success(SysDefault.SUCCESS.getValue());
     }

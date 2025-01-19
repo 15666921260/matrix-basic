@@ -1,7 +1,7 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysFile;
+import com.mybatisflex.core.service.IService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;

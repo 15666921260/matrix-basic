@@ -1,6 +1,10 @@
 package com.matrix.common.pojo.system;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,49 +15,50 @@ import java.util.Date;
  * @since 2024-02-11
  */
 @Data
-@TableName("sys_user")
+@Table("sys_user")
 public class SysUser {
 
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+    @Column("id")
     private String id;
 
-    @TableField("username")
+    @Column("username")
     private String username;
 
-    @TableField("password")
+    @Column("password")
     private String password;
 
-    @TableField("phone")
+    @Column("phone")
     private String phone;
 
-    @TableField("nick_name")
+    @Column("nick_name")
     private String nickName;
 
-    @TableField("real_name")
+    @Column("real_name")
     private String realName;
 
-    @TableField("avatar_file_id")
+    @Column("avatar_file_id")
     private String avatarFileId;
 
-    @TableField("user_type")
+    @Column("user_type")
     private String userType;
 
-    @TableField("remarks")
+    @Column("remarks")
     private String remarks;
 
-    @TableField("create_id")
+    @Column("create_id")
     private String createId;
 
-    @TableField("create_time")
+    @Column("create_time")
     private LocalDateTime createTime;
 
-    @TableField("update_id")
+    @Column("update_id")
     private String updateId;
 
-    @TableField("update_time")
+    @Column("update_time")
     private LocalDateTime updateTime;
 
-    @TableLogic(value="0",delval="1")
+    @Column(value="deleted", isLogicDelete = true)
     private Integer deleted;
 
 }

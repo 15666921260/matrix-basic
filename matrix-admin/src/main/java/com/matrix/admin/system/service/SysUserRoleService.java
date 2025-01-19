@@ -1,7 +1,7 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysUserRole;
+import com.mybatisflex.core.service.IService;
 
 /**
  * 用户角色服务

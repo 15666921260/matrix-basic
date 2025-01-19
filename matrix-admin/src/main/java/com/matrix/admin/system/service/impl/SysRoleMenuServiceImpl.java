@@ -1,12 +1,12 @@
 package com.matrix.admin.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.matrix.admin.system.mappers.SysRoleMenuMapper;
 import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.admin.system.service.SysRoleMenuService;
 import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRoleMenu;
 import com.matrix.common.vo.system.menu.RoleMenuAssociation;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;

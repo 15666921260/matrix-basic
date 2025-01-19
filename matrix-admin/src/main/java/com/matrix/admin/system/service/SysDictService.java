@@ -1,7 +1,6 @@
 package com.matrix.admin.system.service;
 
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.vo.basic.response.BaseResponse;
@@ -9,7 +8,7 @@ import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.mybatisflex.core.service.IService;
 
 import java.util.List;
 

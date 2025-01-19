@@ -1,11 +1,11 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
 import com.matrix.common.vo.system.role.UserRoleAssociation;
+import com.mybatisflex.core.service.IService;
 
 import java.util.List;
 

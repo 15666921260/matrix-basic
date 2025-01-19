@@ -1,8 +1,8 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysRoleMenu;
 import com.matrix.common.vo.system.menu.RoleMenuAssociation;
+import com.mybatisflex.core.service.IService;
 
 /**
  * 角色关联service

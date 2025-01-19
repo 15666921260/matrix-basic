@@ -1,6 +1,10 @@
 package com.matrix.common.pojo.system;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,60 +15,58 @@ import java.time.LocalDateTime;
  * @since 2024-03-21
  */
 @Data
-@TableName("sys_dict")
+@Table("sys_dict")
 public class SysDict {
 
-    /**
-     * id数据库自增
-     */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+    @Column("id")
     private String id;
 
     /**
      * 字典类型
      */
-    @TableField("type")
+    @Column("type")
     private Integer type;
 
     /**
      * 字典名
      */
-    @TableField("dic_name")
+    @Column("dic_name")
     private String dicName;
 
     /**
      * 字典值
      */
-    @TableField("dic_value")
+    @Column("dic_value")
     private String dicValue;
 
     /**
      * 排序字段
      */
-    @TableField("sort_num")
+    @Column("sort_num")
     private Integer sortNum;
 
-    @TableField("remarks")
+    @Column("remarks")
     private String remarks;
 
-    @TableField("create_id")
+    @Column("create_id")
     private String createId;
 
-    @TableField("create_time")
+    @Column("create_time")
     private LocalDateTime createTime;
 
-    @TableField("update_id")
+    @Column("update_id")
     private String updateId;
 
-    @TableField("update_time")
+    @Column("update_time")
     private LocalDateTime updateTime;
 
-    @TableLogic(value="0",delval="1")
+    @Column(value="deleted", isLogicDelete = true)
     private Integer deleted;
 
     /**
      * 是否禁用 true禁用 false 不禁用
      */
-    @TableField("disable")
+    @Column("disable")
     private Boolean disable;
 }

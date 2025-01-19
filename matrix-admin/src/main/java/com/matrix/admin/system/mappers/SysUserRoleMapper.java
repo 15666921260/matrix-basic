@@ -1,7 +1,7 @@
 package com.matrix.admin.system.mappers;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.common.pojo.system.SysUserRole;
+import com.mybatisflex.core.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,5 +24,5 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
      * @param userId 用户id
      * @param roleIds 角色ids
      */
-    void deleteByUserIdAndRoleIds(String userId, List<Long> roleIds);
+    void deleteByUserIdAndRoleIds(@Param("userId") String userId, @Param("roleIds") List<Long> roleIds);
 }

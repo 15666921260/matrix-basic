@@ -1,6 +1,10 @@
 package com.matrix.common.pojo.system;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,51 +16,52 @@ import java.util.Date;
  * @since 2024-03-10
  */
 @Data
-@TableName("sys_file")
+@Table("sys_file")
 public class SysFile {
 
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
+    @Column("id")
     private String id;
     /**
      * 文件类型 jpg、png、doc、pdf等
      */
-    @TableField("file_type")
+    @Column("file_type")
     private String fileType;
 
     /**
      * 文件保存路径
      */
-    @TableField("file_url")
+    @Column("file_url")
     private String fileUrl;
 
     /**
      * 文件临时名称 带后缀
      */
-    @TableField("file_temp_name")
+    @Column("file_temp_name")
     private String fileTempName;
 
     /**
      * 文件源名称(上传时的，带后缀)
      */
-    @TableField("file_source_name")
+    @Column("file_source_name")
     private String fileSourceName;
 
-    @TableField("remarks")
+    @Column("remarks")
     private String remarks;
 
-    @TableField("create_id")
+    @Column("create_id")
     private String createId;
 
-    @TableField("create_time")
+    @Column("create_time")
     private LocalDateTime createTime;
 
-    @TableField("update_id")
+    @Column("update_id")
     private String updateId;
 
-    @TableField("update_time")
+    @Column("update_time")
     private LocalDateTime updateTime;
 
-    @TableLogic(value="0",delval="1")
+    @Column(value="deleted", isLogicDelete = true)
     private Integer deleted;
 
 }

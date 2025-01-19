@@ -1,6 +1,5 @@
 package com.matrix.admin.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysMenuService;
@@ -14,6 +13,7 @@ import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -44,7 +44,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
         List<SysMenuTreeVo> sysMenuTreeVos;
         // 判断是否是超级管理员
-        SysUser sysUser = sysUserMapper.selectById(userId);
+        SysUser sysUser = sysUserMapper.selectOneById(userId);
         if (Objects.nonNull(sysUser) && UserTypeEnum.ADMIN.getTypeId().equals(sysUser.getUserType())){
             sysMenuTreeVos = sysMenuMapper.getNotDisabledAllMenu();
         }else {
@@ -165,14 +165,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }else {
             menu.setUpdateId(loginId);
             menu.setUpdateTime(now);
-            sysMenuMapper.updateById(menu);
+            sysMenuMapper.update(menu);
         }
         return SysDefault.SUCCESS.getValue();
     }
 
     @Override
     public SysMenuDetail getMenuDetailById(Long menuId) {
-        SysMenu sysMenu = sysMenuMapper.selectById(menuId);
+        SysMenu sysMenu = sysMenuMapper.selectOneById(menuId);
         SysMenuDetail detail = new SysMenuDetail();
         detail.setId(sysMenu.getId());
         detail.setParentId(sysMenu.getParentId());

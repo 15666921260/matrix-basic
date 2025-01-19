@@ -12,7 +12,7 @@ SpringBoot 3.1.0
 
 sa-token 权限校验
 
-Mybatis-plus
+Mybatis-flex
 
 swagger
 

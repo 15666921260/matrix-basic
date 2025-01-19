@@ -1,12 +1,12 @@
 package com.matrix.admin.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.martix.util.DateUtils;
 import com.matrix.admin.system.mappers.SysFileMapper;
 import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.SpecialStrEnum;
 import com.matrix.common.enums.system.FileType;
 import com.matrix.common.pojo.system.SysFile;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,7 +49,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         if (StringUtils.isBlank(fileId)){
             return;
         }
-        SysFile sysFile = sysFileMapper.selectById(fileId);
+        SysFile sysFile = sysFileMapper.selectOneById(fileId);
         if (Objects.isNull(sysFile)) {
             return;
         }

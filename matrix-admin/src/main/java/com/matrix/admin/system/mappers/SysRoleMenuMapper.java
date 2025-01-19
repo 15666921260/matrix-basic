@@ -1,7 +1,8 @@
 package com.matrix.admin.system.mappers;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.matrix.common.pojo.system.SysRoleMenu;
+import com.mybatisflex.core.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
      * @param roleId roleId
      * @param menuIds menuId集合
      */
-    void deleteByRoleIdAndMenuIds(Long roleId, List<Long> menuIds);
+    void deleteByRoleIdAndMenuIds(@Param("roleId") Long roleId, @Param("menuIds") List<Long> menuIds);
 
 }

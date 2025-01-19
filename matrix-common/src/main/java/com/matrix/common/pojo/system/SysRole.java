@@ -1,10 +1,12 @@
 package com.matrix.common.pojo.system;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  *
@@ -12,33 +14,34 @@ import java.util.Date;
  * @since 2024-02-28
  */
 @Data
-@TableName("sys_role")
+@Table("sys_role")
 public class SysRole {
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @Id(keyType = KeyType.Auto)
+    @Column("id")
     private Long id;
 
-    @TableField("role_name")
+    @Column("role_name")
     private String roleName;
 
-    @TableField("role_type")
+    @Column("role_type")
     private String roleType;
 
-    @TableField("remarks")
+    @Column("remarks")
     private String remarks;
 
-    @TableField("create_id")
+    @Column("create_id")
     private String createId;
 
-    @TableField("create_time")
+    @Column("create_time")
     private LocalDateTime createTime;
 
-    @TableField("update_id")
+    @Column("update_id")
     private String updateId;
 
-    @TableField("update_time")
+    @Column("update_time")
     private LocalDateTime updateTime;
 
-    @TableLogic(value="0",delval="1")
+    @Column(value="deleted", isLogicDelete = true)
     private Integer deleted;
 }

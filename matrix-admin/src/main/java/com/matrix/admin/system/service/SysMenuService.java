@@ -1,12 +1,12 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.matrix.common.pojo.system.SysMenu;
 import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.system.menu.MenuTreeSelect;
 import com.matrix.common.vo.system.menu.SysMenuDetail;
 import com.matrix.common.vo.system.menu.SysMenuListVo;
 import com.matrix.common.vo.system.menu.SysMenuTreeVo;
+import com.mybatisflex.core.service.IService;
 
 import java.util.List;
 

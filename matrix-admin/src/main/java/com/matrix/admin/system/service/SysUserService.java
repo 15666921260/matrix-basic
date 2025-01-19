@@ -1,12 +1,12 @@
 package com.matrix.admin.system.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.system.LoginResultVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
+import com.mybatisflex.core.service.IService;
 
 import java.util.List;
 
