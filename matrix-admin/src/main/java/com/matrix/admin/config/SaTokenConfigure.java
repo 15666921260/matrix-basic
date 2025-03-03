@@ -7,6 +7,9 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,11 +23,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
 public class SaTokenConfigure implements WebMvcConfigurer {
 
+    @Value("${matrix.not-match}")
+    private String notMatch;
+
     /**
      * 注册 [Sa-Token 全局过滤器]
      */
     @Bean
     public SaServletFilter getSaServletFilter() {
+        String[] notMatchArr = null;
+        if (StringUtils.isNotBlank(notMatch)) {
+            notMatch+= ",/openApi/**";
+            notMatchArr = notMatch.split(",");
+        } else {
+            notMatchArr = new String[]{"/openApi/**"};
+        }
+        String[] finalNotMatchArr = notMatchArr;
+
         return new SaServletFilter()
                 // 指定 [拦截路由] 与 [放行路由]
                 .addInclude("/**")
@@ -35,8 +50,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .notMatch("/user/login")
                             // 开放 swagger
                             .notMatch("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
-                            // 开放自定义接口
-                            .notMatch("/openApi/**")
+                            // 自动配置白名单url
+                            .notMatch(finalNotMatchArr)
                             .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
                 })
                 // 前置函数：在每次认证函数之前执行

@@ -73,4 +73,7 @@ public interface SysUserService extends IService<SysUser> {
      * @return 处理结果
      */
     String deleteUserById(SysUserVo user);
+
+
+    String getTokenCode(String phone);
 }

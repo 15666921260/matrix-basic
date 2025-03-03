@@ -2,6 +2,7 @@ package com.matrix.admin.system.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.exceptions.ValidateException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -127,6 +128,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public String deleteUserById(SysUserVo user) {
         sysUserMapper.deleteById(user.getId());
         return SysDefault.SUCCESS.getValue();
+    }
+
+    @Override
+    public String getTokenCode(String phone) {
+        if (StringUtils.isBlank(phone)) {
+            throw new ValidateException("手机号不能为空!");
+        }
+        return "success";
     }
 
     private void addUserVo2SysUser(AddUserVo addUserVo, SysUser sysUser) {

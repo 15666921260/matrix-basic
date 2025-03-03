@@ -29,3 +29,5 @@ file:
     # 文件上传地址
     upload-path: D:\fileNfs
 matrix:
+  # 白名单 多个用逗号分隔
+  not-match: /user/tokenCode

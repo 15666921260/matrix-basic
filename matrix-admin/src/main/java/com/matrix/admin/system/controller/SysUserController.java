@@ -2,6 +2,7 @@ package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysUserService;
+import com.matrix.common.enums.system.HttpStatus;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +44,15 @@ public class SysUserController {
         LoginResultVo login = sysUserService.login(loginParam.getUsername(), loginParam.getPassword());
         LoginStatus loginStatus = login.getLoginStatus();
         return BaseResponse.build(loginStatus.getCode(), loginStatus.getMessage(), login);
+    }
+
+    @GetMapping("/tokenCode")
+    @Operation(summary = "获取验证码")
+    public BaseResponse<String> getTokenCode(@RequestParam("phone") String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            return BaseResponse.error(HttpStatus.ERROR.getCode(), "手机号不能为空");
+        }
+        return BaseResponse.success(sysUserService.getTokenCode(phone));
     }
 
     @Operation(summary = "退出登录接口")
