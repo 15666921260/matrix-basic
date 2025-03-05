@@ -6,6 +6,6 @@ package com.matrix.admin.open.service;
  */
 public interface OpenApiService {
 
-    String test();
+    String testFileStream();
 
 }

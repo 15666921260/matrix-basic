@@ -74,6 +74,10 @@ public interface SysUserService extends IService<SysUser> {
      */
     String deleteUserById(SysUserVo user);
 
-
+    /**
+     * 获取验证码
+     * @param phone 手机号
+     * @return 是否成功
+     */
     String getTokenCode(String phone);
 }

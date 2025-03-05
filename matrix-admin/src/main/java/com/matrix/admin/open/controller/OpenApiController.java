@@ -22,10 +22,10 @@ public class OpenApiController {
     @Resource
     private OpenApiService openApiService;
 
-    @GetMapping("/test")
-    @Operation(summary = "测试接口", description = "测试接口")
-    public BaseResponse<String> test() {
-        return BaseResponse.success(openApiService.test());
+    @GetMapping("/testFileStream")
+    @Operation(summary = "测试文件流接口", description = "测试接口")
+    public BaseResponse<String> testFileStream() {
+        return BaseResponse.success(openApiService.testFileStream());
     }
 
 }
