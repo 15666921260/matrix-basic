@@ -8,6 +8,9 @@ server:
 spring:
   application:
     name: matrix-basic
+  threads:
+    virtual:
+      enabled: true
   # 当前项目maven激活环境，例如：dev/test/prod
   profiles:
     active: dev
