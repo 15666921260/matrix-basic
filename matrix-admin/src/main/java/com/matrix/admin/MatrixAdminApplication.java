@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * @author liuweizhong
  * @since 2024-02-05
@@ -33,8 +36,15 @@ public class  MatrixAdminApplication {
         String serverPort = environment.getProperty("server.port");
         String contextPath = environment.getProperty("server.servlet.context-path");
         String swaggerPath = environment.getProperty("springdoc.swagger-ui.path");
+        String ip = "127.0.0.1";
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            logger.error("获取本机IP地址失败", e);
+        }
         logger.info("--------<=========系统启动完成========>---------\n" +
-                "swagger路径:http://127.0.0.1:"+ serverPort + contextPath + swaggerPath);
+                "swagger路径:http://"+ ip + ":"+ serverPort + contextPath + swaggerPath + "\n" +
+                "knife4j文档路径:http://"+ ip + ":"+ serverPort + contextPath +"/doc.html");
     }
 
 }

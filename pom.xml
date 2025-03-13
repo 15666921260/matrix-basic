@@ -31,7 +31,7 @@
         <slf4j.version>2.0.12</slf4j.version>
         <sa-token.version>1.39.0</sa-token.version>
         <pagehelper.version>2.1.0</pagehelper.version>
-        <swagger.version>2.2.0</swagger.version>
+        <knife4j.version>4.5.0</knife4j.version>
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
@@ -93,24 +93,11 @@
             </exclusions>
         </dependency>
 
-
-        <!--  整合swagger  -->
+        <!--  整合knife4j  -->
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <!-- 官方建议是springdoc替代springfox-->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>${swagger.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
 
         <!-- 工具包 -->

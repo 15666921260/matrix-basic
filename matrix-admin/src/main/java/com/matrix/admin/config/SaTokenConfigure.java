@@ -49,7 +49,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             // 开放登录接口
                             .notMatch("/user/login")
                             // 开放 swagger
-                            .notMatch("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
+                            .notMatch("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**")
+                            // 开放 knife4j
+                            .notMatch("/doc.html", "/webjars/**")
                             // 自动配置白名单url
                             .notMatch(finalNotMatchArr)
                             .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
