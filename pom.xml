@@ -98,6 +98,7 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <!-- 工具包 -->
@@ -131,6 +132,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.11.4</version>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>
