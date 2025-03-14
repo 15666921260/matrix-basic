@@ -6,10 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.ConfigurableEnvironment;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * @author liuweizhong
@@ -17,6 +15,7 @@ import java.net.UnknownHostException;
  */
 @SpringBootApplication
 @MapperScan("com.matrix.admin.**.mappers")
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class  MatrixAdminApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(MatrixAdminApplication.class);

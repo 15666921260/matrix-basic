@@ -65,3 +65,20 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+# 自己的配置
+file:
+  local:
+    # 文件上传地址
+    upload-path: D:\fileNfs
+matrix:
+  # 白名单 多个用逗号分隔, 中间可以添加注释
+  not-match: |
+    # 开放登录
+    /user/login,
+    # 开放 knife4j
+    /doc.html, /webjars/**,
+    # 开放 swagger
+    /swagger-ui.html, /swagger-ui/**, /v3/api-docs/**, /swagger-resources/**,
+    # 其它开放接口
+    /user/tokenCode, /openApi/**

@@ -29,15 +29,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <postgresql.version>42.7.2</postgresql.version>
         <slf4j.version>2.0.12</slf4j.version>
-        <sa-token.version>1.39.0</sa-token.version>
+        <sa-token.version>1.40.0</sa-token.version>
         <pagehelper.version>2.1.0</pagehelper.version>
         <knife4j.version>4.5.0</knife4j.version>
         <lombok.version>1.18.30</lombok.version>
         <commons-lang3.verson>3.14.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
-        <flowable-engine.version>6.8.0</flowable-engine.version>
         <hutool-http.version>5.8.28</hutool-http.version>
         <mybatis.flex.version>1.10.5</mybatis.flex.version>
+        <junit-jupiter.version>5.11.4</junit-jupiter.version>
     </properties>
 
 
@@ -45,6 +45,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 面向切面编程 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- sa-token 因为是springboot3所以要加boot后要加3 -->
@@ -99,6 +105,12 @@
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
             <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 工具包 -->
@@ -131,7 +143,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.4</version>
+            <version>${junit-jupiter.version}</version>
             <optional>true</optional>
         </dependency>
 

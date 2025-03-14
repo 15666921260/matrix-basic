@@ -7,12 +7,14 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * sa-token 权限配置类
@@ -23,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
 public class SaTokenConfigure implements WebMvcConfigurer {
 
-    @Value("${matrix.not-match}")
+    @Value("#{@environment.getProperty('matrix.not-match').replaceAll('(?m)^\\s*#.*$', '')}")
     private String notMatch;
 
     /**
@@ -31,29 +33,16 @@ public class SaTokenConfigure implements WebMvcConfigurer {
      */
     @Bean
     public SaServletFilter getSaServletFilter() {
-        String[] notMatchArr = null;
-        if (StringUtils.isNotBlank(notMatch)) {
-            notMatch+= ",/openApi/**";
-            notMatchArr = notMatch.split(",");
-        } else {
-            notMatchArr = new String[]{"/openApi/**"};
-        }
-        String[] finalNotMatchArr = notMatchArr;
-
+        String notMatchReplace = StringUtils.deleteWhitespace(notMatch.replaceAll("\\n", ""));
+        List<String> excludeUrls = Arrays.asList(notMatchReplace.split(","));
         return new SaServletFilter()
                 // 指定 [拦截路由] 与 [放行路由]
                 .addInclude("/**")
                 // 认证函数: 每次请求执行
                 .setAuth(obj -> {
-                    SaRouter.match("/**")    // 拦截的 path 列表，可以写多个
-                            // 开放登录接口
-                            .notMatch("/user/login")
-                            // 开放 swagger
-                            .notMatch("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**")
-                            // 开放 knife4j
-                            .notMatch("/doc.html", "/webjars/**")
+                    SaRouter.match("/**")
                             // 自动配置白名单url
-                            .notMatch(finalNotMatchArr)
+                            .notMatch(excludeUrls)
                             .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
                 })
                 // 前置函数：在每次认证函数之前执行
@@ -65,7 +54,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .setHeader("X-XSS-Protection", "1; mode=block")
                             // 禁用浏览器内容嗅探
                             .setHeader("X-Content-Type-Options", "nosniff")
-                            // 允许指定域访问跨域资源
+                            // 允许指定域访问跨域资源(生产环境时建议指定域名)
                             .setHeader("Access-Control-Allow-Origin", "*")
                             // 允许所有请求方式
                             .setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
