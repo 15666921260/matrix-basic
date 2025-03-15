@@ -18,11 +18,24 @@ import org.springframework.web.bind.annotation.*;
 public class GlobalExceptionHandler {
 
     /**
-     * 捕获sa-token异常，返回自定义结果
+     * 业务异常处理器, 捕获业务异常, 并返回错误信息
+     * @param e 业务异常
+     * @return 错误信息
      */
-    @ExceptionHandler(NotLoginException.class)
-    public BaseResponse<String> handleException(NotLoginException e) {
-        log.info("捕获SaTokenException异常：{}", e.getMessage());
-        return BaseResponse.error(HttpStatus.FORBIDDEN, "token失效");
+    @ExceptionHandler(BusinessException.class)
+    public BaseResponse<?> businessExceptionHandler(BusinessException e) {
+        log.error("业务异常: ", e);
+        return BaseResponse.error(e.getCode(), e.getMessage());
+    }
+
+    /**
+     * 运行时异常处理器, 捕获运行时异常, 并返回错误信息
+     * @param e 运行时异常
+     * @return 错误信息
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public BaseResponse<?> businessExceptionHandler(RuntimeException e) {
+        log.error("运行时异常: ", e);
+        return BaseResponse.error(HttpStatus.ERROR);
     }
 }
