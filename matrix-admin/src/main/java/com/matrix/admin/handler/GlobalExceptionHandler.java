@@ -36,6 +36,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public BaseResponse<?> businessExceptionHandler(RuntimeException e) {
         log.error("运行时异常: ", e);
-        return BaseResponse.error(HttpStatus.ERROR);
+        return BaseResponse.error(HttpStatus.ERROR.getCode(), e.getMessage());
     }
 }
