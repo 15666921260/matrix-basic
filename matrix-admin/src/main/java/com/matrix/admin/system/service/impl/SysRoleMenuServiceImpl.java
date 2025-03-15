@@ -5,6 +5,7 @@ import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.admin.system.service.SysRoleMenuService;
 import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRoleMenu;
+import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.system.menu.RoleMenuAssociation;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
@@ -33,9 +34,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
     @Transactional
     public String setRoleMenuAssociation(RoleMenuAssociation roleMenu, String loginId) {
         Long roleId = roleMenu.getRoleId();
-        if (roleId.equals(0L)) {
-            return "角色id为0，无效角色 -->检测是否正确传值";
-        }
+        ThrowUtils.throwIf(roleId.equals(0L), "角色id为0，无效角色 -->检测是否正确传值");
         // 之前已选数据
         List<Long> menuCheckedKeys = sysMenuService.getMenuCheckedKeys(roleId);
         // 更新已选数据

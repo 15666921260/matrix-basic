@@ -10,6 +10,7 @@ import com.matrix.common.enums.DeletedEnum;
 import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.pojo.system.SysDictType;
+import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
@@ -97,9 +98,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     @Override
     public BaseResponse<String> deleteDictTypeById(Integer dictTypeId) {
-        if (Objects.isNull(dictTypeId)) {
-            return BaseResponse.buildCustom("字典类型id为空");
-        }
+        ThrowUtils.throwIfNull(dictTypeId, "字典类型id为空");
         int i = sysDictTypeMapper.deleteById(dictTypeId);
         Integer integer = sysDictMapper.deleteDictByTypeId(dictTypeId);
         if ( i == 0 && integer.equals(0)) {

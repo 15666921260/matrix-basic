@@ -5,6 +5,7 @@ import com.matrix.admin.system.mappers.SysFileMapper;
 import com.matrix.admin.system.service.SysFileService;
 import com.matrix.common.enums.SpecialStrEnum;
 import com.matrix.common.enums.system.FileType;
+import com.matrix.common.exception.BusinessException;
 import com.matrix.common.pojo.system.SysFile;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
@@ -68,6 +69,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
             }
         }catch (IOException e) {
             log.error("文件获取失败！", e);
+            throw new BusinessException("文件获取失败！");
         }
 
     }

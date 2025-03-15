@@ -10,6 +10,7 @@ import com.matrix.admin.system.service.SysUserRoleService;
 import com.matrix.common.enums.SysDefault;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.pojo.system.SysUserRole;
+import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
 import com.matrix.common.vo.system.role.UserRoleAssociation;
@@ -108,9 +109,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public String saveUserRoleAssociation(UserRoleAssociation userRoleAssociation, String loginId) {
         String userId = userRoleAssociation.getUserId();
-        if (StringUtils.isBlank(userId)) {
-            return "当前用户id为空，无法进行继续进行操作";
-        }
+        ThrowUtils.throwIfEmpty(userId, "当前用户id为空，无法进行继续进行操作");
         // 已关联的角色id集合
         List<Long> longs = sysUserRoleMapper.queryRoleIdByUserId(userId);
         // 当前关联的角色id集合

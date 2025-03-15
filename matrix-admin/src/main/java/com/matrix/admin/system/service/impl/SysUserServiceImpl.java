@@ -13,6 +13,7 @@ import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.enums.system.UserTypeEnum;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.utils.EncryptUtils;
+import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.system.LoginResultVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
@@ -82,13 +83,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public String addUser(AddUserVo addUserVo, String loginId) {
-        if (StringUtils.isBlank(addUserVo.getUsername()) && StringUtils.isBlank(addUserVo.getPassword())) {
-            return "用户名或密码是空";
-        }
+        ThrowUtils.throwIf(StringUtils.isBlank(addUserVo.getUsername()) && StringUtils.isBlank(addUserVo.getPassword()), "用户名或密码是空");
         SysUser sysUserDb = sysUserMapper.queryByUsername(addUserVo.getUsername());
-        if (Objects.nonNull(sysUserDb)) {
-            return "该用户名已存在";
-        }
+        ThrowUtils.throwIf(Objects.nonNull(sysUserDb), "该用户名已存在");
         SysUser sysUser = new SysUser();
         addUserVo2SysUser(addUserVo, sysUser);
         LocalDateTime now = LocalDateTime.now();
@@ -102,14 +99,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public String editUser(AddUserVo addUserVo, String loginId) {
-        if (StringUtils.isBlank(addUserVo.getId()) && StringUtils.isBlank(addUserVo.getUsername())
-                && StringUtils.isBlank(addUserVo.getPassword())) {
-            return "用户名或密码是空";
-        }
+        boolean isAllNull = StringUtils.isBlank(addUserVo.getId()) && StringUtils.isBlank(addUserVo.getUsername())
+                && StringUtils.isBlank(addUserVo.getPassword());
+        ThrowUtils.throwIf(isAllNull, "用户名或密码是空");
         SysUser sysUserDb = sysUserMapper.queryByUsername(addUserVo.getUsername());
-        if (Objects.nonNull(sysUserDb) && !sysUserDb.getId().equals(addUserVo.getId())) {
-            return "该用户名已存在";
-        }
+        ThrowUtils.throwIf(Objects.nonNull(sysUserDb) && !sysUserDb.getId().equals(addUserVo.getId()), "该用户名已存在");
         SysUser sysUser = new SysUser();
         LocalDateTime now = LocalDateTime.now();
         addUserVo2SysUser(addUserVo, sysUser);
@@ -132,9 +126,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public String getTokenCode(String phone) {
-        if (StringUtils.isBlank(phone)) {
-            throw new ValidateException("手机号不能为空!");
-        }
+        ThrowUtils.throwIfEmpty(phone, "手机号不能为空!");
         return "success";
     }
 
