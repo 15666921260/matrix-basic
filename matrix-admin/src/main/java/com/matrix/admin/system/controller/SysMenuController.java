@@ -28,6 +28,8 @@ public class SysMenuController {
     private SysMenuService sysMenuService;
     @Resource
     private SysRoleMenuService sysRoleMenuService;
+    @Resource
+    private SysMenuMapper sysMenuMapper;
 
     /**
      * 获取当前用户的导航菜单
@@ -102,6 +104,13 @@ public class SysMenuController {
         // 获取当前登录用户的id
         String loginId = (String) StpUtil.getLoginId();
         return BaseResponse.success(sysRoleMenuService.setRoleMenuAssociation(roleMenu, loginId));
+    }
+
+    @GetMapping("/getPermissions")
+    @Operation(summary = "获取当前用户的权限列表")
+    public ListResponse<String> getPermissionListByLoginUser() {
+        String loginId = (String) StpUtil.getLoginId();
+        return ListResponse.success(sysMenuMapper.getPermissionCodesByUserId(loginId));
     }
 
 }
