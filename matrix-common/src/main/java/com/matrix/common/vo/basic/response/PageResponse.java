@@ -23,8 +23,8 @@ public class PageResponse<T> implements Serializable {
     @Schema(name = "data", description = "数据封装")
     private List<T> data;
 
-    @Schema(name = "message", description = "提示信息")
-    private String message;
+    @Schema(name = "msg", description = "提示信息")
+    private String msg;
 
     @Schema(name = "total", description = "总行数")
     private Long total;
@@ -44,7 +44,7 @@ public class PageResponse<T> implements Serializable {
     public PageResponse(HttpStatus httpStatus, List<T> data, Long total, Integer pageSize, Integer pageNum, Integer pages) {
         this.code = httpStatus.getCode();
         this.data = data;
-        this.message = httpStatus.getMessage();
+        this.msg = httpStatus.getMsg();
         this.total = total;
         this.pageSize = pageSize;
         this.pageNum = pageNum;

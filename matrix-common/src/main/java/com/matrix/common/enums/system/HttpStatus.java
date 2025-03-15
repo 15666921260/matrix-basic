@@ -37,5 +37,5 @@ public enum HttpStatus {
 
 
     private final Integer code;
-    private final String message;
+    private final String msg;
 }

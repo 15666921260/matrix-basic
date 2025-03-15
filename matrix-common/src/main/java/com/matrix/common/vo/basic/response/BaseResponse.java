@@ -22,13 +22,13 @@ public class BaseResponse<T> implements Serializable {
     @Schema(name = "data", description = "数据封装")
     private T data;
 
-    @Schema(name = "message", description = "提示信息")
-    private String message;
+    @Schema(name = "msg", description = "提示信息")
+    private String msg;
 
-    public BaseResponse(int code, T data, String message) {
+    public BaseResponse(int code, T data, String msg) {
         this.code = code;
         this.data = data;
-        this.message = message;
+        this.msg = msg;
     }
 
     public BaseResponse(int code, T data) {
@@ -36,11 +36,11 @@ public class BaseResponse<T> implements Serializable {
     }
 
     public BaseResponse(HttpStatus httpStatus, T data){
-        this(httpStatus.getCode(), data, httpStatus.getMessage());
+        this(httpStatus.getCode(), data, httpStatus.getMsg());
     }
 
     public BaseResponse(HttpStatus httpStatus) {
-        this(httpStatus.getCode(), null, httpStatus.getMessage());
+        this(httpStatus.getCode(), null, httpStatus.getMsg());
     }
 
     /**

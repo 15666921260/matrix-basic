@@ -1,11 +1,13 @@
 package com.matrix.admin.config;
 
 import cn.dev33.satoken.context.SaHolder;
+import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.filter.SaServletFilter;
 import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.matrix.common.enums.system.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,12 +66,16 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .setHeader("Access-Control-Allow-Headers", "*");
                     // 如果是预检请求，则立即返回到前端
                     SaRouter.match(SaHttpMethod.OPTIONS)
-                            .free(r -> log.info("--------OPTIONS预检请求，不做处理"))
+//                            .free(r -> log.info("--->OPTIONS预检请求，不做处理"))
                             .back();
                 })
-                // 异常处理函数：每次认证函数发生异常时执行此函数
+                // sa-token异常处理函数：每次认证函数发生异常时执行此函数
                 .setError(e -> {
-                    return SaResult.error(e.getMessage());
+                    if (e instanceof NotLoginException) {
+                        return SaResult.error(e.getMessage()).setCode(HttpStatus.UNAUTHORIZED.getCode()).setMsg("token无效或已过期");
+                    } else {
+                        return SaResult.error(e.getMessage());
+                    }
                 });
     }
 
