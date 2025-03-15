@@ -53,4 +53,11 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return 返回结果
      */
     List<SysMenuListVo> getMenuListByRoleId(@Param("roleId") Long roleId);
+
+    /**
+     * 根据用户id获取权限码集合
+     * @param userId 用户id
+     * @return 权限码集合
+     */
+    List<String> getPermissionCodesByUserId(@Param("userId") String userId);
 }

@@ -1,6 +1,7 @@
 package com.matrix.admin.config;
 
 import cn.dev33.satoken.stp.StpInterface;
+import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysRoleMapper;
 import com.matrix.common.vo.system.role.RoleVo;
 import jakarta.annotation.Resource;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class StpInterfaceImpl implements StpInterface {
     @Resource
     private SysRoleMapper sysRoleMapper;
+    @Resource
+    private SysMenuMapper sysMenuMapper;
 
     /**
      * 获取权限列表
@@ -27,14 +30,8 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getPermissionList(Object loginIdOb, String s) {
-        List<String> list = new ArrayList<String>();
-        list.add("101");
-        list.add("user.add");
-        list.add("user.update");
-        list.add("user.get");
-        // list.add("user.delete");
-        list.add("art.*");
-        return list;
+        String loginId = (String) loginIdOb;
+        return sysMenuMapper.getPermissionCodesByUserId(loginId);
     }
 
     /**
