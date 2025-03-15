@@ -1,4 +1,4 @@
-package com.matrix.admin.handler;
+package com.matrix.common.exception;
 
 import com.matrix.common.enums.system.HttpStatus;
 import lombok.Getter;

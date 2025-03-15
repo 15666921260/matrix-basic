@@ -1,7 +1,7 @@
 package com.matrix.admin.handler;
 
-import cn.dev33.satoken.exception.NotLoginException;
 import com.matrix.common.enums.system.HttpStatus;
+import com.matrix.common.exception.BusinessException;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
