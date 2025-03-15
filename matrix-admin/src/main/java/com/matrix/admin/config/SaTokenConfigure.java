@@ -70,13 +70,25 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .back();
                 })
                 // sa-token异常处理函数：每次认证函数发生异常时执行此函数
-                .setError(e -> {
-                    if (e instanceof NotLoginException) {
-                        return SaResult.error(e.getMessage()).setCode(HttpStatus.UNAUTHORIZED.getCode()).setMsg("token无效或已过期");
-                    } else {
-                        return SaResult.error(e.getMessage());
-                    }
-                });
+                .setError(this::exceptionHandler);
+    }
+
+    private SaResult exceptionHandler(Throwable e) {
+        if (e instanceof NotLoginException notLoginException) {
+            String message = "token 无效";
+            if (notLoginException.getType().equals(NotLoginException.NOT_TOKEN)) {
+                message = "未能读取到有效 token";
+            } else if (notLoginException.getType().equals(NotLoginException.INVALID_TOKEN)) {
+                message = "登录信息已过期，请重新登录";
+            } else if (notLoginException.getType().equals(NotLoginException.BE_REPLACED)) {
+                message = "当前账号在其他地方登录，请重新登录";
+            } else if (notLoginException.getType().equals(NotLoginException.KICK_OUT)) {
+                message = "账号已被踢出，请联系管理员";
+            }
+            return SaResult.error(e.getMessage()).setCode(HttpStatus.UNAUTHORIZED.getCode()).setMsg(message);
+        } else {
+            return SaResult.error(e.getMessage());
+        }
     }
 
 }
