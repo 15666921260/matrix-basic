@@ -31,6 +31,22 @@ https://gitee.com/liu-weizhong/matrix-basic-vue3
 ![](doc/image/3-字典管理.png)
 ![](doc/image/4-菜单管理.png)
 
+#### 代码提交规范
+
+```
+[init] 初始化
+[feat] 增加新功能
+[fix] 修复问题/BUG
+[perf] 优化/性能提升
+[refactor] 重构
+[revert] 撤销修改
+[style] 代码风格相关无影响运行结果的
+[update] 其他修改
+[upgrade] 升级版本
+```
+
+
+
 #### 特技
 
 1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
