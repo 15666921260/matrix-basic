@@ -4,6 +4,7 @@ import com.matrix.common.enums.system.HttpStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,8 @@ import java.io.Serializable;
 @Data
 @Schema(name = "BaseResponse", description = "通用返回对象")
 public class BaseResponse<T> implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -1061934494124159357L;
 
     @Schema(name = "code", description = "状态码")
     private int code;

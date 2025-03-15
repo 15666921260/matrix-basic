@@ -1,10 +1,12 @@
 package com.matrix.admin.system.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.service.SysMenuService;
 import com.matrix.admin.system.service.SysRoleMenuService;
 import com.matrix.common.vo.basic.TreeData;
 import com.matrix.common.vo.basic.response.BaseResponse;
+import com.matrix.common.vo.basic.response.ListResponse;
 import com.matrix.common.vo.system.menu.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 系统菜单管理
+ * 系统菜单-权限管理
  * @author liuweizhong
  * @since 2024-03-12
  */
@@ -22,10 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/sysMenu")
 public class SysMenuController {
-
     @Resource
     private SysMenuService sysMenuService;
-
     @Resource
     private SysRoleMenuService sysRoleMenuService;
 
@@ -37,11 +37,11 @@ public class SysMenuController {
      */
     @GetMapping("/getMenuTreeList")
     @Operation(summary = "获取当前用户的导航菜单")
-    public BaseResponse<List<SysMenuTreeVo>> getMenuTreeList() {
+    public ListResponse<SysMenuTreeVo> getMenuTreeList() {
         // 获取当前登录用户的id
         String loginId = (String) StpUtil.getLoginId();
         List<SysMenuTreeVo> list = sysMenuService.getMenuTreeListByLoginUser(loginId);
-        return BaseResponse.success(list);
+        return ListResponse.success(list);
     }
 
     /**
@@ -60,8 +60,8 @@ public class SysMenuController {
      */
     @GetMapping("/getMenuTreeSelect")
     @Operation(summary = "获取树形下拉菜单")
-    public BaseResponse<List<MenuTreeSelect>> getMenuTreeSelect() {
-        return BaseResponse.success(sysMenuService.getMenuTreeSelect());
+    public ListResponse<MenuTreeSelect> getMenuTreeSelect() {
+        return ListResponse.success(sysMenuService.getMenuTreeSelect());
     }
 
     @PostMapping("/addOrEditMenu")
@@ -86,14 +86,14 @@ public class SysMenuController {
 
     @GetMapping("/getAllMenuTreeData")
     @Operation(summary = "获取菜单树形数据，用于编辑权限")
-    public BaseResponse<List<TreeData>> getAllMenuTreeData() {
-        return BaseResponse.success(sysMenuService.getAllMenuTreeData());
+    public ListResponse<TreeData> getAllMenuTreeData() {
+        return ListResponse.success(sysMenuService.getAllMenuTreeData());
     }
 
     @GetMapping("/getMenuCheckedKeys")
     @Operation(summary = "根据角色id获取选中菜单的id集合")
-    public BaseResponse<List<Long>> getMenuCheckedKeys(@RequestParam("roleId") Long roleId) {
-        return BaseResponse.success(sysMenuService.getMenuCheckedKeys(roleId));
+    public ListResponse<Long> getMenuCheckedKeys(@RequestParam("roleId") Long roleId) {
+        return ListResponse.success(sysMenuService.getMenuCheckedKeys(roleId));
     }
 
     @PostMapping("/setRoleMenuAssociation")

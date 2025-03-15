@@ -3,6 +3,7 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysRoleService;
 import com.matrix.common.vo.basic.response.BaseResponse;
+import com.matrix.common.vo.basic.response.ListResponse;
 import com.matrix.common.vo.basic.response.PageResponse;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
@@ -34,8 +35,8 @@ public class SysRoleController {
 
     @GetMapping("/queryAllRoleVo")
     @Operation(summary = "查询所有角色")
-    public BaseResponse<List<RoleVo>> queryAllRoleVo() {
-        return BaseResponse.success(sysRoleService.queryAllRoleVo());
+    public ListResponse<RoleVo> queryAllRoleVo() {
+        return ListResponse.success(sysRoleService.queryAllRoleVo());
     }
 
     @PostMapping("/addOrEditRole")
@@ -54,14 +55,14 @@ public class SysRoleController {
 
     @GetMapping("/queryRoleVoByUserId")
     @Operation(summary = "根据用户id查询角色")
-    public BaseResponse<List<RoleVo>> queryRoleVoByUserId(@RequestParam("userId") String userId) {
-        return BaseResponse.success(sysRoleService.queryRoleVoByUserId(userId));
+    public ListResponse<RoleVo> queryRoleVoByUserId(@RequestParam("userId") String userId) {
+        return ListResponse.success(sysRoleService.queryRoleVoByUserId(userId));
     }
 
     @GetMapping("/queryRoleIdByUserId")
     @Operation(summary = "根据用户id查询角色id集合")
-    public BaseResponse<List<Long>> queryRoleIdByUserId(@RequestParam("userId") String userId) {
-        return BaseResponse.success(sysRoleService.queryRoleIdByUserId(userId));
+    public ListResponse<Long> queryRoleIdByUserId(@RequestParam("userId") String userId) {
+        return ListResponse.success(sysRoleService.queryRoleIdByUserId(userId));
     }
 
     @PostMapping("/saveUserRoleAssociation")

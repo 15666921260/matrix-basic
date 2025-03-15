@@ -6,6 +6,7 @@ import com.matrix.common.enums.system.HttpStatus;
 import com.matrix.common.enums.system.LoginStatus;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.pojo.system.SysUser;
+import com.matrix.common.vo.basic.response.ListResponse;
 import com.matrix.common.vo.basic.response.PageResponse;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
@@ -63,8 +64,8 @@ public class SysUserController {
 
     @Operation(summary = "测试")
     @GetMapping("/test")
-    public BaseResponse<List<SysUser>> test(){
-        return BaseResponse.success(sysUserService.queryAllUser());
+    public ListResponse<SysUser> test(){
+        return ListResponse.success(sysUserService.queryAllUser());
     }
 
     @Operation(summary = "是否登录")

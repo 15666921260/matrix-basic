@@ -3,6 +3,7 @@ package com.matrix.admin.system.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.matrix.admin.system.service.SysDictService;
 import com.matrix.common.vo.basic.response.BaseResponse;
+import com.matrix.common.vo.basic.response.ListResponse;
 import com.matrix.common.vo.basic.response.PageResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
@@ -89,7 +90,7 @@ public class SysDictController {
 
     @GetMapping("/selectDictItemByDictTypeId")
     @Operation(summary = "根据字典类型id查询字典项列表")
-    public BaseResponse<List<DictVo>> selectDictItemByDictTypeId(@RequestParam("dictTypeId") Integer dictTypeId){
-        return BaseResponse.success(sysDictService.queryDict(dictTypeId));
+    public ListResponse<DictVo> selectDictItemByDictTypeId(@RequestParam("dictTypeId") Integer dictTypeId){
+        return ListResponse.success(sysDictService.queryDict(dictTypeId));
     }
 }
