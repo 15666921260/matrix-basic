@@ -8,37 +8,28 @@
 
 JDK21
 
-SpringBoot 3.1.0
+SpringBoot 3.2.2
 
 sa-token 权限校验
 
 Mybatis-flex
 
-swagger
+knife4j 接口文档
+
+postgresql
 
 #### 前端部分
 
 https://gitee.com/liu-weizhong/matrix-basic-vue3
 
-#### 安装教程
+#### 效果图
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
+##### 登录页
+![](doc/image/1-登录页.png)
+##### 主页
+![](doc/image/2-页面主览.png)
+![](doc/image/3-字典管理.png)
+![](doc/image/4-菜单管理.png)
 
 #### 特技
 
