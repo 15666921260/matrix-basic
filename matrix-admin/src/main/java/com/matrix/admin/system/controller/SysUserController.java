@@ -66,6 +66,7 @@ public class SysUserController {
     public BaseResponse<List<SysUser>> test(){
         return BaseResponse.success(sysUserService.queryAllUser());
     }
+
     @Operation(summary = "是否登录")
     @GetMapping("/isLogin")
     public BaseResponse<String> isLogin(){
