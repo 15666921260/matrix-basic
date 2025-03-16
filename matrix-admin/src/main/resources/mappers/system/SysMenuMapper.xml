@@ -32,8 +32,9 @@
     </select>
     <!--  todo 能不能直接把父级都查出来  -->
     <select id="getMenuByUserRole" resultType="com.matrix.common.vo.system.menu.SysMenuTreeVo">
-        select sm.id, sm.title, sm.parent_id, sm.type, sm.code, sm.route_url, sm.component_path, sm.route_redirect,
-               sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id, sm.create_time, sm.update_id, sm.update_time
+        select sm.id, sm.title, sm.parent_id as parentId, sm.type, sm.code, sm.route_url as routeUrl, sm.component_path as componentPath,
+               sm.route_redirect as routeRedirect, sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id as createId,
+               sm.create_time as createTime, sm.update_id as updateId, sm.update_time as updateTime
         from sys_menu sm
         left join sys_role_menu srm on sm.id = srm.menu_id
         left join sys_user_role sur on sur.role_id = srm.role_id and sur.user_id = #{userId}
@@ -75,8 +76,9 @@
         where sm.deleted = 0 and srm.role_id = #{roleId}
     </select>
     <select id="getMenuListVoByIds" resultType="com.matrix.common.vo.system.menu.SysMenuTreeVo">
-        select sm.id, sm.title, sm.parent_id, sm.type, sm.code, sm.route_url, sm.component_path, sm.route_redirect,
-               sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id, sm.create_time, sm.update_id, sm.update_time
+        select sm.id, sm.title, sm.parent_id as parentId, sm.type, sm.code, sm.route_url as routeUrl, sm.component_path as componentPath,
+               sm.route_redirect as routeRedirect, sm.icon, sm.sort, sm.hidden, sm.status, sm.create_id as createId,
+               sm.create_time as createTime, sm.update_id as updateId, sm.update_time as updateTime
         from sys_menu sm
         where sm.deleted = 0 and sm.id in
         <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
@@ -90,5 +92,10 @@
         left join sys_user_role sur on sur.role_id = srm.role_id and sur.user_id = #{userId}
         where sm.type = 3
           and sur.user_id = #{userId}
+    </select>
+    <select id="getAllPermissionCodes" resultType="java.lang.String">
+        select distinct sm.code
+        from sys_menu sm
+        where sm.type = 3
     </select>
 </mapper>

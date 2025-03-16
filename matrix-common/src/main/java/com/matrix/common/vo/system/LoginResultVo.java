@@ -28,5 +28,7 @@ public class LoginResultVo {
     private LoginStatus loginStatus;
     @Schema(name = "auths", description = "权限列表")
     private List<String> auths;
+    @Schema(name = "permissions", description = "权限列表")
+    private List<String> permissions;
 
 }

@@ -6,6 +6,7 @@ import cn.hutool.core.exceptions.ValidateException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
 import com.matrix.common.enums.SysDefault;
@@ -20,6 +21,7 @@ import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +35,10 @@ import java.util.Objects;
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
-
     @Resource
     private SysUserMapper sysUserMapper;
+    @Resource
+    private SysMenuMapper sysMenuMapper;
 
     @Override
     public LoginResultVo login(String username, String password) {
@@ -59,6 +62,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             resultVo.setToken(tokenInfo.getTokenValue());
         }else {
             resultVo.setLoginStatus(LoginStatus.ERROR);
+        }
+        if (sysUser.getUserType().equals(UserTypeEnum.ADMIN.getTypeId())) {
+            List<String> allPermissionCodes = sysMenuMapper.getAllPermissionCodes();
+            resultVo.setPermissions(allPermissionCodes);
+        } else {
+            List<String> permissions = sysMenuMapper.getPermissionCodesByUserId(sysUser.getId());
+            if (CollectionUtils.isNotEmpty(permissions)) {
+                resultVo.setPermissions(permissions);
+            }
         }
         return resultVo;
     }

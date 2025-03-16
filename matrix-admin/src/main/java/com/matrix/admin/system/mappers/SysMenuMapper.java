@@ -60,4 +60,10 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return 权限码集合
      */
     List<String> getPermissionCodesByUserId(@Param("userId") String userId);
+
+    /**
+     * 获取所有权限码
+     * @return 权限码集合
+     */
+    List<String> getAllPermissionCodes();
 }
