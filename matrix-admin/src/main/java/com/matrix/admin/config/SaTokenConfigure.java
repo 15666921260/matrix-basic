@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2024-02-11
  */
 @Slf4j
-@Configuration    // 保证此类被 SpringBoot 扫描，完成 Sa-Token 的自定义权限验证扩展
+@Configuration
 public class SaTokenConfigure implements WebMvcConfigurer {
 
     @Value("#{@environment.getProperty('matrix.not-match').replaceAll('(?m)^\\s*#.*$', '')}")
