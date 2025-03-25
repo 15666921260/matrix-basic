@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @Order(Integer.MIN_VALUE)
-@RestControllerAdvice // 声明一个控制器增强器(AOP)
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
