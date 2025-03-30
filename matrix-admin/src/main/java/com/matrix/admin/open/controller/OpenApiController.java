@@ -28,4 +28,10 @@ public class OpenApiController {
         return BaseResponse.success(openApiService.test());
     }
 
+    @GetMapping("/testThreadPool")
+    @Operation(summary = "测试线程池接口", description = "测试线程池接口")
+    public BaseResponse<String> testThreadPool() {
+        return BaseResponse.success(openApiService.testThreadPool());
+    }
+
 }

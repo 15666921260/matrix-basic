@@ -16,4 +16,10 @@ public class OpenApiServiceImpl implements OpenApiService {
         log.info("===========进入测试接口！");
         return "success";
     }
+
+    @Override
+    public String testThreadPool() {
+
+        return null;
+    }
 }

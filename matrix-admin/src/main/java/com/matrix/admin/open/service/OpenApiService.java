@@ -8,4 +8,6 @@ public interface OpenApiService {
 
     String test();
 
+    String testThreadPool();
+
 }

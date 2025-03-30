@@ -8,11 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author liuweizhong
  * @since 2024-02-05
  */
+@EnableAsync // 启动异步任务
 @SpringBootApplication
 @MapperScan("com.matrix.admin.**.mappers")
 @EnableAspectJAutoProxy(exposeProxy = true)
