@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.5.3</version>
         <relativePath/>
     </parent>
 
@@ -29,14 +29,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <postgresql.version>42.7.2</postgresql.version>
         <slf4j.version>2.0.12</slf4j.version>
-        <sa-token.version>1.40.0</sa-token.version>
+        <sa-token.version>1.44.0</sa-token.version>
         <pagehelper.version>2.1.0</pagehelper.version>
         <knife4j.version>4.5.0</knife4j.version>
-        <lombok.version>1.18.30</lombok.version>
-        <commons-lang3.verson>3.14.0</commons-lang3.verson>
-        <commons-collections4.vsersion>4.4</commons-collections4.vsersion>
+        <lombok.version>1.18.38</lombok.version>
+        <commons-lang3.verson>3.17.0</commons-lang3.verson>
+        <commons-collections4.vsersion>4.5.0</commons-collections4.vsersion>
         <hutool-http.version>5.8.28</hutool-http.version>
-        <mybatis.flex.version>1.10.5</mybatis.flex.version>
+        <mybatis.flex.version>1.10.9</mybatis.flex.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
     </properties>
 
