@@ -3,7 +3,7 @@ package com.matrix.admin.system.service.impl;
 import com.martix.util.DateUtils;
 import com.matrix.admin.system.mappers.SysFileMapper;
 import com.matrix.admin.system.service.SysFileService;
-import com.matrix.common.enums.SpecialStrEnum;
+import com.matrix.common.constant.SpecialStr;
 import com.matrix.common.enums.system.FileType;
 import com.matrix.common.exception.BusinessException;
 import com.matrix.common.pojo.system.SysFile;
@@ -44,7 +44,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
     @Override
     public void imagePreview(String fileId, HttpServletResponse response) {
-        if (SpecialStrEnum.ZERO.getStr().equals(fileId)) {
+        if (SpecialStr.ZERO.equals(fileId)) {
             return;
         }
         if (StringUtils.isBlank(fileId)){
@@ -92,14 +92,14 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         String fileType = FileType.NONE.getFileType();
         String fileSourceName = file.getOriginalFilename();
         if (StringUtils.isNotBlank(fileSourceName)){
-            String[] split = fileSourceName.split(SpecialStrEnum.POINT_SPLIT.getStr());
+            String[] split = fileSourceName.split(SpecialStr.POINT_SPLIT);
             if (split.length != 0) {
                 fileType = split[split.length - 1];
             }
         }
 
         // 上传文件
-        String fileTempName = DateUtils.date2StrFormat(new Date(), "yyyyMMddHHmmssSSS") + SpecialStrEnum.POINT.getStr() + fileType;
+        String fileTempName = DateUtils.date2StrFormat(new Date(), "yyyyMMddHHmmssSSS") + SpecialStr.POINT + fileType;
         try {
             file.transferTo(new File(folder, fileTempName));
         } catch (IOException e) {
