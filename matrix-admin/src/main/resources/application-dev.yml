@@ -60,12 +60,6 @@ sa-token:
   # token前缀
   token-prefix: "Bearer"
 
-pagehelper:
-  helperDialect: postgresql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
-
 # 自己的配置
 file:
   local:
