@@ -1,13 +1,13 @@
 package com.matrix.admin.system.service;
 
 
-import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysDict;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
+import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param dictTypeParam 查询参数
      * @return 返回的数据
      */
-    PageInfo<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam);
+    Page<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam);
 
     /**
      * 根据字典类型id查询字典项
@@ -60,7 +60,7 @@ public interface SysDictService extends IService<SysDict> {
      * @param queryDictItemParam 查询参数
      * @return 分页数据
      */
-    PageInfo<DictVo> pageDictItem(QueryDictItemParam queryDictItemParam);
+    Page<DictVo> pageDictItem(QueryDictItemParam queryDictItemParam);
 
     /**
      * 根据字典项id查询字典详情

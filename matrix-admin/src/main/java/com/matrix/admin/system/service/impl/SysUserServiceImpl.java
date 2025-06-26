@@ -3,9 +3,6 @@ package com.matrix.admin.system.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.exceptions.ValidateException;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
@@ -19,6 +16,8 @@ import com.matrix.common.vo.system.LoginResultVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
@@ -28,6 +27,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
+import static com.matrix.common.pojo.system.table.Tables.SYS_DICT;
+import static com.matrix.common.pojo.system.table.Tables.SYS_USER;
 
 /**
  * @author liuweizhong
@@ -81,11 +83,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public PageInfo<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId) {
-        // 只有紧跟着PageHelper.startPage(pageNum,pageSize)的sql语句才被pagehelper起作用
-        Page<SysUserVo> page = PageHelper.startPage(queryUserParam.getPageNum(), queryUserParam.getPageSize())
-                .doSelectPage(() -> sysUserMapper.queryUserList(queryUserParam));
-        return page.toPageInfo();
+    public Page<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId) {
+        QueryWrapper queryWrapper = QueryWrapper.create()
+                .select(SYS_USER.ID, SYS_USER.USERNAME, SYS_USER.NICK_NAME, SYS_USER.PHONE, SYS_USER.REAL_NAME, SYS_USER.CREATE_TIME, SYS_USER.UPDATE_TIME)
+                .select(SYS_DICT.DIC_NAME.as(SysUserVo::getUserType))
+                .from(SYS_USER)
+                .leftJoin(SYS_DICT).on(SYS_USER.USER_TYPE.eq(SYS_DICT.ID))
+                .where(SYS_USER.USERNAME.like(queryUserParam.getUsername()))
+                .orderBy(SYS_USER.CREATE_TIME.asc());
+        if (StringUtils.isNotBlank(queryUserParam.getUsername())) {
+            queryWrapper.where(SYS_USER.USERNAME.like(queryUserParam.getUsername()));
+        }
+        return sysUserMapper.paginateAs(queryUserParam.getPageNum(), queryUserParam.getPageSize(), queryWrapper, SysUserVo.class);
     }
 
     @Override

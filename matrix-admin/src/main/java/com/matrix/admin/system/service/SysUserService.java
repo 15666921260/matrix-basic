@@ -1,11 +1,11 @@
 package com.matrix.admin.system.service;
 
-import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.system.LoginResultVo;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
+import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userId 当前登录用户的id
      * @return 返回的数据
      */
-    PageInfo<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId);
+    Page<SysUserVo> queryUserList(QueryUserParam queryUserParam, String userId);
 
     /**
      * 获取当前登录用户

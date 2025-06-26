@@ -8,7 +8,7 @@
 
 JDK21
 
-SpringBoot 3.2.2
+SpringBoot 3.5.3
 
 sa-token 权限校验
 
@@ -44,7 +44,7 @@ https://gitee.com/liu-weizhong/matrix-basic-vue3
 [update] 其他修改
 [upgrade] 升级版本
 ```
-
+运行matrix-common中的 mvn clean package (或者执行全局的package)生成mybatis-flex所需的文件
 
 
 #### 特技

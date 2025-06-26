@@ -1,8 +1,5 @@
 package com.matrix.admin.system.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysRoleMapper;
 import com.matrix.admin.system.mappers.SysUserRoleMapper;
 import com.matrix.admin.system.service.SysRoleService;
@@ -14,6 +11,8 @@ import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
 import com.matrix.common.vo.system.role.UserRoleAssociation;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
@@ -24,6 +23,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static com.matrix.common.pojo.system.table.Tables.SYS_DICT;
+import static com.matrix.common.pojo.system.table.Tables.SYS_ROLE;
 
 /**
  * @author liuweizhong
@@ -40,10 +42,16 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysUserRoleService sysUserRoleService;
 
     @Override
-    public PageInfo<RoleVo> pageRoleVo(QueryRoleParam param) {
-        Page<RoleVo> page = PageHelper.startPage(param.getPageNum(), param.getPageSize())
-                .doSelectPage(() -> sysRoleMapper.selectByRoleName(param.getRoleName()));
-        return page.toPageInfo();
+    public Page<RoleVo> pageRoleVo(QueryRoleParam param) {
+        QueryWrapper queryWrapper = QueryWrapper.create()
+                .select(SYS_ROLE.ID, SYS_ROLE.ROLE_NAME, SYS_ROLE.ROLE_TYPE, SYS_ROLE.REMARKS, SYS_ROLE.CREATE_TIME)
+                .select(SYS_DICT.DIC_NAME.as(RoleVo::getRoleTypeStr))
+                .from(SYS_ROLE)
+                .leftJoin(SYS_DICT).on(SYS_ROLE.ROLE_TYPE.eq(SYS_DICT.ID));
+        if (StringUtils.isNotBlank(param.getRoleName())) {
+            queryWrapper.where(SYS_ROLE.ROLE_NAME.like(param.getRoleName()));
+        }
+        return sysRoleMapper.paginateAs(param.getPageNum(), param.getPageSize(), queryWrapper, RoleVo.class);
     }
 
     @Override

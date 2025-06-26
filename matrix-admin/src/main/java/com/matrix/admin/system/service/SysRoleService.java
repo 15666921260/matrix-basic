@@ -1,10 +1,10 @@
 package com.matrix.admin.system.service;
 
-import com.github.pagehelper.PageInfo;
 import com.matrix.common.pojo.system.SysRole;
 import com.matrix.common.vo.system.param.QueryRoleParam;
 import com.matrix.common.vo.system.role.RoleVo;
 import com.matrix.common.vo.system.role.UserRoleAssociation;
+import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param param 查询参数
      * @return 返回数据
      */
-    PageInfo<RoleVo> pageRoleVo(QueryRoleParam param);
+    Page<RoleVo> pageRoleVo(QueryRoleParam param);
 
     /**
      * 添加或者编辑角色

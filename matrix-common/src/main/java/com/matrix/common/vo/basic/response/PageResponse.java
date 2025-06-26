@@ -1,7 +1,7 @@
 package com.matrix.common.vo.basic.response;
 
-import com.github.pagehelper.PageInfo;
 import com.matrix.common.enums.system.HttpStatus;
+import com.mybatisflex.core.paginate.Page;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -30,18 +30,18 @@ public class PageResponse<T> implements Serializable {
     private Long total;
 
     @Schema(name = "pages", description = "总页数")
-    private Integer pages;
+    private Long pages;
 
     @Schema(name = "pageSize", description = "分页大小")
-    private Integer pageSize;
+    private Long pageSize;
 
-    @Schema(name = "pageNum", description = "页数")
-    private Integer pageNum;
+    @Schema(name = "pageNum", description = "当前页数")
+    private Long pageNum;
 
     public PageResponse() {
     }
 
-    public PageResponse(HttpStatus httpStatus, List<T> data, Long total, Integer pageSize, Integer pageNum, Integer pages) {
+    public PageResponse(HttpStatus httpStatus, List<T> data, Long total, Long pageSize, Long pageNum, Long pages) {
         this.code = httpStatus.getCode();
         this.data = data;
         this.msg = httpStatus.getMsg();
@@ -51,13 +51,13 @@ public class PageResponse<T> implements Serializable {
         this.pages = pages;
     }
 
-    public static <T> PageResponse<T> success(PageInfo<T> pageInfo) {
-        return new PageResponse<>(HttpStatus.SUCCESS, pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPageSize(),
-                pageInfo.getPageNum(), pageInfo.getPages());
+    public static <T> PageResponse<T> success(Page<T> pageInfo) {
+        return new PageResponse<>(HttpStatus.SUCCESS, pageInfo.getRecords(), pageInfo.getTotalRow(), pageInfo.getPageSize(),
+                pageInfo.getPageNumber(), pageInfo.getTotalPage());
     }
 
-    public static <T> PageResponse<T> build(HttpStatus httpStatus, PageInfo<T> pageInfo) {
-        return new PageResponse<>(httpStatus, pageInfo.getList(), pageInfo.getTotal(), pageInfo.getPageSize(),
-                pageInfo.getPageNum(), pageInfo.getPages());
+    public static <T> PageResponse<T> build(HttpStatus httpStatus, Page<T> pageInfo) {
+        return new PageResponse<>(httpStatus, pageInfo.getRecords(), pageInfo.getTotalRow(), pageInfo.getPageSize(),
+                pageInfo.getPageNumber(), pageInfo.getTotalPage());
     }
 }

@@ -1,8 +1,5 @@
 package com.matrix.admin.system.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.matrix.admin.system.mappers.SysDictMapper;
 import com.matrix.admin.system.mappers.SysDictTypeMapper;
 import com.matrix.admin.system.service.SysDictService;
@@ -16,6 +13,8 @@ import com.matrix.common.vo.system.dict.DictTypeVo;
 import com.matrix.common.vo.system.dict.DictVo;
 import com.matrix.common.vo.system.param.QueryDictItemParam;
 import com.matrix.common.vo.system.param.QueryDictTypeParam;
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +23,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
+import static com.matrix.common.pojo.system.table.Tables.SYS_DICT;
+import static com.matrix.common.pojo.system.table.Tables.SYS_DICT_TYPE;
 
 /**
  * 系统字典服务
@@ -85,10 +87,14 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public PageInfo<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam) {
-        Page<DictTypeVo> page = PageHelper.startPage(dictTypeParam.getPageNum(), dictTypeParam.getPageSize())
-                .doSelectPage(() -> sysDictTypeMapper.queryDictType(dictTypeParam.getTypeName()));
-        return page.toPageInfo();
+    public Page<DictTypeVo> queryDictType(QueryDictTypeParam dictTypeParam) {
+        QueryWrapper query = QueryWrapper.create()
+                .select(SYS_DICT_TYPE.ID, SYS_DICT_TYPE.TYPE_NAME, SYS_DICT_TYPE.NEED_ENUM, SYS_DICT_TYPE.REMARKS, SYS_DICT_TYPE.DISABLE)
+                .orderBy(SYS_DICT_TYPE.ID.asc());
+        if (StringUtils.isNotBlank(dictTypeParam.getTypeName())) {
+            query.where(SYS_DICT_TYPE.TYPE_NAME.like(dictTypeParam.getTypeName()));
+        }
+        return sysDictTypeMapper.paginateAs(dictTypeParam.getPageNum(), dictTypeParam.getPageSize(), query, DictTypeVo.class);
     }
 
     @Override
@@ -108,11 +114,14 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    public PageInfo<DictVo> pageDictItem(QueryDictItemParam dictItemParam) {
-        Page<DictVo> page = PageHelper.startPage(dictItemParam.getPageNum(), dictItemParam.getPageSize()).doSelectPage(() ->
-                sysDictMapper.queryDictByTypeId(dictItemParam.getTypeId())
-        );
-        return page.toPageInfo();
+    public Page<DictVo> pageDictItem(QueryDictItemParam dictItemParam) {
+        QueryWrapper query = QueryWrapper.create()
+                .select(SYS_DICT.ID,SYS_DICT.DIC_NAME, SYS_DICT.DIC_VALUE, SYS_DICT.SORT_NUM, SYS_DICT.DISABLE, SYS_DICT.REMARKS)
+                .select(SYS_DICT_TYPE.TYPE_NAME)
+                .from(SYS_DICT)
+                .leftJoin(SYS_DICT_TYPE).on(SYS_DICT.TYPE.eq(SYS_DICT_TYPE.ID))
+                .where(SYS_DICT.TYPE.eq(dictItemParam.getTypeId())).orderBy(SYS_DICT.SORT_NUM.asc());
+        return sysDictMapper.paginateAs(dictItemParam.getPageNum(), dictItemParam.getPageSize(), query, DictVo.class);
     }
 
     @Override

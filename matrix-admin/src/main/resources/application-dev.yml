@@ -81,4 +81,4 @@ matrix:
     # 开放 swagger
     /swagger-ui.html, /swagger-ui/**, /v3/api-docs/**, /swagger-resources/**,
     # 其它开放接口
-    /user/tokenCode, /openApi/**
+    /user/tokenCode, /openApi/**, /open/**, /open/api/**
