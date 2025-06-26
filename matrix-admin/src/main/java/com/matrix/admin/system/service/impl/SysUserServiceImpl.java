@@ -89,7 +89,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 .select(SYS_DICT.DIC_NAME.as(SysUserVo::getUserType))
                 .from(SYS_USER)
                 .leftJoin(SYS_DICT).on(SYS_USER.USER_TYPE.eq(SYS_DICT.ID))
-                .where(SYS_USER.USERNAME.like(queryUserParam.getUsername()))
+                // sys_dict.type = 2 是用户字典的类型是2
+                .where(SYS_DICT.TYPE.eq(2))
                 .orderBy(SYS_USER.CREATE_TIME.asc());
         if (StringUtils.isNotBlank(queryUserParam.getUsername())) {
             queryWrapper.where(SYS_USER.USERNAME.like(queryUserParam.getUsername()));

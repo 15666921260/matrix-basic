@@ -14,13 +14,6 @@ import java.util.List;
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     /**
-     * 根据角色名模糊查询角色信息
-     * @param roleName 角色名
-     * @return 返回值
-     */
-    List<RoleVo> selectByRoleName(@Param("roleName") String roleName);
-
-    /**
      * 查询所有角色信息
      * @return 结果集
      */

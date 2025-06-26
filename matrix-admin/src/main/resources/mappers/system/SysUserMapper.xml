@@ -27,32 +27,6 @@
         WHERE deleted = 0
     </select>
 
-
-    <resultMap id="SysUserVoResult" type="com.matrix.common.vo.system.user.SysUserVo">
-        <result property="id" column="id"/>
-        <result property="username" column="username"/>
-        <result property="nickName" column="nick_name"/>
-        <result property="phone" column="phone"/>
-        <result property="realName" column="real_name"/>
-        <result property="userType" column="user_type"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
-    </resultMap>
-    <select id="queryUserList" resultMap="SysUserVoResult">
-        select sys_user.id, sys_user.username, sys_user.nick_name, sys_user.phone, sys_user.real_name,
-               sys_dict.dic_name as user_type,
-               sys_user.create_time, sys_user.update_time
-        from sys_user
-            -- sys_dict.type = 2 是用户字典的类型是2
-        left join sys_dict on sys_dict.type = 2 and sys_user.user_type = sys_dict.id
-        where
-            sys_user.deleted = 0
-            <if test="queryParam.username != null and queryParam.username != '' ">
-                and sys_user.username like concat('%',#{queryParam.username},'%')
-            </if>
-        ORDER BY sys_user.create_time
-    </select>
-
     <resultMap id="AddUserVoResult" type="com.matrix.common.vo.system.user.AddUserVo">
         <result property="id" column="id"/>
         <result property="username" column="username"/>

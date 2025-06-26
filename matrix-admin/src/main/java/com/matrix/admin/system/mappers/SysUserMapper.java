@@ -28,13 +28,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     List<SysUser> queryAllUser();
 
     /**
-     * 分页查询用户表
-     * @param queryParam 查询参数
-     * @return 数据
-     */
-    List<SysUserVo> queryUserList(@Param("queryParam")QueryUserParam queryParam);
-
-    /**
      * 检测 username是否在数据库中存在
      * @param username
      * @return
