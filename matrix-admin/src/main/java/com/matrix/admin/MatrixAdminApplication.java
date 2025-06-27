@@ -37,7 +37,7 @@ public class  MatrixAdminApplication {
         String serverPort = environment.getProperty("server.port");
         String contextPath = environment.getProperty("server.servlet.context-path");
         String swaggerPath = environment.getProperty("springdoc.swagger-ui.path");
-        logger.info("--------<=========系统启动完成========>---------\n" +
+        logger.info("--------<========= System startup successful! ========>---------\n" +
                 "swagger路径:http://localhost:"+ serverPort + contextPath + swaggerPath + "\n" +
                 "knife4j文档路径:http://localhost:"+ serverPort + contextPath +"/doc.html");
     }

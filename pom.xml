@@ -34,7 +34,7 @@
         <lombok.version>1.18.38</lombok.version>
         <commons-lang3.verson>3.17.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.5.0</commons-collections4.vsersion>
-        <hutool-http.version>5.8.28</hutool-http.version>
+        <hutool.version>5.8.38</hutool.version>
         <mybatis.flex.version>1.10.9</mybatis.flex.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
     </properties>
@@ -123,7 +123,13 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
-            <version>${hutool-http.version}</version>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!--  hutool验证码 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
 
         <!-- 单元测试  -->

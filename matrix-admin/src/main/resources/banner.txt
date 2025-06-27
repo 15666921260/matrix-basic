@@ -1,5 +1,4 @@
-${AnsiColor.BLUE}----------========>>> by dgb
-you opened my project! thanks!${AnsiColor.BRIGHT_MAGENTA}
+${AnsiColor.BLUE}----------========>>> System startup starts...${AnsiColor.BRIGHT_MAGENTA}
       ___           ___           ___           ___                       ___
      /\__\         /\  \         /\  \         /\  \          ___        |\__\
     /::|  |       /::\  \        \:\  \       /::\  \        /\  \       |:|  |

@@ -8,6 +8,6 @@ import com.matrix.common.vo.system.captcha.CaptchaVo;
  */
 public interface SysCaptchaService {
 
-    CaptchaVo getCaptcha();
+    CaptchaVo getCaptcha(String captchaId);
 
 }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,8 +24,8 @@ public class SysCaptchaController {
 
     @GetMapping("/get")
     @Operation(summary = "获取验证码")
-    public BaseResponse<CaptchaVo> getCaptcha() {
-        return BaseResponse.success(sysCaptchaService.getCaptcha());
+    public BaseResponse<CaptchaVo> getCaptcha(@RequestParam(value = "captchaId", required = false) String captchaId) {
+        return BaseResponse.success(sysCaptchaService.getCaptcha(captchaId));
     }
 
 }
