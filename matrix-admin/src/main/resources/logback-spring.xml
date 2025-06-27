@@ -21,7 +21,7 @@
             <!-- 日志文件名格式 -->
             <fileNamePattern>${log.path}/debug/sys-console.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
             <!--每个文件最多200MB-->
-            <maxFileSize>200MB</maxFileSize>
+<!--            <maxFileSize>200MB</maxFileSize>-->
             <!-- 日志最大 60天 -->
             <maxHistory>60</maxHistory>
             <!--每个文件最多200MB，保留60天的历史记录，但最多30GB-->
@@ -47,7 +47,7 @@
             <!-- 日志文件名格式 -->
             <fileNamePattern>${log.path}/info/sys-info.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
             <!--每个文件最多200MB-->
-            <maxFileSize>200MB</maxFileSize>
+<!--            <maxFileSize>200MB</maxFileSize>-->
             <!-- 日志最大的历史 60 -->
             <maxHistory>60</maxHistory>
             <!--每个文件最多200MB，保留60天的历史记录，但最多30GB-->
@@ -75,7 +75,7 @@
             <!-- 日志文件名格式 -->
             <fileNamePattern>${log.path}/error/sys-error.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
             <!--每个文件最多200MB-->
-            <maxFileSize>200MB</maxFileSize>
+<!--            <maxFileSize>200MB</maxFileSize>-->
             <!-- 日志最大的历史 60 天 -->
             <maxHistory>60</maxHistory>
             <!--每个文件最多200MB，保留60天的历史记录，但最多30GB-->
