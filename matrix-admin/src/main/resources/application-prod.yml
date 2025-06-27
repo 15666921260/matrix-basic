@@ -35,7 +35,6 @@ logging:
   level:
     org.apache.ibatis: DEBUG
     com.matrix.*: DEBUG
-    com.baomidou.mybatisplus: DEBUG
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:
