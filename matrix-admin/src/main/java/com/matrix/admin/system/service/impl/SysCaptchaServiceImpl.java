@@ -23,7 +23,7 @@ public class SysCaptchaServiceImpl implements SysCaptchaService {
     public CaptchaVo getCaptcha(String captchaId) {
         // 如果有旧验证码覆盖掉旧验证码
         String newCaptchaId = StringUtils.isNotBlank(captchaId) ? captchaId : IdUtil.getSnowflakeNextIdStr();
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(180, 80);
         String imageBase64 = lineCaptcha.getImageBase64();
         CaptchaVo captchaVo = new CaptchaVo(imageBase64, newCaptchaId);
         redisService.saveData(newCaptchaId, lineCaptcha.getCode(), 60);

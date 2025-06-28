@@ -22,7 +22,12 @@ public class SysCaptchaController {
     @Resource
     private SysCaptchaService sysCaptchaService;
 
-    @GetMapping("/get")
+    /**
+     * 图片验证码
+     * @param captchaId 验证码id
+     * @return 验证码存储对象
+     */
+    @GetMapping("/image/get")
     @Operation(summary = "获取验证码")
     public BaseResponse<CaptchaVo> getCaptcha(@RequestParam(value = "captchaId", required = false) String captchaId) {
         return BaseResponse.success(sysCaptchaService.getCaptcha(captchaId));
