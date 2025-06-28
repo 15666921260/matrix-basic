@@ -2,6 +2,7 @@ package com.matrix.admin.system.service;
 
 import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.vo.system.LoginResultVo;
+import com.matrix.common.vo.system.param.LoginParam;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
@@ -18,11 +19,10 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 登录接口
-     * @param username 用户名
-     * @param password 密码
+     * @param loginParam 用户名
      * @return LoginResultVo
      */
-    LoginResultVo login(String username, String password);
+    LoginResultVo login(LoginParam loginParam);
 
     /**
      * 查询全部用户

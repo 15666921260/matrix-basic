@@ -16,7 +16,8 @@ public enum LoginStatus {
      *
      */
     SUCCESS(200, "登录成功!"),
-    ERROR(401, "用户名或密码错误!");
+    ERROR(401, "用户名或密码错误!"),
+    NOT_CAPTCHA_ERR(401, "验证码不能为空！");
 
 
     private final Integer code;

@@ -41,7 +41,7 @@ public class SysUserController {
     @Operation(summary = "登录接口")
     @PostMapping("/login")
     public BaseResponse<LoginResultVo> login(@RequestBody LoginParam loginParam){
-        LoginResultVo login = sysUserService.login(loginParam.getUsername(), loginParam.getPassword());
+        LoginResultVo login = sysUserService.login(loginParam);
         LoginStatus loginStatus = login.getLoginStatus();
         return BaseResponse.build(loginStatus.getCode(), loginStatus.getMessage(), login);
     }

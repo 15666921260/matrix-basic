@@ -14,5 +14,9 @@ public class LoginParam {
     private String username;
     @Schema(name = "password", description = "密码")
     private String password;
+    @Schema(name = "captcha", description = "验证码")
+    private String captcha;
+    @Schema(name = "captchaId", description = "验证码id")
+    private String captchaId;
 
 }

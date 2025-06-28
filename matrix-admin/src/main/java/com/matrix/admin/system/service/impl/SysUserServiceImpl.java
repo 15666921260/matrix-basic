@@ -2,7 +2,7 @@ package com.matrix.admin.system.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.exceptions.ValidateException;
+import com.matrix.admin.middleware.RedisService;
 import com.matrix.admin.system.mappers.SysMenuMapper;
 import com.matrix.admin.system.mappers.SysUserMapper;
 import com.matrix.admin.system.service.SysUserService;
@@ -13,6 +13,7 @@ import com.matrix.common.pojo.system.SysUser;
 import com.matrix.common.utils.EncryptUtils;
 import com.matrix.common.utils.ThrowUtils;
 import com.matrix.common.vo.system.LoginResultVo;
+import com.matrix.common.vo.system.param.LoginParam;
 import com.matrix.common.vo.system.user.AddUserVo;
 import com.matrix.common.vo.system.user.SysUserVo;
 import com.matrix.common.vo.system.param.QueryUserParam;
@@ -41,17 +42,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserMapper sysUserMapper;
     @Resource
     private SysMenuMapper sysMenuMapper;
+    @Resource
+    private RedisService redisService;
 
     @Override
-    public LoginResultVo login(String username, String password) {
-        SysUser sysUser = sysUserMapper.queryByUsername(username);
+    public LoginResultVo login(LoginParam loginParam) {
         LoginResultVo resultVo = new LoginResultVo();
+        if (StringUtils.isBlank(loginParam.getCaptcha())) {
+            resultVo.setLoginStatus(LoginStatus.NOT_CAPTCHA_ERR);
+            return resultVo;
+        }
+        ThrowUtils.throwIf(StringUtils.isBlank(loginParam.getCaptchaId()), "验证码id为空!请检查请求体或前端代码!");
+        String data = redisService.getData(loginParam.getCaptchaId());
+        ThrowUtils.throwIf(!loginParam.getCaptcha().equalsIgnoreCase(data), "验证码错误!");
+        SysUser sysUser = sysUserMapper.queryByUsername(loginParam.getUsername());
         if (Objects.isNull(sysUser)){
             resultVo.setLoginStatus(LoginStatus.ERROR);
             return resultVo;
         }
 
-        String s = EncryptUtils.encryptMd5(password);
+        String s = EncryptUtils.encryptMd5(loginParam.getPassword());
         if (s.equals(sysUser.getPassword())){
             StpUtil.login(sysUser.getId());
             resultVo.setUsername(sysUser.getUsername());
