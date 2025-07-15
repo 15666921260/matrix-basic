@@ -21,4 +21,19 @@ public interface SpecialStr {
      * 字符串0，如果restfull风格有的值为空，先传0替代
      */
     String ZERO = "0";
+
+    /**
+     * 星号
+     */
+    String ASTERISK = "*";
+
+    /**
+     * 路由忽略
+     */
+    String ROUTE_IGNORED = "/**";
+
+    /**
+     * 逗号
+     */
+    String COMMA = ",";
 }

@@ -8,12 +8,15 @@ import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.matrix.common.constant.SpecialStr;
+import com.matrix.common.constant.config.MaHttpHeaders;
 import com.matrix.common.enums.system.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -38,13 +41,13 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     @Bean
     public SaServletFilter getSaServletFilter() {
         String notMatchReplace = StringUtils.deleteWhitespace(notMatch.replaceAll("\\n", ""));
-        List<String> excludeUrls = Arrays.asList(notMatchReplace.split(","));
+        List<String> excludeUrls = Arrays.asList(notMatchReplace.split(SpecialStr.COMMA));
         return new SaServletFilter()
                 // 指定 [拦截路由] 与 [放行路由]
-                .addInclude("/**")
+                .addInclude(SpecialStr.ROUTE_IGNORED)
                 // 认证函数: 每次请求执行
                 .setAuth(obj -> {
-                    SaRouter.match("/**")
+                    SaRouter.match(SpecialStr.ROUTE_IGNORED)
                             // 自动配置白名单url
                             .notMatch(excludeUrls)
                             .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
@@ -55,17 +58,17 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             // 是否可以在iframe显示视图： DENY=不可以 | SAMEORIGIN=同域下可以 | ALLOW-FROM uri=指定域名下可以
                             // .setHeader("X-Frame-Options", "SAMEORIGIN")
                             // 是否启用浏览器默认XSS防护： 0=禁用 | 1=启用 | 1; mode=block 启用, 并在检查到XSS攻击时，停止渲染页面
-                            .setHeader("X-XSS-Protection", "1; mode=block")
+                            .setHeader(MaHttpHeaders.X_XSS_PROTECTION, MaHttpHeaders.X_XSS_PROTECTION_V)
                             // 禁用浏览器内容嗅探
-                            .setHeader("X-Content-Type-Options", "nosniff")
-                            // 允许指定域访问跨域资源(生产环境时建议指定域名)
-                            .setHeader("Access-Control-Allow-Origin", "*")
-                            // 允许所有请求方式
-                            .setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
-                            // 有效时间
-                            .setHeader("Access-Control-Max-Age", "3600")
-                            // 允许的header参数
-                            .setHeader("Access-Control-Allow-Headers", "*");
+                            .setHeader(MaHttpHeaders.X_CONTENT_TYPE_OPTIONS, MaHttpHeaders.X_CONTENT_TYPE_OPTIONS_V)
+                            // 允许指定域访问跨域资源(生产环境时建议指定域名) Access-Control-Allow-Origin
+                            .setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, SpecialStr.ASTERISK)
+                            // 允许所有请求方式 Access-Control-Allow-Methods
+                            .setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST, GET, OPTIONS, DELETE")
+                            // 有效时间  Access-Control-Max-Age
+                            .setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600")
+                            // 允许的header参数  Access-Control-Allow-Headers
+                            .setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, SpecialStr.ASTERISK);
                     // 如果是预检请求，则立即返回到前端
                     SaRouter.match(SaHttpMethod.OPTIONS)
 //                            .free(r -> log.info("--->OPTIONS预检请求，不做处理"))
@@ -82,7 +85,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册 Sa-Token 拦截器，打开注解式鉴权功能
-        registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new SaInterceptor()).addPathPatterns(SpecialStr.ROUTE_IGNORED);
     }
 
     private SaResult exceptionHandler(Throwable e) {
