@@ -34,3 +34,5 @@ build/
 
 ### logs ###
 logs/**
+
+history_file

@@ -6,3 +6,22 @@ logging:
     org.apache.ibatis: DEBUG
     # 设置项目日志级别
     com.matrix.*: DEBUG
+
+dingtalk:
+  custom-robot-token: 86ae305371e0220258f3e71b728208829c36b63223a864b3b78702427c590884
+  secret: SEC0fbe963cd5175895762341e3b048792031d304ed6c296fc0de727aff0577af6e
+
+user:
+  # 所有值日人员
+  names: 董小光,林繁丹,曹凯凯,王轩昂,卢涛,孟旭,刘伟中
+  # 一次值日的人员数
+  value: 2
+  # 大值日项目
+  max-item: 扫地,拖地
+  # 小项目
+  min-item: 浇花,倒垃圾
+
+history:
+  # 历史文件名称 不能有路径
+  url: history_file
+
