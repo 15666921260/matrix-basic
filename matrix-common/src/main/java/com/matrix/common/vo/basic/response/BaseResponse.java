@@ -1,7 +1,6 @@
 package com.matrix.common.vo.basic.response;
 
 import com.matrix.common.enums.system.HttpStatus;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serial;
@@ -14,18 +13,14 @@ import java.io.Serializable;
  * @param <T>
  */
 @Data
-@Schema(name = "BaseResponse", description = "通用返回对象")
 public class BaseResponse<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = -1061934494124159357L;
 
-    @Schema(name = "code", description = "状态码")
     private int code;
 
-    @Schema(name = "data", description = "数据封装")
     private T data;
 
-    @Schema(name = "msg", description = "提示信息")
     private String msg;
 
     public BaseResponse(int code, T data, String msg) {

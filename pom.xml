@@ -28,12 +28,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <slf4j.version>2.0.12</slf4j.version>
-        <knife4j.version>4.5.0</knife4j.version>
         <lombok.version>1.18.38</lombok.version>
         <commons-lang3.verson>3.17.0</commons-lang3.verson>
         <commons-collections4.vsersion>4.5.0</commons-collections4.vsersion>
         <hutool.version>5.8.38</hutool.version>
-        <junit-jupiter.version>5.11.4</junit-jupiter.version>
         <dingtalk-service>2.0.0</dingtalk-service>
         <commons-codec>1.11</commons-codec>
     </properties>
@@ -49,20 +47,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-
-        <!--  整合knife4j  -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>${knife4j.version}</version>
-            <optional>true</optional>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- 工具包 -->
@@ -84,30 +68,10 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.vsersion}</version>
         </dependency>
-        <!-- 里边依赖了 hutool-core、hutool-json -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
-            <version>${hutool.version}</version>
-        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-json</artifactId>
             <version>${hutool.version}</version>
-        </dependency>
-        <!--  hutool验证码 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-captcha</artifactId>
-            <version>${hutool.version}</version>
-        </dependency>
-
-        <!-- 单元测试  -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <optional>true</optional>
         </dependency>
 
         <dependency>

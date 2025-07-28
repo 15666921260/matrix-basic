@@ -3,8 +3,8 @@ package com.matrix.common.utils;
 import cn.hutool.json.JSONUtil;
 import com.matrix.common.pojo.History;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,12 +25,8 @@ public class HistorySettingsUtils {
     private static String readFileToString(String filePath) {
         Path path = Paths.get(filePath);
         try {
-            // 检查并创建路径和文件（不存在时）
-            if (!Files.exists(path)) {
-                Files.createDirectories(path.getParent());
-                Files.createFile(path);
-                return ""; // 新文件返回空字符串
-            }
+            // 检查并创建文件（不存在时）
+            checkFile(path);
             return Files.readString(path); // 读取全部内容
         } catch (IOException e) {
             log.error("读取历史文件时操作异常: {}", e.getMessage());
@@ -62,13 +58,14 @@ public class HistorySettingsUtils {
             log.error("要添加的历史记录为空");
             return false;
         }
+        ThrowUtils.throwIf(CollectionUtils.isEmpty(history.getUsers()), "值日人员不能为空");
+        ThrowUtils.throwIf(StringUtils.isBlank(history.getAllUsers()), "全部人员数据不能为空");
+        ThrowUtils.throwIfNull(history.getDate(), "发送日期不能为空");
         String content = JSONUtil.toJsonStr(history);
         Path path = Paths.get(filePath);
         try {
             // 检查并创建路径和文件（不存在时）
-            if (!Files.exists(path)) {
-                Files.createFile(path);
-            }
+            checkFile(path);
             // 追加内容并自动添加换行符
             Files.writeString(
                     path,
@@ -80,6 +77,12 @@ public class HistorySettingsUtils {
             return false;
         }
         return true;
+    }
+
+    private static void checkFile(Path path) throws IOException {
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+        }
     }
 
 

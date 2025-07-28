@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -22,22 +21,7 @@ public class  MatrixAdminApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(MatrixAdminApplication.class, args);
-        printlnProjectInfo(context);
-    }
-
-    /**
-     * 打印项目信息
-     *
-     * @param context 用于获取springboot配置
-     */
-    private static void printlnProjectInfo(ConfigurableApplicationContext context) {
-        ConfigurableEnvironment environment = context.getEnvironment();
-        String serverPort = environment.getProperty("server.port");
-        String contextPath = environment.getProperty("server.servlet.context-path");
-        String swaggerPath = environment.getProperty("springdoc.swagger-ui.path");
-        logger.info("--------<========= System startup successful! ========>---------\n" +
-                "swagger路径:http://localhost:"+ serverPort + contextPath + swaggerPath + "\n" +
-                "knife4j文档路径:http://localhost:"+ serverPort + contextPath +"/doc.html");
+        logger.info("--------<========= System startup successful! ========>---------");
     }
 
 }

@@ -16,4 +16,6 @@ public class History {
 
     private List<String> users;
 
+    private String allUsers;
+
 }
