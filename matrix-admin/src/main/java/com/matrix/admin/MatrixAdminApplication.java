@@ -20,7 +20,7 @@ public class  MatrixAdminApplication {
     private static final Logger logger = LoggerFactory.getLogger(MatrixAdminApplication.class);
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(MatrixAdminApplication.class, args);
+        SpringApplication.run(MatrixAdminApplication.class, args);
         logger.info("--------<========= System startup successful! ========>---------");
     }
 
