@@ -3,10 +3,8 @@ package com.matrix.admin.open.service.impl;
 import com.matrix.admin.open.service.GetConfigValue;
 import com.matrix.admin.open.service.IDingTalkMessageService;
 import com.matrix.common.constant.DingTalkTextType;
-import com.matrix.common.pojo.History;
 import com.matrix.common.utils.DingTalkRobotMessageUtils;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

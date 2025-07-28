@@ -26,8 +26,22 @@ public class GetConfigValueImpl implements GetConfigValue {
     private Integer dutyNumber;
     @Value("${history.url}")
     private String historyPath;
+    @Value("${user.max-item}")
+    private String maxItems;
+    @Value("${user.min-item}")
+    private String minItems;
 
     public List<String> getAllUsers() {
         return List.of(users.split(","));
+    }
+
+    @Override
+    public List<String> maxItemList() {
+        return List.of(maxItems.split(","));
+    }
+
+    @Override
+    public List<String> minItemList() {
+        return List.of(minItems.split(","));
     }
 }

@@ -1,5 +1,6 @@
 package com.matrix.common.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.List;
  * @since 2025-07-28 14:25
  */
 @Data
+@AllArgsConstructor
 public class History {
 
     private LocalDateTime date;
@@ -17,5 +19,11 @@ public class History {
     private List<String> users;
 
     private String allUsers;
+
+    public History(List<String> users, String allUsers) {
+        this.users = users;
+        this.allUsers = allUsers;
+        this.date = LocalDateTime.now();
+    }
 
 }

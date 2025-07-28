@@ -1,5 +1,6 @@
 package com.matrix.admin.open.service.impl;
 
+import com.martix.util.DateUtils;
 import com.matrix.admin.open.service.FilterLogicService;
 import com.matrix.admin.open.service.GetConfigValue;
 import com.matrix.admin.open.service.OpenApiService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,8 +36,9 @@ public class OpenApiServiceImpl implements OpenApiService {
         history.setDate(LocalDateTime.now());
         history.setUsers(Collections.singletonList("刘伟中"));
         HistorySettingsUtils.addHistory(filePath, history);*/
-        List<String> onDutyUsers = filterLogicService.getOnDutyUsers();
-        log.info("===========进入测试接口！{}", onDutyUsers);
+        LocalDateTime localDateTime = LocalDateTime.of(2025, 8, 4, 0, 0);
+        boolean sameWeekAsNow = DateUtils.isSameWeekAsNow(localDateTime);
+        log.info("===========进入测试接口！{}", sameWeekAsNow);
         return "success";
     }
 

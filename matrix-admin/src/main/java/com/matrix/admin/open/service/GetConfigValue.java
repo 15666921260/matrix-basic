@@ -22,4 +22,10 @@ public interface GetConfigValue {
      */
     List<String> getAllUsers();
 
+    String getUsers();
+
+    List<String> maxItemList();
+
+    List<String> minItemList();
+
 }
