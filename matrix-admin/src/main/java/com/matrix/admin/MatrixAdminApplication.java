@@ -1,6 +1,5 @@
 package com.matrix.admin;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +15,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAsync // 启动异步任务
 @SpringBootApplication
-@MapperScan("com.matrix.admin.**.mappers")
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class  MatrixAdminApplication {
 

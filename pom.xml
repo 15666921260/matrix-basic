@@ -52,40 +52,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- sa-token 因为是springboot3所以要加boot后要加3 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
-            <version>${sa-token.version}</version>
-        </dependency>
-        <!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-redis-jackson</artifactId>
-            <version>${sa-token.version}</version>
-        </dependency>
-        <!-- 提供Redis连接池 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <!-- 数据库 -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
-            <version>${mybatis.flex.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency>
-
         <!--  整合knife4j  -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
