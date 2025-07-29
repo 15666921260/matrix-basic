@@ -5,13 +5,12 @@ import com.matrix.admin.open.service.FilterLogicService;
 import com.matrix.admin.open.service.GetConfigValue;
 import com.matrix.common.pojo.History;
 import com.matrix.common.utils.HistorySettingsUtils;
+import com.matrix.common.utils.RandomCollectionGenerator;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author liuweizhong
@@ -50,10 +49,31 @@ public class FilterLogicServiceImpl implements FilterLogicService {
         int start = 0;
         for (int i = 0; i < allNames.size(); i++) {
             if (last.equals(allNames.get(i))) {
-                start = i;
+                start = ++i;
             }
         }
-        return allNames.subList(start, getConfigValue.getDutyNumber());
+        Integer dutyNumber = getConfigValue.getDutyNumber();
+        int tag = 0;
+        List<String> strings = new ArrayList<>();
+        int size = allNames.size();
+        for(int i = 0; i < size; i++) {
+            if (start > size) {
+                strings = allNames.subList(0, dutyNumber);
+                break;
+            }
+            if (start == i || (tag > 0 && tag < dutyNumber)) {
+                tag++;
+                strings.add(allNames.get(i));
+            } else if (tag == dutyNumber) {
+                break;
+            }
+        }
+        if (strings.size() < dutyNumber) {
+            int laseInt = dutyNumber - strings.size();
+            List<String> lastName = allNames.subList(0, laseInt);
+            strings.addAll(lastName);
+        }
+        return strings;
     }
 
     @Override
@@ -63,10 +83,22 @@ public class FilterLogicServiceImpl implements FilterLogicService {
 
         int dutyNum = dutyUsers.size();
 
+        List<Integer> maxItem = RandomCollectionGenerator.generate(dutyNum, 0, maxItemList.size()-1);
+        List<Integer> minItem = RandomCollectionGenerator.generate(dutyNum, 0, minItemList.size()-1);
         Map<String, List<String>> dutyContent = new HashMap<>();
-        for (String user : dutyUsers) {
-
+        for (int i = 0; i < dutyNum; i++) {
+            List<String> items = new ArrayList<>();
+            Integer maxTag = maxItem.get(i);
+            Integer minTag = minItem.get(i);
+            items.add(maxItemList.get(maxTag));
+            items.add(minItemList.get(minTag));
+            dutyContent.put(dutyUsers.get(i), items);
         }
         return dutyContent;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> generate = RandomCollectionGenerator.generate(2, 1, 2);
+        System.out.println(generate);
     }
 }

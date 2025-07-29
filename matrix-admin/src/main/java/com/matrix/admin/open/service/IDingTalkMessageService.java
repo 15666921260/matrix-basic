@@ -5,5 +5,7 @@ package com.matrix.admin.open.service;
  * @since 2025-07-28 11:16
  */
 public interface IDingTalkMessageService {
-    String sendMessage(String message);
+    void sendMessage(String message);
+
+    String buildMessage();
 }

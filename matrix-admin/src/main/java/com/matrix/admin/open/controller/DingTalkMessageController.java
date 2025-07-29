@@ -3,6 +3,7 @@ package com.matrix.admin.open.controller;
 import com.matrix.admin.open.service.IDingTalkMessageService;
 import com.matrix.common.vo.basic.response.BaseResponse;
 import jakarta.annotation.Resource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,17 @@ public class DingTalkMessageController {
      * 测试钉钉信息发送接口
      */
     @GetMapping("/send")
-    public BaseResponse<String> sendMessage(@RequestParam(value = "message") String message) {
-        return BaseResponse.success(dingTalkMessageService.sendMessage(message));
+    @Scheduled(cron = "0 0 16 ? * 5", zone = "Asia/Shanghai")
+//    @Scheduled(cron = "0 17 11 ? * 2", zone = "Asia/Shanghai")
+    public BaseResponse<String> sendMessage() {
+        String message = dingTalkMessageService.buildMessage();
+        dingTalkMessageService.sendMessage(message);
+        return BaseResponse.success(message);
+    }
+
+    @GetMapping("/build")
+    public BaseResponse<String> buildMessage() {
+        return BaseResponse.success(dingTalkMessageService.buildMessage());
     }
 
 }

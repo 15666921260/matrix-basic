@@ -1,5 +1,6 @@
 package com.matrix.admin.open.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.martix.util.DateUtils;
 import com.matrix.admin.open.service.FilterLogicService;
 import com.matrix.admin.open.service.GetConfigValue;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,15 +33,11 @@ public class OpenApiServiceImpl implements OpenApiService {
     private FilterLogicService filterLogicService;
 
     @Override
-    public String test() {
-        /*History history = new History();
-        history.setDate(LocalDateTime.now());
-        history.setUsers(Collections.singletonList("刘伟中"));
-        HistorySettingsUtils.addHistory(filePath, history);*/
-        LocalDateTime localDateTime = LocalDateTime.of(2025, 8, 4, 0, 0);
-        boolean sameWeekAsNow = DateUtils.isSameWeekAsNow(localDateTime);
-        log.info("===========进入测试接口！{}", sameWeekAsNow);
-        return "success";
+    public String test(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        History history = new History(dateTime, Collections.singletonList("test"), "test");
+        return JSONUtil.toJsonStr(history);
     }
 
     @Override
