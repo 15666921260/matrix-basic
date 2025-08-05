@@ -3,7 +3,6 @@ package com.matrix.common.vo.basic.response;
 import com.matrix.common.enums.system.HttpStatus;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +16,6 @@ import java.util.List;
 @Data
 public class ListResponse<T> implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 5364576275549295059L;
 
     private int code;

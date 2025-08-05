@@ -6,11 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +29,8 @@ public class HistorySettingsUtils {
         try {
             // 检查并创建文件（不存在时）
             checkFile(path);
-            return Files.readString(path); // 读取全部内容
+            byte[] bytes = Files.readAllBytes(path);
+            return new String(bytes, StandardCharsets.UTF_8); // 读取全部内容
         } catch (IOException e) {
             log.error("读取历史文件时操作异常: {}", e.getMessage());
             return ""; // 异常时返回空字符串
@@ -67,11 +70,12 @@ public class HistorySettingsUtils {
             // 检查并创建路径和文件（不存在时）
             checkFile(path);
             // 追加内容并自动添加换行符
-            Files.writeString(
-                    path,
-                    content + "\n", // 追加换行符
-                    StandardOpenOption.APPEND // 启用追加模式
-            );
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            writer.write(content);
+            writer.newLine(); // 可选：追加换行符
+            writer.flush();
+            fileWriter.close();
         } catch (IOException e) {
             log.error("文件追加失败: {}", e.getMessage());
             return false;
