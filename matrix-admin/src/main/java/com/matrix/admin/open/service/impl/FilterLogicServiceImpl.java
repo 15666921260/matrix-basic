@@ -97,8 +97,4 @@ public class FilterLogicServiceImpl implements FilterLogicService {
         return dutyContent;
     }
 
-    public static void main(String[] args) {
-        List<Integer> generate = RandomCollectionGenerator.generate(2, 1, 2);
-        System.out.println(generate);
-    }
 }

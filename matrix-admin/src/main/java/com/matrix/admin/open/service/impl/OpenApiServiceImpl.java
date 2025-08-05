@@ -33,7 +33,7 @@ public class OpenApiServiceImpl implements OpenApiService {
     public String test(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-        History history = new History(dateTime, Collections.singletonList("test"), "test");
+        History history = new History(dateTime, dateTime.toString(), Collections.singletonList("test"), "test");
         return JSONUtil.toJsonStr(history);
     }
 

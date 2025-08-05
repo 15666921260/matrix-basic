@@ -10,6 +10,13 @@
     <properties>
         <java.version>8</java.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.liu</groupId>
+            <artifactId>matrix-utils</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+    </dependencies>
 
     <parent>
         <groupId>com.liu</groupId>

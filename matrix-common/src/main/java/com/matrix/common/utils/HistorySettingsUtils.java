@@ -1,6 +1,7 @@
 package com.matrix.common.utils;
 
 import cn.hutool.json.JSONUtil;
+import com.martix.util.DateUtils;
 import com.matrix.common.pojo.History;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +65,9 @@ public class HistorySettingsUtils {
         }
         ThrowUtils.throwIf(CollectionUtils.isEmpty(history.getUsers()), "值日人员不能为空");
         ThrowUtils.throwIf(StringUtils.isBlank(history.getAllUsers()), "全部人员数据不能为空");
-        ThrowUtils.throwIfNull(history.getDate(), "发送日期不能为空");
+        LocalDateTime date = history.getDate();
+        ThrowUtils.throwIfNull(date, "发送日期不能为空");
+        history.setDateStr(DateUtils.localDateTime2Str(date, "yyyy-MM-dd HH:mm:ss"));
         String content = JSONUtil.toJsonStr(history);
         Path path = Paths.get(filePath);
         try {

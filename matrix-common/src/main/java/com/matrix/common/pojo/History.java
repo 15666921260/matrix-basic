@@ -17,6 +17,8 @@ public class History {
 
     private LocalDateTime date;
 
+    private String dateStr;
+
     private List<String> users;
 
     private String allUsers;

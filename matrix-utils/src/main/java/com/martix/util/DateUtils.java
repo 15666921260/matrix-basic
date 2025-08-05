@@ -3,6 +3,7 @@ package com.martix.util;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.Date;
 
@@ -40,5 +41,11 @@ public class DateUtils {
         int targetWeek = targetDateTime.get(weekFields.weekOfWeekBasedYear());
 
         return currentWeekYear == targetWeekYear && currentWeek == targetWeek;
+    }
+
+    public static String localDateTime2Str(LocalDateTime targetDateTime, String format) {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(format);
+        LocalDateTime time = LocalDateTime.now();
+        return df.format(time);
     }
 }
