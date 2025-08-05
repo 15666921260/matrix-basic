@@ -2,12 +2,12 @@ package com.matrix.admin.open.controller;
 
 import com.matrix.admin.open.service.IDingTalkMessageService;
 import com.matrix.common.vo.basic.response.BaseResponse;
-import jakarta.annotation.Resource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author liuweizhong

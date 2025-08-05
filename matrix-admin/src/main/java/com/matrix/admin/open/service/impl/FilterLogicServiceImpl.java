@@ -6,10 +6,10 @@ import com.matrix.admin.open.service.GetConfigValue;
 import com.matrix.common.pojo.History;
 import com.matrix.common.utils.HistorySettingsUtils;
 import com.matrix.common.utils.RandomCollectionGenerator;
-import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -32,7 +32,7 @@ public class FilterLogicServiceImpl implements FilterLogicService {
             HistorySettingsUtils.addHistory(getConfigValue.getHistoryPath(), new History(dutyUsers, getConfigValue.getUsers()));
             return dutyUsers;
         }
-        History last = allHistory.getLast();
+        History last = allHistory.get(allHistory.size() - 1);
         // 对比是时间是否是本周，如果是本周的则直接返回值日数据，否则获取新值日数据并存入历史文件中
         if (DateUtils.isSameWeekAsNow(last.getDate())) {
             return last.getUsers();
@@ -44,7 +44,7 @@ public class FilterLogicServiceImpl implements FilterLogicService {
     }
 
     private List<String> findNamesNotChanges(List<String> targetNames) {
-        String last = targetNames.getLast();
+        String last = targetNames.get(targetNames.size() - 1);
         List<String> allNames = getConfigValue.getAllUsers();
         int start = 0;
         for (int i = 0; i < allNames.size(); i++) {

@@ -5,9 +5,9 @@ import com.matrix.admin.open.service.GetConfigValue;
 import com.matrix.admin.open.service.IDingTalkMessageService;
 import com.matrix.common.constant.DingTalkTextType;
 import com.matrix.common.utils.DingTalkRobotMessageUtils;
-import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

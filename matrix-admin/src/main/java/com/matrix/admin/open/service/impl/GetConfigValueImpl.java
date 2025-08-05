@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,16 +32,16 @@ public class GetConfigValueImpl implements GetConfigValue {
     private String minItems;
 
     public List<String> getAllUsers() {
-        return List.of(users.split(","));
+        return Arrays.asList(users.split(","));
     }
 
     @Override
     public List<String> maxItemList() {
-        return List.of(maxItems.split(","));
+        return Arrays.asList(maxItems.split(","));
     }
 
     @Override
     public List<String> minItemList() {
-        return List.of(minItems.split(","));
+        return Arrays.asList(minItems.split(","));
     }
 }
