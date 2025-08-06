@@ -43,7 +43,7 @@ public class DingTalkMessageServiceImpl implements IDingTalkMessageService {
                 "\n" +
                 "## \uD83D\uDCC5 打扫时间\n" +
                 "\n" +
-                "**每周一 17:30-18:00（下班前半小时）**\n\n" +
+                "**每周一 17:30-18:00（下班后半小时）**\n\n" +
                 "本周值日人员:\n");
         for (String key : dutyContent.keySet()) {
             String collect = String.join(", ", dutyContent.get(key));
