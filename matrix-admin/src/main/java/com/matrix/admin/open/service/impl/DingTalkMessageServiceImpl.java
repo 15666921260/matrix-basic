@@ -35,7 +35,7 @@ public class DingTalkMessageServiceImpl implements IDingTalkMessageService {
         List<String> onDutyUsers = filterLogicService.getOnDutyUsers();
         // 构建值日表
         Map<String, List<String>> dutyContent = filterLogicService.getDutyContent(onDutyUsers);
-        StringBuilder str = new StringBuilder("# \uD83E\uDDF9 办公室每周卫生打扫通知\n" +
+        StringBuilder str = new StringBuilder("## \uD83E\uDDF9 办公室每周卫生打扫通知\n" +
                 "\n" +
                 "各位同事：\n" +
                 "\n" +
@@ -43,14 +43,14 @@ public class DingTalkMessageServiceImpl implements IDingTalkMessageService {
                 "\n" +
                 "## \uD83D\uDCC5 打扫时间\n" +
                 "\n" +
-                "每周一 17:30-18:00（下班前半小时）\n\n" +
+                "**每周一 17:30-18:00（下班前半小时）**\n\n" +
                 "本周值日人员:\n");
         for (String key : dutyContent.keySet()) {
-            String collect = String.join(",", dutyContent.get(key));
+            String collect = String.join(", ", dutyContent.get(key));
             str.append(key).append(": ").append(collect).append("\n");
         }
         LocalDate now = LocalDate.now();
-        str.append("\n").append(now.getYear()).append("年").append(now.getMonthValue()).append("月").append(now.getDayOfMonth()).append("日");
+        str.append("\n").append("**").append(now.getYear()).append("年").append(now.getMonthValue()).append("月").append(now.getDayOfMonth()).append("日").append("**");
         return str.toString();
     }
 }
