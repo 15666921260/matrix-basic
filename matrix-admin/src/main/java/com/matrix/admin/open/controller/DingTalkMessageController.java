@@ -23,7 +23,7 @@ public class DingTalkMessageController {
      * 测试钉钉信息发送接口
      */
     @GetMapping("/send")
-    @Scheduled(cron = "0 0 10 ? * 1", zone = "Asia/Shanghai")
+    @Scheduled(cron = "0 0 16 ? * 1", zone = "Asia/Shanghai")
 //    @Scheduled(cron = "0 17 11 ? * 2", zone = "Asia/Shanghai")
     public BaseResponse<String> sendMessage() {
         String message = dingTalkMessageService.buildMessage();
