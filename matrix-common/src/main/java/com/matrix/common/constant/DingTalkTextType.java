@@ -9,4 +9,6 @@ public interface DingTalkTextType {
 
     String TEXT = "text";
 
+    String MD = "markdown";
+
 }

@@ -50,14 +50,15 @@ public class DingTalkRobotMessageUtils {
              * 发送文本消息
              */
             //定义文本内容
-            OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
-            text.setContent(content);
+            OapiRobotSendRequest.Markdown markdown = new OapiRobotSendRequest.Markdown();
+            markdown.setTitle("本周值日");
+            markdown.setText(content);
             //定义 @ 对象
             OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
             at.setAtUserIds(userIds);
             //设置消息类型
             req.setMsgtype(textType);
-            req.setText(text);
+            req.setMarkdown(markdown);
             req.setAt(at);
             OapiRobotSendResponse rsp = client.execute(req, customRoBoyToken);
             log.info("rsp.getBody()====>{}", rsp.getBody());
