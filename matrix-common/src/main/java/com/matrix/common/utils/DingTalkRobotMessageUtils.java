@@ -51,7 +51,7 @@ public class DingTalkRobotMessageUtils {
              */
             //定义文本内容
             OapiRobotSendRequest.Markdown markdown = new OapiRobotSendRequest.Markdown();
-            markdown.setTitle("本周值日");
+            markdown.setTitle("打扫卫生通知");
             markdown.setText(content);
             //定义 @ 对象
             OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
