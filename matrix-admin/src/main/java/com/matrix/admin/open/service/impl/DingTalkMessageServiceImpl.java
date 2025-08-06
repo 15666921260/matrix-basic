@@ -35,15 +35,15 @@ public class DingTalkMessageServiceImpl implements IDingTalkMessageService {
         List<String> onDutyUsers = filterLogicService.getOnDutyUsers();
         // 构建值日表
         Map<String, List<String>> dutyContent = filterLogicService.getDutyContent(onDutyUsers);
-        StringBuilder str = new StringBuilder("## \uD83E\uDDF9 办公室每周卫生打扫通知\n" +
+        StringBuilder str = new StringBuilder("## \uD83E\uDDF9 打扫卫生通知\n" +
                 "\n" +
                 "各位同事：\n" +
                 "\n" +
-                "为营造整洁、舒适的办公环境，保障大家的工作效率与健康，现将本周卫生打扫安排通知如下，请各区域负责人员认真执行\n" +
+                "为营造整洁、舒适的办公环境，保障大家的工作效率与健康，现将本周卫生打扫安排通知如下，请各负责人员认真执行\n" +
                 "\n" +
                 "## \uD83D\uDCC5 打扫时间\n" +
                 "\n" +
-                "**每周一 17:30-18:00（下班后半小时）**\n\n" +
+                "**每周一 17:30-18:00(下班后半小时)**\n\n" +
                 "### 本周值日人员:\n\n");
         for (String key : dutyContent.keySet()) {
             String collect = String.join(", ", dutyContent.get(key));
