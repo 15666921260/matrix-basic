@@ -3,6 +3,7 @@ package com.matrix.admin.handler;
 import com.matrix.common.enums.system.HttpStatus;
 import com.matrix.common.exception.BusinessException;
 import com.matrix.common.vo.basic.response.BaseResponse;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @Order(Integer.MIN_VALUE)
+@Hidden
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
