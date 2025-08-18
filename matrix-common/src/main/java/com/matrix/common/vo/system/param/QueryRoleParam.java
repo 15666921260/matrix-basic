@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @Schema(name = "QueryRoleParam", description = "分页查询角色参数")
 public class QueryRoleParam extends PageQueryBaseParam {
 
-    @Schema(name = "角色名称")
+    @Schema(name = "roleName", description = "角色名称")
     private String roleName;
 
 }
